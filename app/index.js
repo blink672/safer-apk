@@ -1,26 +1,8 @@
-import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import HomeScreen from './Home.js';
+import FriendMap from './FriendMap.js';
+import { StackNavigator } from 'react-navigation';
 
-export default class CodeSharing extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-  }
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>CodeSharing App</Text>
-      </View>
-    )
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
+export default safely = StackNavigator({
+  Home: { screen: HomeScreen },
+  FriendMap: { screen: FriendMap }
 });

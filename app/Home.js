@@ -20,7 +20,7 @@ class HomeScreen extends Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-        <Text>Yo Yo refactor</Text>
+        <Text>Hello world</Text>
         <Button
           onPress={() => navigate('FriendMap', { 
               friendId: 1234567890,

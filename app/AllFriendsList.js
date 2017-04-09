@@ -6,13 +6,18 @@ export default class AllFriendsList extends Component {
   constructor(props) {
     super(props);
     this.state =  {};
-    fetch(endpoint + '/api/test')
+    // This won't work without editing the server files to res.json('validated!');
+    fetch(endpoint + '/api/validate', {
+      method: 'POST'
+    })
       .then(function(response) {
         return response.json();
       })
       .then(function(data) {
         console.log('data: ', data);
-        this.setState(data);
+        this.setState({
+          data: data
+        });
       }.bind(this))
       .catch(function(error) {
         console.log('There was an error in fetching your data: ', error);
@@ -29,7 +34,7 @@ export default class AllFriendsList extends Component {
     return (
       <View>
         <Text>Contacts List</Text>
-        <Text>{ this.state.name }</Text>
+        <Text>{ this.state.data }</Text>
       </View>
     );
   }

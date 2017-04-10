@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import endpoint from './endpoint.js';
 import Contacts from 'react-native-contacts';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, Text, StyleSheet, Button, ListView } from 'react-native';
 
 export default class AllFriendsList extends Component {
   constructor(props) {
     super(props);
-    this.state =  {};
+    this.state =  {
+      friends: new ListView.DataSource({
+        rowHasChanged: (row1, row2) => row1 !== row2
+      }),
+      loaded: false
+    };
     // This won't work without editing the server files to res.json('validated!');
     fetch(endpoint + '/api/validate', {
       method: 'POST'
@@ -25,9 +30,9 @@ export default class AllFriendsList extends Component {
         return error;
       });
     this.checkPermissionAndGet = this.checkPermissionAndGet.bind(this);
-  }
+    };
 
-  checkPermissionAndGet(){
+  checkPermissionAndGet() {
     Contacts.checkPermission( (err, permission) => {
       // Contacts.PERMISSION_AUTHORIZED || Contacts.PERMISSION_UNDEFINED || Contacts.PERMISSION_DENIED
       console.log(permission)
@@ -40,14 +45,29 @@ export default class AllFriendsList extends Component {
       if(permission === 'authorized'){
         // yay!
         Contacts.getAll((err, contacts) => {
-          console.log(contacts);
+          let friends = [];
+          contacts.map((contact) => {
+            let phoneNumbers = contact.phoneNumbers;
+            if(phoneNumbers.length > 0) {
+              let newFriend = {
+                name: contact.givenName,
+                phoneNumber: contact.phoneNumbers[0].number
+              };
+              friends.push(newFriend);
+            }
+          });
+          this.setState({
+            friends: this.state.friends.cloneWithRows(friends),
+            loaded: true
+          });
+          console.log(friends);
         })
       }
       if(permission === 'denied'){
         // x.x
       }
     })
-  }
+  };
 
   static navigationOptions = {
     title: 'Contacts'
@@ -55,6 +75,11 @@ export default class AllFriendsList extends Component {
 
   render() {
     const params = this.props.navigation.state.params;
+
+    if(this.state.loaded === true) {
+      return this.renderContactList();
+    }
+
     return (
       <View style={styles.container}>
         <Text>Contacts List</Text>
@@ -65,12 +90,50 @@ export default class AllFriendsList extends Component {
       </View>
     );
   }
+
+  renderContactList() {
+    return (
+      <ListView
+        dataSource={this.state.friends}
+        renderRow={this.renderContacts}
+        style={styles.listView}
+      />
+    )
+  }
+
+  renderContacts(friend) {
+    return (
+      <View>
+        <Text style={styles.title}>{friend.name}</Text>
+        <Text style={styles.year}>{friend.phoneNumber}</Text>
+      </View>
+    )
+  }
 }
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+  },
+  rightContainer: {
+    flex: 1,
+  },
+  title: {
+    fontSize: 20,
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  year: {
+    textAlign: 'center',
+  },
+  thumbnail: {
+    width: 53,
+    height: 81,
+  },
+  listView: {
+    paddingTop: 20,
+    backgroundColor: '#F5FCFF',
+  },
 });

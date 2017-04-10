@@ -6,12 +6,41 @@ import PushNotification from 'react-native-push-notification';
 import FriendMap from './FriendMap.js';
 import PushController from './PushController.js';
 
-export default class HomeScreen extends Component {
+import Contacts from 'react-native-contacts';
+
+class HomeScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {};
     this.handleAppStateChange = this.handleAppStateChange.bind(this);
   };
+
+  componentDidMount(){
+    this.getContactPermission();
+  }
+
+  getContactPermission(){
+    Contacts.checkPermission( (err, permission) => {
+      // Contacts.PERMISSION_AUTHORIZED || Contacts.PERMISSION_UNDEFINED || Contacts.PERMISSION_DENIED
+      console.log(permission)
+      if(permission === 'undefined'){
+        console.log('in fnction')
+        Contacts.requestPermission( (err, permission) => {
+          // ...
+        })
+      }
+      if(permission === 'authorized'){
+        // yay!
+        Contacts.getAll((err, contacts) => {
+          console.log(contacts);
+        })
+      }
+      if(permission === 'denied'){
+        // x.x
+      }
+    })
+    
+  }
 
   static navigationOptions = {
     title: 'Favorites'

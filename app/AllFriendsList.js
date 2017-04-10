@@ -96,7 +96,6 @@ export default class AllFriendsList extends Component {
       <ListView
         dataSource={this.state.friends}
         renderRow={this.renderContacts}
-        style={styles.listView}
       />
     )
   }
@@ -104,8 +103,8 @@ export default class AllFriendsList extends Component {
   renderContacts(friend) {
     return (
       <View>
-        <Text style={styles.title}>{friend.name}</Text>
-        <Text style={styles.year}>{friend.phoneNumber}</Text>
+        <Text style={styles.name}>{friend.name}</Text>
+        <Text style={styles.phoneNumber}>{friend.phoneNumber}</Text>
       </View>
     )
   }
@@ -117,23 +116,12 @@ let styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  rightContainer: {
-    flex: 1,
-  },
-  title: {
+  name: {
     fontSize: 20,
-    marginBottom: 8,
+    marginBottom: 4,
     textAlign: 'center',
   },
-  year: {
+  phoneNumber: {
     textAlign: 'center',
-  },
-  thumbnail: {
-    width: 53,
-    height: 81,
-  },
-  listView: {
-    paddingTop: 20,
-    backgroundColor: '#F5FCFF',
   },
 });

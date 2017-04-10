@@ -12,7 +12,23 @@ export default class AllFriendsList extends Component {
       }),
       loaded: false
     };
-    
+    // This won't work without editing the server files to res.json('validated!');
+    fetch(endpoint + '/api/validate', {
+      method: 'POST'
+    })
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(data) {
+        console.log('data: ', data);
+        this.setState({
+          data: data
+        });
+      }.bind(this))
+      .catch(function(error) {
+        console.log('There was an error in fetching your data: ', error);
+        return error;
+      });
     this.checkPermissionAndGet = this.checkPermissionAndGet.bind(this);
     };
 
@@ -80,6 +96,7 @@ export default class AllFriendsList extends Component {
       <ListView
         dataSource={this.state.friends}
         renderRow={this.renderContacts}
+        style={styles.listView}
       />
     )
   }
@@ -87,12 +104,12 @@ export default class AllFriendsList extends Component {
   renderContacts(friend) {
     return (
       <View>
-        <Text style={styles.name}>{friend.name}</Text>
-        <Text style={styles.phoneNumber}>{friend.phoneNumber}</Text>
+        <Text style={styles.title}>{friend.name}</Text>
+        <Text style={styles.year}>{friend.phoneNumber}</Text>
       </View>
     )
   }
-};
+}
 
 let styles = StyleSheet.create({
   container: {
@@ -100,12 +117,23 @@ let styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  name: {
+  rightContainer: {
+    flex: 1,
+  },
+  title: {
     fontSize: 20,
-    marginBottom: 4,
+    marginBottom: 8,
     textAlign: 'center',
   },
-  phoneNumber: {
+  year: {
     textAlign: 'center',
+  },
+  thumbnail: {
+    width: 53,
+    height: 81,
+  },
+  listView: {
+    paddingTop: 20,
+    backgroundColor: '#F5FCFF',
   },
 });

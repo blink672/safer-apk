@@ -7,7 +7,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "browserify": "^14.3.0",
     "react": "16.0.0-alpha.6",
     "react-native": "0.43.2",
     "react-native-contacts": "^0.8.1",

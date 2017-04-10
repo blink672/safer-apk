@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { Button, View, Text, StyleSheet } from 'react-native';
 
 export default class GroupsList extends Component {
   constructor(props) {
@@ -13,9 +13,14 @@ export default class GroupsList extends Component {
 
   render() {
     const params = this.props.navigation.state.params;
+    const { navigate } = this.props.navigation;
     return (
       <View>
         <Text>Group</Text>
+        <Button
+          onPress={() => navigate('DrawerOpen')}
+          title='Open Drawer'
+        />
       </View>
     );
   }

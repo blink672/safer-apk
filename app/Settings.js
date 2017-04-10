@@ -3,36 +3,24 @@ import { View, Button, Text, StyleSheet } from 'react-native';
 
 import FriendMap from './FriendMap.js';
 
-export default class HomeScreen extends Component {
+export default class Settings extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   };
 
   static navigationOptions = {
-    title: 'Favorites'
+    title: 'Settings'
   };
 
   render() {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-        <Text>Hello world</Text>
+        <Text>Settings go here</Text>
         <Button
           onPress={() => navigate('DrawerOpen')}
           title='Open Drawer'
-        />
-        <Button
-          onPress={() => navigate('FriendMap', { 
-              friendId: 1234567890,
-              friendName: 'Kyle' 
-            })
-          }
-          title="See yo friend yo"
-        />
-        <Button 
-          onPress ={() => navigate('AddFence')}
-          title="Geofence"
         />
       </View>
     )

@@ -23,6 +23,9 @@ INSTRUCTIONS TO GET A LOCAL TEST SERVER WORKING WITH YOUR APP
 
 9. Whenever you make a fetch request to our server, make sure you're using the endpoint here + whatever route you want
 
+For more information:
+https://facebook.github.io/react-native/docs/running-on-device.html
+
 */
 
 // Please fill and rename this file to endpoint.js

@@ -5,6 +5,8 @@ import GroupsList from './GroupsList.js';
 import AllFriendsList from './AllFriendsList.js';
 import Settings from './Settings.js';
 
+import React from 'react';
+import { Button } from 'react-native';
 import { StackNavigator, TabNavigator, DrawerNavigator } from 'react-navigation';
 
 const HomePageTabs = TabNavigator({
@@ -15,6 +17,9 @@ const HomePageTabs = TabNavigator({
 
 HomePageTabs.navigationOptions = {
   title: 'Safely',
+  header: (({ navigate }) => ({
+    left: <Button title='Menu' onPress={ () => navigate('DrawerOpen') }/>
+  }))
 }
 
 const Stack = StackNavigator({

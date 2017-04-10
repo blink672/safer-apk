@@ -6,7 +6,7 @@ import PushNotification from 'react-native-push-notification';
 import FriendMap from './FriendMap.js';
 import PushController from './PushController.js';
 
-class HomeScreen extends Component {
+export default class HomeScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {};

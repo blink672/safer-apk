@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import endpoint from './endpoint.js';
+import endpoint from './endpoint.js';
 import Contacts from 'react-native-contacts';
 import { View, Text, StyleSheet, Button, ListView } from 'react-native';
 
@@ -12,27 +12,31 @@ export default class AllFriendsList extends Component {
       }),
       loaded: false
     };
-    // This won't work without editing the server files to res.json('validated!');
-    // fetch(endpoint + '/api/validate', {
-    //   method: 'POST'
-    // })
-    //   .then(function(response) {
-    //     return response.json();
-    //   })
-    //   .then(function(data) {
-    //     console.log('data: ', data);
-    //     this.setState({
-    //       data: data
-    //     });
-    //   }.bind(this))
-    //   .catch(function(error) {
-    //     console.log('There was an error in fetching your data: ', error);
-    //     return error;
-    //   });
     this.checkPermissionAndGet = this.checkPermissionAndGet.bind(this);
     };
 
   checkPermissionAndGet() {
+    
+
+    // This won't work without editing the server files to res.json('validated!');
+    fetch(`${endpoint}/anyroute`, {
+      method: 'GET'
+    })
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(data) {
+        console.log('data: ', data);
+        this.setState({
+          data: data
+        });
+      }.bind(this))
+      .catch(function(error) {
+        console.log('There was an error in fetching your data: ', error);
+        return error;
+      });
+
+
     Contacts.checkPermission( (err, permission) => {
       // Contacts.PERMISSION_AUTHORIZED || Contacts.PERMISSION_UNDEFINED || Contacts.PERMISSION_DENIED
       console.log(permission)

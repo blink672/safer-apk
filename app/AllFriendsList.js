@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
 import endpoint from './endpoint.js';
+import Contacts from 'react-native-contacts';
+import { View, Text, StyleSheet, Button } from 'react-native';
 
 export default class AllFriendsList extends Component {
   constructor(props) {
@@ -23,6 +24,29 @@ export default class AllFriendsList extends Component {
         console.log('There was an error in fetching your data: ', error);
         return error;
       });
+    this.checkPermissionAndGet = this.checkPermissionAndGet.bind(this);
+  }
+
+  checkPermissionAndGet(){
+    Contacts.checkPermission( (err, permission) => {
+      // Contacts.PERMISSION_AUTHORIZED || Contacts.PERMISSION_UNDEFINED || Contacts.PERMISSION_DENIED
+      console.log(permission)
+      if(permission === 'undefined'){
+        console.log('in fnction')
+        Contacts.requestPermission( (err, permission) => {
+          // ...
+        })
+      }
+      if(permission === 'authorized'){
+        // yay!
+        Contacts.getAll((err, contacts) => {
+          console.log(contacts);
+        })
+      }
+      if(permission === 'denied'){
+        // x.x
+      }
+    })
   }
 
   static navigationOptions = {
@@ -32,10 +56,21 @@ export default class AllFriendsList extends Component {
   render() {
     const params = this.props.navigation.state.params;
     return (
-      <View>
+      <View style={styles.container}>
         <Text>Contacts List</Text>
-        <Text>{ this.state.data }</Text>
+        <Button
+          onPress={this.checkPermissionAndGet}
+          title="Get Contacts"
+        />
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+});

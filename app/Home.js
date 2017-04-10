@@ -3,11 +3,40 @@ import { View, Button, Text, StyleSheet } from 'react-native';
 
 import FriendMap from './FriendMap.js';
 
-export default class HomeScreen extends Component {
+import Contacts from 'react-native-contacts';
+
+class HomeScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   };
+
+  componentDidMount(){
+    this.getContactPermission();
+  }
+
+  getContactPermission(){
+    Contacts.checkPermission( (err, permission) => {
+      // Contacts.PERMISSION_AUTHORIZED || Contacts.PERMISSION_UNDEFINED || Contacts.PERMISSION_DENIED
+      console.log(permission)
+      if(permission === 'undefined'){
+        console.log('in fnction')
+        Contacts.requestPermission( (err, permission) => {
+          // ...
+        })
+      }
+      if(permission === 'authorized'){
+        // yay!
+        Contacts.getAll((err, contacts) => {
+          console.log(contacts);
+        })
+      }
+      if(permission === 'denied'){
+        // x.x
+      }
+    })
+    
+  }
 
   static navigationOptions = {
     title: 'Favorites'

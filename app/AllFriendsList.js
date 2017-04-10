@@ -33,27 +33,6 @@ export default class AllFriendsList extends Component {
     };
 
   checkPermissionAndGet() {
-
-    fetch('http://10.6.128.38:1337/any', {
-       method: 'GET'
-     })
-       .then(function(response) {
-         return response.json();
-       })
-       .then(function(data) {
-         console.log('data: ', data);
-         this.setState({
-           data: data
-         });
-       }.bind(this))
-       .catch(function(error) {
-         console.log('There was an error in fetching your data: ', error);
-         return error;
-       });
-
-
-
-
     Contacts.checkPermission( (err, permission) => {
       // Contacts.PERMISSION_AUTHORIZED || Contacts.PERMISSION_UNDEFINED || Contacts.PERMISSION_DENIED
       console.log(permission)

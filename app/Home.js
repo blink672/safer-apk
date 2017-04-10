@@ -3,7 +3,7 @@ import { View, Button, Text, StyleSheet } from 'react-native';
 
 import FriendMap from './FriendMap.js';
 
-class HomeScreen extends Component {
+export default class HomeScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {};

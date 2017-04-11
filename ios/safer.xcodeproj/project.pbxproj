@@ -36,7 +36,15 @@
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		583296A3D6814F0680FAD2BA /* libRCTContacts.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA8964E6CA064D168660170C /* libRCTContacts.a */; };
+<<<<<<< HEAD
 		028EB2C2B92A404DA3F103A0 /* libRNFIRMessaging.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C9E1AE160FF42C68322DBFA /* libRNFIRMessaging.a */; };
+=======
+		8FEB7A18AE1E4BB78EB774BA /* libRNGoogleSignin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AEFBB7AF6524771BC8830E1 /* libRNGoogleSignin.a */; };
+		031E43129BB44B98BFEA9027 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3C0BCA72B14C2FBFA1DC31 /* libz.tbd */; };
+		ECC9EC4796B74A7DBF0607A5 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A58B1B115C04D2F846B8457 /* SafariServices.framework */; };
+		AE66DA11957D4E378F40A41C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 449F8DBB934F40F189974851 /* SystemConfiguration.framework */; };
+		C4B061D3D8964C9CB3486869 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6AE1EFB5DF4A46B13BD4A1 /* AddressBook.framework */; };
+>>>>>>> installed react-native-google-signin and ran react-native link
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -258,8 +266,17 @@
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		667F99EAD4AE4C84AEA37974 /* RCTContacts.xcodeproj */ = {isa = PBXFileReference; name = "RCTContacts.xcodeproj"; path = "../node_modules/react-native-contacts/ios/RCTContacts.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		AA8964E6CA064D168660170C /* libRCTContacts.a */ = {isa = PBXFileReference; name = "libRCTContacts.a"; path = "libRCTContacts.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+<<<<<<< HEAD
 		82B109A84729498C9D254877 /* RNFIRMessaging.xcodeproj */ = {isa = PBXFileReference; name = "RNFIRMessaging.xcodeproj"; path = "../node_modules/react-native-fcm/ios/RNFIRMessaging.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		4C9E1AE160FF42C68322DBFA /* libRNFIRMessaging.a */ = {isa = PBXFileReference; name = "libRNFIRMessaging.a"; path = "libRNFIRMessaging.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+=======
+		3DACD81EF3924B639017CF3E /* RNGoogleSignin.xcodeproj */ = {isa = PBXFileReference; name = "RNGoogleSignin.xcodeproj"; path = "../node_modules/react-native-google-signin/ios/RNGoogleSignin.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		5AEFBB7AF6524771BC8830E1 /* libRNGoogleSignin.a */ = {isa = PBXFileReference; name = "libRNGoogleSignin.a"; path = "libRNGoogleSignin.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		9F3C0BCA72B14C2FBFA1DC31 /* libz.tbd */ = {isa = PBXFileReference; name = "libz.tbd"; path = "usr/lib/libz.tbd"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = sourcecode.text-based-dylib-definition; explicitFileType = undefined; includeInIndex = 0; };
+		0A58B1B115C04D2F846B8457 /* SafariServices.framework */ = {isa = PBXFileReference; name = "SafariServices.framework"; path = "System/Library/Frameworks/SafariServices.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		449F8DBB934F40F189974851 /* SystemConfiguration.framework */ = {isa = PBXFileReference; name = "SystemConfiguration.framework"; path = "System/Library/Frameworks/SystemConfiguration.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		0A6AE1EFB5DF4A46B13BD4A1 /* AddressBook.framework */ = {isa = PBXFileReference; name = "AddressBook.framework"; path = "System/Library/Frameworks/AddressBook.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+>>>>>>> installed react-native-google-signin and ran react-native link
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -287,7 +304,15 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				583296A3D6814F0680FAD2BA /* libRCTContacts.a in Frameworks */,
+<<<<<<< HEAD
 				028EB2C2B92A404DA3F103A0 /* libRNFIRMessaging.a in Frameworks */,
+=======
+				8FEB7A18AE1E4BB78EB774BA /* libRNGoogleSignin.a in Frameworks */,
+				031E43129BB44B98BFEA9027 /* libz.tbd in Frameworks */,
+				ECC9EC4796B74A7DBF0607A5 /* SafariServices.framework in Frameworks */,
+				AE66DA11957D4E378F40A41C /* SystemConfiguration.framework in Frameworks */,
+				C4B061D3D8964C9CB3486869 /* AddressBook.framework in Frameworks */,
+>>>>>>> installed react-native-google-signin and ran react-native link
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,7 +480,11 @@
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				667F99EAD4AE4C84AEA37974 /* RCTContacts.xcodeproj */,
+<<<<<<< HEAD
 				82B109A84729498C9D254877 /* RNFIRMessaging.xcodeproj */,
+=======
+				3DACD81EF3924B639017CF3E /* RNGoogleSignin.xcodeproj */,
+>>>>>>> installed react-native-google-signin and ran react-native link
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -476,6 +505,7 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* saferTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
+				E02B290C4B714B63A5983ECF /* Frameworks */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -490,6 +520,18 @@
 				2D02E4901E0B4A5D006451C7 /* safer-tvOSTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		E02B290C4B714B63A5983ECF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9F3C0BCA72B14C2FBFA1DC31 /* libz.tbd */,
+				0A58B1B115C04D2F846B8457 /* SafariServices.framework */,
+				449F8DBB934F40F189974851 /* SystemConfiguration.framework */,
+				0A6AE1EFB5DF4A46B13BD4A1 /* AddressBook.framework */,
+			);
+			name = Frameworks;
+			path = "";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -989,7 +1031,11 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-contacts/ios/RCTContacts",
+<<<<<<< HEAD
 					"$(SRCROOT)/../node_modules/react-native-fcm/ios",
+=======
+					"$(SRCROOT)/../node_modules/react-native-google-signin/ios/RNGoogleSignin/**",
+>>>>>>> installed react-native-google-signin and ran react-native link
 				);
 			};
 			name = Debug;
@@ -1016,7 +1062,11 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-contacts/ios/RCTContacts",
+<<<<<<< HEAD
 					"$(SRCROOT)/../node_modules/react-native-fcm/ios",
+=======
+					"$(SRCROOT)/../node_modules/react-native-google-signin/ios/RNGoogleSignin/**",
+>>>>>>> installed react-native-google-signin and ran react-native link
 				);
 			};
 			name = Release;
@@ -1039,7 +1089,11 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-contacts/ios/RCTContacts",
+<<<<<<< HEAD
 					"$(SRCROOT)/../node_modules/react-native-fcm/ios",
+=======
+					"$(SRCROOT)/../node_modules/react-native-google-signin/ios/RNGoogleSignin/**",
+>>>>>>> installed react-native-google-signin and ran react-native link
 				);
 			};
 			name = Debug;
@@ -1061,7 +1115,11 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-contacts/ios/RCTContacts",
+<<<<<<< HEAD
 					"$(SRCROOT)/../node_modules/react-native-fcm/ios",
+=======
+					"$(SRCROOT)/../node_modules/react-native-google-signin/ios/RNGoogleSignin/**",
+>>>>>>> installed react-native-google-signin and ran react-native link
 				);
 			};
 			name = Release;
@@ -1097,7 +1155,11 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-contacts/ios/RCTContacts",
+<<<<<<< HEAD
 					"$(SRCROOT)/../node_modules/react-native-fcm/ios",
+=======
+					"$(SRCROOT)/../node_modules/react-native-google-signin/ios/RNGoogleSignin/**",
+>>>>>>> installed react-native-google-signin and ran react-native link
 				);
 			};
 			name = Debug;
@@ -1133,7 +1195,11 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-contacts/ios/RCTContacts",
+<<<<<<< HEAD
 					"$(SRCROOT)/../node_modules/react-native-fcm/ios",
+=======
+					"$(SRCROOT)/../node_modules/react-native-google-signin/ios/RNGoogleSignin/**",
+>>>>>>> installed react-native-google-signin and ran react-native link
 				);
 			};
 			name = Release;

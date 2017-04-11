@@ -50,3 +50,18 @@ View the project roadmap [here](https://drive.google.com/open?id=1zswwIFLl2TnROU
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+
+## Troubleshooting
+
+- If you're not using an emulator, make sure wifi is on and you're connected to the same network.
+
+- Try deleting node_modules and reinstalling:
+```sh
+rm -rf node_modules && npm install
+```
+
+- Turn it off and back on again. Turn off your emulator, unplug your phone, close your terminals, and if that doesn't work, restart your computer.
+- Link your libraries automatically by running:
+```sh
+react-native link
+```

@@ -134,15 +134,15 @@ let styles = StyleSheet.create({
   rightContainer: {
     flex: 1,
   },
-  name: {
+  title: {
     fontSize: 20,
     marginBottom: 8,
     textAlign: 'center',
   },
-  phoneNumber: {
+  year: {
     textAlign: 'center',
   },
-  button: {
+  thumbnail: {
     width: 53,
     height: 81,
   },

@@ -12,66 +12,28 @@ export default class AllFriendsList extends Component {
       }),
       loaded: false
     };
-    this.checkPermissionAndGet = this.checkPermissionAndGet.bind(this);
-    };
+  };
 
-  checkPermissionAndGet() {
-    
-
-    // This won't work without editing the server files to res.json('validated!');
-    fetch(`${endpoint}/anyroute`, {
-      method: 'GET'
+  componentWillMount() {
+    console.log("in component will mount in all friends list")
+    fetch(`${endpoint}/api/friends`, {
+      method: 'GET',
     })
       .then(function(response) {
         return response.json();
       })
-      .then(function(data) {
-        console.log('data: ', data);
-        this.setState({
-          data: data
-        });
-      }.bind(this))
-      .catch(function(error) {
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
         console.log('There was an error in fetching your data: ', error);
         return error;
       });
+  }
 
 
-    Contacts.checkPermission( (err, permission) => {
-      // Contacts.PERMISSION_AUTHORIZED || Contacts.PERMISSION_UNDEFINED || Contacts.PERMISSION_DENIED
-      console.log(permission)
-      if(permission === 'undefined'){
-        console.log('in fnction')
-        Contacts.requestPermission( (err, permission) => {
-          // ...
-        })
-      }
-      if(permission === 'authorized'){
-        // yay!
-        Contacts.getAll((err, contacts) => {
-          let friends = [];
-          contacts.map((contact) => {
-            let phoneNumbers = contact.phoneNumbers;
-            if(phoneNumbers.length > 0) {
-              let newFriend = {
-                name: contact.givenName,
-                phoneNumber: contact.phoneNumbers[0].number
-              };
-              friends.push(newFriend);
-            }
-          });
-          this.setState({
-            friends: this.state.friends.cloneWithRows(friends),
-            loaded: true
-          });
-          console.log(friends);
-        })
-      }
-      if(permission === 'denied'){
-        // x.x
-      }
-    })
-  };
+
+
 
   static navigationOptions = {
     title: 'Contacts'
@@ -88,7 +50,7 @@ export default class AllFriendsList extends Component {
       <View style={styles.container}>
         <Text>Contacts List</Text>
         <Button
-          onPress={this.checkPermissionAndGet}
+          // onPress={this.checkPermissionAndGet}
           title="Get Contacts"
         />
       </View>
@@ -100,15 +62,23 @@ export default class AllFriendsList extends Component {
       <ListView
         dataSource={this.state.friends}
         renderRow={this.renderContacts}
+        style={styles.listView}
       />
     )
   }
 
   renderContacts(friend) {
     return (
-      <View>
-        <Text style={styles.name}>{friend.name}</Text>
-        <Text style={styles.phoneNumber}>{friend.phoneNumber}</Text>
+      <View style={styles.container}>
+        <Button
+          style={styles.button}
+          onPress={() => {console.log(friend)}}
+          title="Add Friend"
+        />
+        <View style={styles.rightContainer}>
+          <Text style={styles.name}>{friend.name}</Text>
+          <Text style={styles.phoneNumber}>{friend.phoneNumber}</Text>
+        </View>
       </View>
     )
   }
@@ -117,15 +87,51 @@ export default class AllFriendsList extends Component {
 let styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#F5FCFF',
   },
-  name: {
+  rightContainer: {
+    flex: 1,
+  },
+  title: {
     fontSize: 20,
-    marginBottom: 4,
+    marginBottom: 8,
     textAlign: 'center',
   },
-  phoneNumber: {
+  year: {
     textAlign: 'center',
+  },
+  thumbnail: {
+    width: 53,
+    height: 81,
+  },
+  listView: {
+    paddingTop: 20,
+    backgroundColor: '#F5FCFF',
   },
 });
+
+// let styles = StyleSheet.create({
+//   button: {
+//     flex: 1,
+//     flexDirection: 'row',
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     backgroundColor: '#F5FCFF',
+//   },
+//   container: {
+//     flex: 1,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//   },
+//   name: {
+//     fontSize: 20,
+//     marginBottom: 4,
+//     textAlign: 'center',
+//   },
+//   phoneNumber: {
+//     textAlign: 'center',
+//   },
+// });

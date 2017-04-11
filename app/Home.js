@@ -3,6 +3,7 @@ import { AppState, View, Button, Text, StyleSheet } from 'react-native';
 
 // import endpoint from './endpoint.js';
 import FriendMap from './FriendMap.js';
+import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
 
 export default class HomeScreen extends Component {
   constructor(props) {
@@ -30,6 +31,12 @@ export default class HomeScreen extends Component {
         <Button 
           onPress ={() => navigate('AddFence')}
           title="Geofence"
+        />
+        <GoogleSigninButton
+          style={{width: 312, height: 48}}
+          size={GoogleSigninButton.Size.Wide}
+          color={GoogleSigninButton.Color.Dark}
+          //onPress={this._signIn.bind(this)}
         />
       </View>
     );

@@ -22,8 +22,12 @@ export default class AllFriendsList extends Component {
       .then(function(response) {
         return response.json();
       })
-      .then((data) => {
-        console.log(data);
+      .then((friends) => {
+        console.log(friends);
+        this.setState({
+          friends: this.state.friends.cloneWithRows(friends),
+          loaded: true
+        });
       })
       .catch((error) => {
         console.log('There was an error in fetching your data: ', error);
@@ -31,12 +35,8 @@ export default class AllFriendsList extends Component {
       });
   }
 
-
-
-
-
   static navigationOptions = {
-    title: 'Contacts'
+    title: 'Friends'
   };
 
   render() {
@@ -48,11 +48,7 @@ export default class AllFriendsList extends Component {
 
     return (
       <View style={styles.container}>
-        <Text>Contacts List</Text>
-        <Button
-          // onPress={this.checkPermissionAndGet}
-          title="Get Contacts"
-        />
+        <Text>Loading Friends...</Text>
       </View>
     );
   }
@@ -63,6 +59,7 @@ export default class AllFriendsList extends Component {
         dataSource={this.state.friends}
         renderRow={this.renderContacts}
         style={styles.listView}
+        renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
       />
     )
   }
@@ -71,13 +68,13 @@ export default class AllFriendsList extends Component {
     return (
       <View style={styles.container}>
         <Button
-          style={styles.button}
+          style={styles.thumbnail}
           onPress={() => {console.log(friend)}}
-          title="Add Friend"
+          title={friend.status}
         />
         <View style={styles.rightContainer}>
-          <Text style={styles.name}>{friend.name}</Text>
-          <Text style={styles.phoneNumber}>{friend.phoneNumber}</Text>
+          <Text style={styles.title}>{friend.first}</Text>
+          <Text style={styles.year}>{friend.last}</Text>
         </View>
       </View>
     )
@@ -110,6 +107,11 @@ let styles = StyleSheet.create({
   listView: {
     paddingTop: 20,
     backgroundColor: '#F5FCFF',
+  },
+  separator: {
+    flex: 1,
+    height: StyleSheet.hairlineWidth,
+    backgroundColor: '#8E8E8E',
   },
 });
 

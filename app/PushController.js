@@ -18,7 +18,7 @@ export default class PushController extends Component {
       },
 
       // ANDROID ONLY: GCM Sender ID (optional - not required for local notifications, but is need to receive remote push notifications) 
-      senderID: "YOUR GCM SENDER ID", //Firebase Cloud Messenger
+      // senderID: "YOUR GCM SENDER ID", //Firebase Cloud Messenger
 
       // IOS ONLY (optional): default: all - Permissions to register.
       // permissions: {

@@ -19,10 +19,6 @@ export default class HomeScreen extends Component {
       <View style={styles.container}>
         <Text>Hello world</Text>
         <Button
-          onPress={() => navigate('DrawerOpen')}
-          title='Open Drawer'
-        />
-        <Button
           onPress={() => navigate('FriendMap', { 
               friendId: 1234567890,
               friendName: 'Kyle' 

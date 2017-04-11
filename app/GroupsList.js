@@ -17,10 +17,6 @@ export default class GroupsList extends Component {
     return (
       <View>
         <Text>Group</Text>
-        <Button
-          onPress={() => navigate('DrawerOpen')}
-          title='Open Drawer'
-        />
       </View>
     );
   }

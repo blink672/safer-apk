@@ -18,10 +18,6 @@ export default class Settings extends Component {
     return (
       <View style={styles.container}>
         <Text>Settings go here</Text>
-        <Button
-          onPress={() => navigate('DrawerOpen')}
-          title='Open Drawer'
-        />
       </View>
     )
   }

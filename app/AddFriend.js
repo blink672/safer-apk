@@ -107,23 +107,6 @@ export default class AddFriend extends Component {
       />
     )
   }
-
-  renderContacts(friend) {
-    let func = this.addFriend;
-    return (
-      <View style={styles.container}>
-        <Button
-          style={styles.button}
-          onPress={() => func(friend)}
-          title={friend.hasApp ? "Add Friend" : "Invite Friend"}
-        />
-        <View style={styles.rightContainer}>
-          <Text style={styles.name}>{friend.name}</Text>
-          <Text style={styles.phoneNumber}>{friend.phoneNumber}</Text>
-        </View>
-      </View>
-    )
-  }
 }
 
 let styles = StyleSheet.create({

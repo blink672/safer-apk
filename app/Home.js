@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppState, View, Button, Text, StyleSheet } from 'react-native';
+import { AppState, View, Button, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 // import endpoint from './endpoint.js';
 import FriendMap from './FriendMap.js';
@@ -26,10 +26,16 @@ export default class HomeScreen extends Component {
     if (!this.state.user) {
       return (
         <View style={styles.container}>
-          <GoogleSigninButton style={{width: 120, height: 44}} color={GoogleSigninButton.Color.Light} size={GoogleSigninButton.Size.Icon} onPress={() => { this._signIn(); }}/>
+          <GoogleSigninButton
+            style={{width: 312, height: 48}}
+            color={GoogleSigninButton.Color.Dark}
+            size={GoogleSigninButton.Size.Wide}
+            onPress={() => { this._signIn(); }}
+          />
         </View>
       );
-    } else {
+    }
+    if (this.state.user) {
       return (
         <View style={styles.container}>
           <Text>Hello {this.state.user.name}</Text>
@@ -46,6 +52,11 @@ export default class HomeScreen extends Component {
             onPress ={() => navigate('AddFence')}
             title="Geofence"
           />
+          <TouchableOpacity onPress={() => {this._signOut(); }}>
+            <View style={{marginTop: 50}}>
+              <Text>Log out</Text>
+            </View>
+          </TouchableOpacity>
         </View>
       )
     }
@@ -55,7 +66,7 @@ export default class HomeScreen extends Component {
     try {
       await GoogleSignin.hasPlayServices({ autoResolve: true });
       await GoogleSignin.configure({
-        webClientId: '603421766430-60og8n04mebic8hi49u1mrcmcdmugnd5.apps.googleusercontent.com',
+        webClientId: ''//replace with client_id from google-services.json,
         offlineAccess: false
       });
 

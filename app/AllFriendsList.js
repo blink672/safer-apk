@@ -114,26 +114,3 @@ let styles = StyleSheet.create({
     backgroundColor: '#8E8E8E',
   },
 });
-
-// let styles = StyleSheet.create({
-//   button: {
-//     flex: 1,
-//     flexDirection: 'row',
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     backgroundColor: '#F5FCFF',
-//   },
-//   container: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//   },
-//   name: {
-//     fontSize: 20,
-//     marginBottom: 4,
-//     textAlign: 'center',
-//   },
-//   phoneNumber: {
-//     textAlign: 'center',
-//   },
-// });

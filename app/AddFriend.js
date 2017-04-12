@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import endpoint from './endpoint.js';
 import Contacts from 'react-native-contacts';
+import AddFriendList from './AddFriendList.js';
 import { View, Text, StyleSheet, Button, ListView } from 'react-native';
 
 export default class AddFriend extends Component {
@@ -13,7 +14,6 @@ export default class AddFriend extends Component {
       loaded: false
     };
     this.checkPermissionAndGet = this.checkPermissionAndGet.bind(this);
-    // this.addFriend = this.addFriend.bind(this);
   };
   componentWillMount(){
     console.log("will mount in addfriend")
@@ -73,31 +73,7 @@ export default class AddFriend extends Component {
     })
   };
 
-  addFriend (contact) {
-    console.log(contact);
-    fetch(`${endpoint}/api/friends`, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({contact: contact})
-    })
-      .then(function(response) {
-        return response.json();
-      })
-      .then((friend) => {
-        console.log(friend);
-        // this.setState({
-        //   friends: this.state.friends.cloneWithRows(friends),
-        //   loaded: true
-        // });
-      })
-      .catch((error) => {
-        console.log('There was an error in fetching your data: ', error);
-        return error;
-      });
-  } 
+  
 
   static navigationOptions = {
     title: 'AddFriend'
@@ -125,7 +101,7 @@ export default class AddFriend extends Component {
     return (
       <ListView
         dataSource={this.state.friends}
-        renderRow={this.renderContacts}
+        renderRow={(rowData) => <AddFriendList friend={rowData} /> }
         style={styles.listView}
         renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
       />
@@ -133,11 +109,12 @@ export default class AddFriend extends Component {
   }
 
   renderContacts(friend) {
+    let func = this.addFriend;
     return (
       <View style={styles.container}>
         <Button
           style={styles.button}
-          onPress={() => this.addFriend()}
+          onPress={() => func(friend)}
           title={friend.hasApp ? "Add Friend" : "Invite Friend"}
         />
         <View style={styles.rightContainer}>

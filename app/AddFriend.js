@@ -13,6 +13,7 @@ export default class AddFriend extends Component {
       loaded: false
     };
     this.checkPermissionAndGet = this.checkPermissionAndGet.bind(this);
+    // this.addFriend = this.addFriend.bind(this);
   };
   componentWillMount(){
     console.log("will mount in addfriend")
@@ -42,7 +43,6 @@ export default class AddFriend extends Component {
               friends.push(newFriend);
             }
           });
-
           fetch(`${endpoint}/api/contacts`, {
             method: 'POST',
             headers: {
@@ -65,7 +65,6 @@ export default class AddFriend extends Component {
               console.log('There was an error in fetching your data: ', error);
               return error;
             });
-
         })
       }
       if(permission === 'denied'){
@@ -73,6 +72,32 @@ export default class AddFriend extends Component {
       }
     })
   };
+
+  addFriend (contact) {
+    console.log(contact);
+    fetch(`${endpoint}/api/friends`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({contact: contact})
+    })
+      .then(function(response) {
+        return response.json();
+      })
+      .then((friend) => {
+        console.log(friend);
+        // this.setState({
+        //   friends: this.state.friends.cloneWithRows(friends),
+        //   loaded: true
+        // });
+      })
+      .catch((error) => {
+        console.log('There was an error in fetching your data: ', error);
+        return error;
+      });
+  } 
 
   static navigationOptions = {
     title: 'AddFriend'
@@ -112,7 +137,7 @@ export default class AddFriend extends Component {
       <View style={styles.container}>
         <Button
           style={styles.button}
-          onPress={() => {console.log(friend)}}
+          onPress={() => this.addFriend()}
           title={friend.hasApp ? "Add Friend" : "Invite Friend"}
         />
         <View style={styles.rightContainer}>

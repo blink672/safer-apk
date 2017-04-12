@@ -69,8 +69,8 @@ export default class AllFriendsList extends Component {
       <View style={styles.container}>
         <Button
           style={styles.thumbnail}
-          onPress={() => {console.log(friend)}}
-          title={friend.status}
+          onPress={() => console.log(friend)}
+          title={friend.privacy}
         />
         <View style={styles.rightContainer}>
           <Text style={styles.title}>{friend.first}</Text>

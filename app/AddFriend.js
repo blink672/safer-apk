@@ -43,28 +43,29 @@ export default class AddFriend extends Component {
             }
           });
 
-          fetch(`${endpoint}/api/contacts/${friends}`, {
-            method: 'GET',
+          fetch(`${endpoint}/api/contacts`, {
+            method: 'POST',
             headers: {
               'Accept': 'application/json',
               'Content-Type': 'application/json',
-            }
+            },
+            body: JSON.stringify({friends: friends})
           })
             .then(function(response) {
               return response.json();
             })
-            .then((data) => {
-              console.log(data);
+            .then((friends) => {
+              console.log(friends);
+              this.setState({
+                friends: this.state.friends.cloneWithRows(friends),
+                loaded: true
+              });
             })
             .catch((error) => {
               console.log('There was an error in fetching your data: ', error);
               return error;
             });
 
-          this.setState({
-            friends: this.state.friends.cloneWithRows(friends),
-            loaded: true
-          });
         })
       }
       if(permission === 'denied'){
@@ -88,7 +89,7 @@ export default class AddFriend extends Component {
       <View style={styles.container}>
         <Text>Contacts List</Text>
         <Button
-          onPress={this.checkPermissionAndGet}
+          onPress={() => console.log('get contacts')}
           title="Get Contacts"
         />
       </View>
@@ -112,7 +113,7 @@ export default class AddFriend extends Component {
         <Button
           style={styles.button}
           onPress={() => {console.log(friend)}}
-          title="Add Friend"
+          title={friend.hasApp ? "Add Friend" : "Invite Friend"}
         />
         <View style={styles.rightContainer}>
           <Text style={styles.name}>{friend.name}</Text>

@@ -13,25 +13,7 @@ export default class AddFriend extends Component {
       loaded: false
     };
     this.checkPermissionAndGet = this.checkPermissionAndGet.bind(this);
-    };
-          // fetch(`${endpoint}/api/friends`, {
-          //   method: 'POST',
-          //   headers: {
-          //     'Accept': 'application/json',
-          //     'Content-Type': 'application/json',
-          //   },
-          //   body: JSON.stringify({'friends': friends})
-          // })
-          //   .then(function(response) {
-          //     return response.json();
-          //   })
-          //   .then((data) => {
-          //     console.log(data);
-          //   })
-          //   .catch((error) => {
-          //     console.log('There was an error in fetching your data: ', error);
-          //     return error;
-          //   });
+  };
   componentWillMount(){
     console.log("will mount in addfriend")
     this.checkPermissionAndGet();
@@ -60,11 +42,29 @@ export default class AddFriend extends Component {
               friends.push(newFriend);
             }
           });
+
+          fetch(`${endpoint}/api/contacts/${friends}`, {
+            method: 'GET',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+            }
+          })
+            .then(function(response) {
+              return response.json();
+            })
+            .then((data) => {
+              console.log(data);
+            })
+            .catch((error) => {
+              console.log('There was an error in fetching your data: ', error);
+              return error;
+            });
+
           this.setState({
             friends: this.state.friends.cloneWithRows(friends),
             loaded: true
           });
-          // console.log(friends);
         })
       }
       if(permission === 'denied'){
@@ -156,26 +156,3 @@ let styles = StyleSheet.create({
     backgroundColor: '#8E8E8E',
   },
 });
-
-// let styles = StyleSheet.create({
-//   button: {
-//     flex: 1,
-//     flexDirection: 'row',
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     backgroundColor: '#F5FCFF',
-//   },
-//   container: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//   },
-//   name: {
-//     fontSize: 20,
-//     marginBottom: 4,
-//     textAlign: 'center',
-//   },
-//   phoneNumber: {
-//     textAlign: 'center',
-//   },
-// });

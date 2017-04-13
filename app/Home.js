@@ -19,7 +19,6 @@ export default class HomeScreen extends Component {
 
   componentDidMount() {
     this._setupGoogleSignin();
-    console.log('this is googleAuthWebClientId');
   };
 
   render() {

@@ -17,7 +17,8 @@ export default class Settings extends Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-        <Text>Settings go here</Text>
+        <Text>Privacy Settings</Text>
+        
       </View>
     )
   }

@@ -56,6 +56,19 @@ export default class AddFriend extends Component {
             })
             .then((friends) => {
               console.log(friends);
+              friends.sort((a, b) => {
+                if (a.hasApp && b.hasApp) {
+                  if (a.name > b.name) { return 1; }
+                  if (a.name < b.name) { return -1; }
+                }
+                if (a.hasApp && b.hasApp === undefined) { return -1; }
+                if (a.hasApp === undefined && b.hasApp) { return 1; }
+                if (a.hasApp === undefined && b.hasApp === undefined) {
+                  if (a.name > b.name) { return 1; }
+                  if (a.name < b.name) { return -1; }
+                }
+                return 0;
+              })
               this.setState({
                 friends: this.state.friends.cloneWithRows(friends),
                 loaded: true
@@ -72,8 +85,6 @@ export default class AddFriend extends Component {
       }
     })
   };
-
-  
 
   static navigationOptions = {
     title: 'AddFriend'
@@ -135,10 +146,5 @@ let styles = StyleSheet.create({
   listView: {
     paddingTop: 20,
     backgroundColor: '#F5FCFF',
-  },
-  separator: {
-    flex: 1,
-    height: StyleSheet.hairlineWidth,
-    backgroundColor: '#8E8E8E',
   },
 });

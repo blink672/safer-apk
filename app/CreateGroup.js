@@ -55,6 +55,7 @@ export default class CreateGroup extends Component {
           renderRow={(rowData) => (
             <CheckBox
               label={rowData.first}
+              underlayColor='none'
             />
           )}
         />

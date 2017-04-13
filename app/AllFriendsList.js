@@ -3,7 +3,7 @@ import { endpoint } from './endpoint.js';
 import Contacts from 'react-native-contacts';
 import { View, Text, StyleSheet, Button, ListView } from 'react-native';
 
-export default class AllFriendsList extends Component {
+export default class AllFriendsItem extends Component {
   constructor(props) {
     super(props);
     this.state =  {

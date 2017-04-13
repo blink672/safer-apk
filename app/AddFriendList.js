@@ -1,59 +1,122 @@
 import React, { Component } from 'react';
 import {endpoint} from './endpoint.js';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import Contacts from 'react-native-contacts';
+import AddFriendItem from './AddFriendList.js';
+import { View, Text, StyleSheet, Button, ListView } from 'react-native';
 
 export default class AddFriendList extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      buttonPressed: false
+    this.state =  {
+      friends: new ListView.DataSource({
+        rowHasChanged: (row1, row2) => row1 !== row2
+      }),
+      loaded: false
     };
-    this.addFriend = this.addFriend.bind(this);
-  }
+    this.checkPermissionAndGet = this.checkPermissionAndGet.bind(this);
+  };
+  componentWillMount(){
+    console.log("will mount in addfriend")
+    this.checkPermissionAndGet();
+  };
 
-  addFriend (contact) {
-    console.log(contact);
-    fetch(`${endpoint}/api/friends`, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({contact: contact})
-    }).then(function(response) {
-      // console.log('response received: ', response);
+  checkPermissionAndGet() {
+    Contacts.checkPermission( (err, permission) => {
+      // Contacts.PERMISSION_AUTHORIZED || Contacts.PERMISSION_UNDEFINED || Contacts.PERMISSION_DENIED
+      console.log(permission)
+      if(permission === 'undefined'){
+        Contacts.requestPermission( (err, permission) => {
+          // ...
+        })
+      }
+      if(permission === 'authorized'){
+        // yay!
+        Contacts.getAll((err, contacts) => {
+          let friends = [];
+          contacts.map((contact) => {
+            let phoneNumbers = contact.phoneNumbers;
+            if(phoneNumbers.length > 0) {
+              let newFriend = {
+                name: contact.givenName,
+                phoneNumber: contact.phoneNumbers[0].number
+              };
+              friends.push(newFriend);
+            }
+          });
+          fetch(`${endpoint}/api/contacts`, {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({friends: friends})
+          })
+            .then(function(response) {
+              return response.json();
+            })
+            .then((friends) => {
+              console.log(friends);
+              friends.sort((a, b) => {
+                if (a.hasApp && b.hasApp) {
+                  if (a.name > b.name) { return 1; }
+                  if (a.name < b.name) { return -1; }
+                }
+                if (a.hasApp && b.hasApp === undefined) { return -1; }
+                if (a.hasApp === undefined && b.hasApp) { return 1; }
+                if (a.hasApp === undefined && b.hasApp === undefined) {
+                  if (a.name > b.name) { return 1; }
+                  if (a.name < b.name) { return -1; }
+                }
+                return 0;
+              })
+              this.setState({
+                friends: this.state.friends.cloneWithRows(friends),
+                loaded: true
+              });
+            })
+            .catch((error) => {
+              console.log('There was an error in fetching your data: ', error);
+              return error;
+            });
+        })
+      }
+      if(permission === 'denied'){
+        // x.x
+      }
+    })
+  };
 
-      // TODO: move setState from below here once we set up the invite friend functionality
-      // This ensures that the client properly reflects the status of our db/their 
-      // friend requests (ie, their add/invite friend button and friend only disappear
-      // once our server returns a 200 message that we have successfully added/invited them)
-
-      return response.json();
-    }).catch((error) => {
-      console.log('There was an error in fetching your data: ', error);
-      return error;
-    });
-
-    this.setState({
-      buttonPressed: true
-    });
-  }
+  static navigationOptions = {
+    title: 'AddFriend'
+  };
 
   render() {
-    let friend = this.props.friend;
-    return !this.state.buttonPressed && (
+    const params = this.props.navigation.state.params;
+
+    if(this.state.loaded === true) {
+      return this.renderContactList();
+    }
+
+    return (
       <View style={styles.container}>
+        <Text>Contacts List</Text>
         <Button
-          style={styles.button}
-          onPress={() => this.addFriend(friend)}
-          title={friend.hasApp ? "Add Friend" : "Invite Friend"}
+          onPress={() => console.log('get contacts')}
+          title="Get Contacts"
         />
-        <View style={styles.rightContainer}>
-          <Text style={styles.name}>{friend.name}</Text>
-          <Text style={styles.phoneNumber}>{friend.phoneNumber}</Text>
-        </View>
       </View>
     );
+  }
+
+  renderContactList() {
+    return (
+      <ListView
+        dataSource={this.state.friends}
+        renderRow={(rowData) => <AddFriendItem friend={rowData} /> }
+        style={styles.listView}
+        renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
+      />
+    )
   }
 }
 

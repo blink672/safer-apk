@@ -29,7 +29,7 @@ HomePageTabs.navigationOptions = ({navigation}) => ({
 });
 
 const Stack = StackNavigator({
-  Home: { screen: HomePageTabs },
+  HomePageTabs: { screen: HomePageTabs },
   FriendMap: { screen: FriendMap },
   AddFence: { screen: AddFence },
   Settings: { screen: Settings },

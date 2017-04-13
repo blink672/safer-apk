@@ -16,6 +16,14 @@ export default class GroupsList extends Component {
     const { navigate } = this.props.navigation;
     return (
       <View>
+        <Button
+          onPress={() => navigate('CreateGroup',{
+            information: 'random',
+            title: "Create Group"
+          })
+        }
+        title="Create Group"
+        />
         <Text>Group</Text>
       </View>
     );

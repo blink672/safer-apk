@@ -14,10 +14,10 @@ export default class CreateGroup extends Component {
   render() {
     const params = this.props.navigation.state.params;
     return (
-      <View style={styles.container}>
+      <View>
         <Text style={styles.button}>Create Group:</Text>
         <TextInput
-          style={{height: 81, borderColor: 'gray', borderWidth: 1, flex: 1}}
+          style={{fontSize: 18}}
           onChangeText={(text) => this.setState({text})}
           placeholder='Insert Group Name'
           value={this.state.text}
@@ -47,8 +47,9 @@ let styles = StyleSheet.create({
     textAlign: 'center',
   },
   button: {
-    width: 53,
-    height: 81,
+    fontSize: 20,
+    // width: 53,
+    // height: 81,
   },
   listView: {
     paddingTop: 20,

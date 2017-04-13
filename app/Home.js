@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { AppState, View, Button, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-// import endpoint from './endpoint.js';
+import { endpoint, googleAuthWebClientId } from './endpoint.js';
 import FriendMap from './FriendMap.js';
 import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
 
@@ -19,6 +19,7 @@ export default class HomeScreen extends Component {
 
   componentDidMount() {
     this._setupGoogleSignin();
+    console.log('this is googleAuthWebClientId');
   };
 
   render() {
@@ -66,7 +67,7 @@ export default class HomeScreen extends Component {
     try {
       await GoogleSignin.hasPlayServices({ autoResolve: true });
       await GoogleSignin.configure({
-        webClientId: ''//replace with client_id from google-services.json,
+        webClientId: googleAuthWebClientId, //replace with client_id from google-services.json
         offlineAccess: false
       });
 

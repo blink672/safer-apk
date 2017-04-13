@@ -30,5 +30,5 @@ https://facebook.github.io/react-native/docs/running-on-device.html
 
 // Please fill and rename this file to endpoint.js
 // endpoint.js is included in the gitignore
-//export default endpoint = 'http://<your IP address here>:1337'
-
+exports.endpoint = 'http://<your IP address here>:1337';
+exports.googleAuthWebClientId = ''; //get this from your google-services.json file

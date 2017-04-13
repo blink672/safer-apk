@@ -121,7 +121,9 @@ dependencies {
     compile (project(':react-native-fcm')) {
         exclude group: "com.google.firebase"
     } // FCM
-    compile project(':react-native-google-signin')
+    compile (project(':react-native-google-signin')) {         
+        exclude group: "com.google.android.gms" // very important
+    }
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:23.0.1"
     compile "com.facebook.react:react-native:+"  // From node_modules
@@ -130,6 +132,7 @@ dependencies {
         exclude group: 'com.google.android.gms:play-services-maps'
         exclude group: 'com.google.maps.android:android-maps-utils'
     }
+
     compile ("com.google.android.gms:play-services-base:10.0.1") {
         force = true;
     }
@@ -143,6 +146,9 @@ dependencies {
         force = true;
     }
     compile ('com.google.firebase:firebase-messaging:10.0.1') {
+        force = true;
+    }
+    compile ('com.google.android.gms:play-services-auth:10.0.1') {
         force = true;
     }
 }

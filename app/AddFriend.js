@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import endpoint from './endpoint.js';
+import {endpoint} from './endpoint.js';
 import Contacts from 'react-native-contacts';
 import AddFriendList from './AddFriendList.js';
 import { View, Text, StyleSheet, Button, ListView } from 'react-native';

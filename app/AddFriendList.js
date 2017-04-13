@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import endpoint from './endpoint.js';
+import {endpoint} from './endpoint.js';
 import { View, Text, StyleSheet, Button } from 'react-native';
 
 export default class AddFriendList extends Component {

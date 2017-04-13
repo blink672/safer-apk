@@ -18,16 +18,26 @@ export default class Settings extends Component {
   };
 
   onChange(privacySetting) {
+    console.log(privacySetting);
     fetch(endpoint + '/api/privacySettings', {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json',
+        'Content-Type': 'text/plain',
       },
       body: JSON.stringify(privacySetting)
+
     }).then((response) => {
-      console.log(response);
-    })
+      console.log('response: ', response);
+
+    }).catch((err) => {
+      console.log('there was an error');
+    });
+
+    this.setState({
+      selected: privacySetting
+    });
+    console.log('in on change');
   }
 
   render() {
@@ -38,7 +48,7 @@ export default class Settings extends Component {
         <Picker 
           style={{width: 200}} 
           selectedValue={this.state.selected}
-          onValueChange={(selected) => this.setState({selected: selected})} >
+          onValueChange={this.onChange} >
           <Picker.Item label='Label' value='label'/>
           <Picker.Item label='GPS Coordinates' value='gps' />
         </Picker>

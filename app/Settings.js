@@ -7,37 +7,47 @@ import FriendMap from './FriendMap.js';
 export default class Settings extends Component {
   constructor(props) {
     super(props);
+    // TODO: grab logged in userId (for SQL table)
+    // and pass it along in the req.body
+    // currently hard coded to 1
     this.state = {
-      selected: 'Label'
+      userId: 1, 
+      selected: 'GPS', //TODO: set this to the privacy setting grabbed from the sql database
+      error: false
     };
-    this.onChange = this.onChange.bind(this);
+    this.onValueChange = this.onValueChange.bind(this);
   };
 
   static navigationOptions = {
     title: 'Settings'
   };
 
-  onChange(privacySetting) {
-    console.log(privacySetting);
+  onValueChange(privacySetting) {
     fetch(endpoint + '/api/privacySettings', {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'text/plain',
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(privacySetting)
+      body: JSON.stringify({
+        userId: this.state.userId,
+        privacy: privacySetting
+      })
 
     }).then((response) => {
-      console.log('response: ', response);
-
+      if (response.err) {
+        this.setState({
+          error: true
+        });
+      }      
     }).catch((err) => {
-      console.log('there was an error');
+      this.setState({
+        error: true
+      });
     });
-
     this.setState({
-      selected: privacySetting
+      selected: privacySetting,
     });
-    console.log('in on change');
   }
 
   render() {
@@ -45,12 +55,14 @@ export default class Settings extends Component {
     return (
       <View style={styles.container}>
         <Text>Privacy Settings</Text>
+        {this.state.error && 
+          (<Text>There was an error updating your privacy settings. Please try again later.</Text>)}
         <Picker 
           style={{width: 200}} 
           selectedValue={this.state.selected}
-          onValueChange={this.onChange} >
+          onValueChange={this.onValueChange} >
           <Picker.Item label='Label' value='label'/>
-          <Picker.Item label='GPS Coordinates' value='gps' />
+          <Picker.Item label='GPS' value='gps' />
         </Picker>
 
       </View>

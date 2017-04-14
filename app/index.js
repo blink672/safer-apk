@@ -6,6 +6,7 @@ import AllFriendsList from './AllFriendsList.js';
 import Settings from './Settings.js';
 import AddFriendList from './AddFriendList.js';
 import CreateGroup from './CreateGroup.js';
+import GroupMap from './GroupMap.js';
 
 import React from 'react';
 import { Button } from 'react-native';
@@ -36,6 +37,7 @@ const Stack = StackNavigator({
   Settings: { screen: Settings },
   AddFriend: { screen: AddFriendList },
   CreateGroup: { screen: CreateGroup },
+  GroupMap: { screen: GroupMap },
 });
 
 Stack.navigationOptions = {

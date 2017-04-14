@@ -10,7 +10,8 @@ export default class AllFriendsItem extends Component {
       friends: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2
       }),
-      loaded: false
+      loaded: false,
+      privacy: '',
     };
   };
 

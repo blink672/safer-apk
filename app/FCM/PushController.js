@@ -45,8 +45,27 @@ export default class PushController extends Component {
 
     this.notificationListener = FCM.on(FCMEvent.Notification, notif => {
       console.log('Notification', notif);
+      if (notif.local_notification) { return; }
+      if (notif.opened_from_tray) { return; }
+      this.showLocalNotification(notif);
     });
+
+    this.refreshTokenListener = FCM.on(FCMEvent.RefreshToken, token => {
+      console.log('token (refreshUnsubcribe)', token);
+      this.props.onChangeToken(token);
+    })
   };
+
+  showLocalNotification(notif) {
+    FCM.presentLocalNotification({
+      title: notif.title,
+      body: notif.body,
+      priority: 'high',
+      click_action: notif.click_action,
+      show_in_foreground: true,
+      local: true
+    });
+  }
 
   render() {
     return null;

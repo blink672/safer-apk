@@ -3,7 +3,7 @@ import { endpoint } from './endpoint.js';
 import Contacts from 'react-native-contacts';
 import { View, Text, StyleSheet, Button, ListView } from 'react-native';
 
-export default class AllFriendsItem extends Component {
+export default class AllFriendsList extends Component {
   constructor(props) {
     super(props);
     this.state =  {
@@ -16,9 +16,8 @@ export default class AllFriendsItem extends Component {
   };
 
   componentWillMount() {
-    fetch(`${endpoint}/api/friends`, {
-      method: 'GET',
-    })
+    console.log("in component will mount in all friends list")
+    fetch(`${endpoint}/api/friends`)
       .then(function(response) {
         return response.json();
       })
@@ -69,7 +68,7 @@ export default class AllFriendsItem extends Component {
         <Button
           style={styles.thumbnail}
           onPress={() => console.log(friend)}
-          title={friend.privacy}
+          title={friend.showSetting}
         />
         <View style={styles.rightContainer}>
           <Text style={styles.title}>{friend.first}</Text>

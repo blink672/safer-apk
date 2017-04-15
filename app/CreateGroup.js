@@ -80,9 +80,13 @@ export default class CreateGroup extends Component {
     console.log(this.state);
   }
 
-  static navigationOptions = {
-    title: ({state}) => (state.params.title)
-  };
+  // static navigationOptions = {
+  //   title: ({state}) => (state.params.title)
+  // };
+
+  static navigationOptions = ({ navigation }) => {
+    title: navigation.state.params.title
+  }
 
   render() {
     const params = this.props.navigation.state.params;

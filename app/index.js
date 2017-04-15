@@ -18,17 +18,10 @@ const HomePageTabs = TabNavigator({
   AllFriendsList: { screen: AllFriendsList },
 });
 
-HomePageTabs.navigationOptions = {
+HomePageTabs.navigationOptions = ({navigation}) => ({
   title: 'Safely',
-  header: (({ navigate }) => ({
-    left: <Button title='Menu' onPress={ () => navigate('DrawerOpen') }/>
-  }))
-};
-
-// HomePageTabs.navigationOptions = ({navigation}) => ({
-//   title: 'Safely',
-//   headerRight: <Button title='Menu' onPress={ () => navigation.navigate('DrawerOpen') } />
-// });
+  headerLeft: <Button title='Menu' onPress={ () => navigation.navigate('DrawerOpen') } />
+});
 
 const Stack = StackNavigator({
   HomePageTabs: { screen: HomePageTabs },

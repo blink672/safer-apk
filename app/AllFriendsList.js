@@ -1,3 +1,4 @@
+import FriendMap from './FriendMap.js';
 import React, { Component } from 'react';
 import { endpoint } from './endpoint.js';
 import Contacts from 'react-native-contacts';
@@ -55,7 +56,7 @@ export default class AllFriendsList extends Component {
     return (
       <ListView
         dataSource={this.state.friends}
-        renderRow={this.renderContacts}
+        renderRow={(rowData) => this.renderContacts(rowData)}
         style={styles.listView}
         renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
       />
@@ -63,11 +64,15 @@ export default class AllFriendsList extends Component {
   }
 
   renderContacts(friend) {
+    const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
         <Button
           style={styles.thumbnail}
-          onPress={() => console.log(friend)}
+          onPress={() => navigate('FriendMap', {
+            data: friend
+            })
+          }
           title={friend.showSetting}
         />
         <View style={styles.rightContainer}>

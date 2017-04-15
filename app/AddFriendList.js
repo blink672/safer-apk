@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {endpoint} from './endpoint.js';
 import Contacts from 'react-native-contacts';
-import AddFriendItem from './AddFriendList.js';
+import AddFriendItem from './AddFriendItem.js';
 import { View, Text, StyleSheet, Button, ListView } from 'react-native';
 
 export default class AddFriendList extends Component {

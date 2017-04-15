@@ -1,20 +1,28 @@
 import React, { Component } from 'react';
 import { endpoint } from './endpoint.js';
-import { View, Text, StyleSheet } from 'react-native';
+import { ListView, View, Text, StyleSheet } from 'react-native';
 
 export default class GroupMap extends Component {
   constructor(props) {
     super(props);
-    this.state =  {};
+    this.state =  {
+      members: new ListView.DataSource({
+        rowHasChanged: (row1, row2) => row1 !== row2
+      })
+    };
   }
 
   componentWillMount() {
-    fetch(`${endpoint}/api/groupUsers`)
+    console.log('GROUPMAP',this.props.navigation.state.params)
+    let {name} = this.props.navigation.state.params.data;
+    fetch(`${endpoint}/api/groupUsers?name=${name}`)
     .then(response => {
       return response.json();
     })
     .then(members => {
-      console.log(members);
+      this.setState({
+        members: this.state.members.cloneWithRows(members)
+      });
     })
     .catch(err => {
       console.log('there was an error in fetching members', err);
@@ -29,6 +37,10 @@ export default class GroupMap extends Component {
     const params = this.props.navigation.state.params;
     return (
       <View>
+        <ListView
+          dataSource={this.state.members}
+          renderRow={(rowData) => <Text>{rowData.first}</Text>}
+        />
         <Text>Raffy is in a ditch a block away from his house. Find his fingers. { params.friendId }</Text>
         <Text>{ params.friendName }</Text>
       </View>

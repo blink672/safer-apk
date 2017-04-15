@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { endpoint } from './endpoint.js';
-import { ListView, View, Text, StyleSheet } from 'react-native';
+import { Button, View, Text, StyleSheet, ListView, TouchableOpacity } from 'react-native';
 
-export default class GroupMap extends Component {
+export default class HomeFavorite extends Component {
   constructor(props) {
     super(props);
-    this.state =  {
+    this.state = {
       members: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2
       })
@@ -13,9 +13,9 @@ export default class GroupMap extends Component {
   }
 
   componentWillMount() {
-    console.log('GROUPMAP',this.props.navigation.state.params)
-    let {name} = this.props.navigation.state.params.data;
-    fetch(`${endpoint}/api/groupUsers?name=${name}`)
+    console.log('HOME FAVORITE')
+    // let {name} = this.props.navigation.state.params.data;
+    fetch(`${endpoint}/api/groupUsers?name=FAVORITES`)
     .then(response => {
       return response.json();
     })
@@ -29,14 +29,15 @@ export default class GroupMap extends Component {
     });
   };
 
-  static navigationOptions = {
-    title: ({state}) => (state.params.data.name)
-  };
-
   render() {
-    const params = this.props.navigation.state.params;
+    // const params = this.props.navigation.state.params;
+    // const { navigate } = this.props.navigation;
     return (
       <View>
+        <Button
+          onPress={() => console.log("PRESSED")}
+        title="Add Member To Favorite"
+        />
         <ListView
           dataSource={this.state.members}
           renderRow={(rowData) => <Text>{rowData.first}</Text>}

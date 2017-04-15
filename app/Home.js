@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { AppState, View, Button, Text, StyleSheet, TouchableOpacity } from 'react-native';
-
-import { endpoint, googleAuthWebClientId } from './endpoint.js';
 import FriendMap from './FriendMap.js';
+import HomeFavorite from './HomeFavorite.js';
+import { AppState, View, Button, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { endpoint, googleAuthWebClientId } from './endpoint.js';
 import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
 import PushController from './FCM/PushController.js';
 
@@ -79,30 +79,33 @@ export default class HomeScreen extends Component {
     }
     if (this.state.user) {
       return (
-        <View style={styles.container}>
-          <Text>Hello {this.state.user.name}</Text>
-          <Text>Notifications???</Text>
-          <Button
-            onPress={() => navigate('FriendMap', { 
-                friendId: 1234567890,
-                friendName: 'Kyle' 
-              })
-            }
-            title="See yo friend yo"
-          />
-          <Button 
-            onPress ={() => navigate('AddFence')}
-            title="Geofence"
-          />
-          <TouchableOpacity onPress={() => {this._signOut(); }}>
-            <View style={{marginTop: 50}}>
-              <Text>Log out</Text>
-            </View>
-          </TouchableOpacity>
+        <View>
+          <HomeFavorite />
         </View>
       )
     }
   }
+        // <View style={styles.container}>
+        //   <Text>Hello {this.state.user.name}</Text>
+        //   <Text>Notifications???</Text>
+        //   <Button
+        //     onPress={() => navigate('FriendMap', { 
+        //         friendId: 1234567890,
+        //         friendName: 'Kyle' 
+        //       })
+        //     }
+        //     title="See yo friend yo"
+        //   />
+        //   <Button 
+        //     onPress ={() => navigate('AddFence')}
+        //     title="Geofence"
+        //   />
+        //   <TouchableOpacity onPress={() => {this._signOut(); }}>
+        //     <View style={{marginTop: 50}}>
+        //       <Text>Log out</Text>
+        //     </View>
+        //   </TouchableOpacity>
+        // </View>
 
   async _setupGoogleSignin() {
     try {

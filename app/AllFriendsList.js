@@ -16,7 +16,6 @@ export default class AllFriendsItem extends Component {
   };
 
   componentWillMount() {
-    console.log("in component will mount in all friends list")
     fetch(`${endpoint}/api/friends`, {
       method: 'GET',
     })
@@ -24,7 +23,6 @@ export default class AllFriendsItem extends Component {
         return response.json();
       })
       .then((friends) => {
-        console.log(friends);
         this.setState({
           friends: this.state.friends.cloneWithRows(friends),
           loaded: true

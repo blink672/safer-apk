@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import FriendMap from './FriendMap.js';
 import HomeFavorite from './HomeFavorite.js';
-import { AppState, View, Button, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { AppState, View, Button, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 import { endpoint, googleAuthWebClientId } from './endpoint.js';
 import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
 import PushController from './FCM/PushController.js';
@@ -12,7 +12,8 @@ export default class HomeScreen extends Component {
     this.state = {
       user: null,
       initialPosition: 'unknown',
-      lastPosition: 'unknown'
+      lastPosition: 'unknown',
+      phoneNumber: ''
     };
   };
 
@@ -64,17 +65,30 @@ export default class HomeScreen extends Component {
 
   render() {
     const { navigate } = this.props.navigation;
-    if (!this.state.user) {
+    if (!this.state.user && this.state.phoneNumber.length < 10) {
       return (
-        <View style={styles.container}>
-          <PushController onChangeToken={token => this.setState({token: token || ''})} />
-          <GoogleSigninButton
-            style={{width: 312, height: 48}}
-            color={GoogleSigninButton.Color.Dark}
-            size={GoogleSigninButton.Size.Wide}
-            onPress={() => { this._signIn(); }}
+        <View>
+          <Text>Please enter your phone number</Text>
+          <TextInput
+            style={{fontSize: 18, borderColor: 'black', borderWidth: 0.5,}}
+            onChangeText={(text) => this.setState( {phoneNumber: text} )}
+            // placeholder='Insert Group Name'
+            value={this.state.text}
           />
         </View>
+      )
+    }
+    if (!this.state.user && this.state.phoneNumber.length === 10) {
+      return (
+          <View style={styles.container}>
+            <Text>Your phone number: {this.state.phoneNumber}</Text>
+            <GoogleSigninButton
+              style={{width: 312, height: 48}}
+              color={GoogleSigninButton.Color.Dark}
+              size={GoogleSigninButton.Size.Wide}
+              onPress={() => { this._signIn(); }}
+            />
+          </View>
       );
     }
     if (this.state.user) {
@@ -116,7 +130,6 @@ export default class HomeScreen extends Component {
       });
 
       const user = await GoogleSignin.currentUserAsync();
-      console.log(user);
       this.setState({user});
     }
     catch(err) {
@@ -130,6 +143,17 @@ export default class HomeScreen extends Component {
       console.log(user);
       this.setState({user: user});
     })
+    .then(() => {
+      return fetch(`${endpoint}/`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.state.user.idToken}`
+      },
+      body: JSON.stringify({phoneNumber: this.state.phoneNumber})
+      })
+    })
     .catch((err) => {
       console.log('WRONG SIGNIN', err);
     })
@@ -137,7 +161,12 @@ export default class HomeScreen extends Component {
   }
 
   _signOut() {
-    GoogleSignin.revokeAccess().then(() => GoogleSignin.signOut()).then(() => {
+    GoogleSignin.revokeAccess()
+    .then(() => {
+      GoogleSignin.signOut();
+      console.log('Google access revoked');
+    })
+    .then(() => {
       this.setState({user: null});
     })
     .done();
@@ -151,22 +180,3 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   }
 });
-
-
-// This won't work without editing the server files to res.json('validated!');
-    // fetch(endpoint + '/api/validate', {
-    //   method: 'POST'
-    // })
-    //   .then(function(response) {
-    //     return response.json();
-    //   })
-    //   .then(function(data) {
-    //     console.log('data: ', data);
-    //     this.setState({
-    //       data: data
-    //     });
-    //   }.bind(this))
-    //   .catch(function(error) {
-    //     console.log('There was an error in fetching your data: ', error);
-    //     return error;
-    //   });

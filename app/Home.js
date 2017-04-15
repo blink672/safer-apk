@@ -4,6 +4,7 @@ import { AppState, View, Button, Text, StyleSheet, TouchableOpacity } from 'reac
 import { endpoint, googleAuthWebClientId } from './endpoint.js';
 import FriendMap from './FriendMap.js';
 import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
+import PushController from './FCM/PushController.js';
 
 export default class HomeScreen extends Component {
   constructor(props) {
@@ -66,6 +67,7 @@ export default class HomeScreen extends Component {
     if (!this.state.user) {
       return (
         <View style={styles.container}>
+          <PushController onChangeToken={token => this.setState({token: token || ''})} />
           <GoogleSigninButton
             style={{width: 312, height: 48}}
             color={GoogleSigninButton.Color.Dark}

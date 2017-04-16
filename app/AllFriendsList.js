@@ -34,9 +34,9 @@ export default class AllFriendsList extends Component {
       });
   }
 
-  static navigationOptions = {
+  static navigationOptions = ({navigation}) => ({
     title: 'Friends'
-  };
+  });
 
   render() {
     const params = this.props.navigation.state.params;

@@ -96,6 +96,7 @@ export default class HomeScreen extends Component {
     if (this.state.user) {
       return (
         <View>
+          <PushController onChangeToken={(token) => {this.setState({FCMToken: token})}}/>
           <HomeFavorite />
         </View>
       )

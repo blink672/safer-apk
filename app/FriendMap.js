@@ -22,7 +22,7 @@ export default class FriendMap extends Component {
   renderPending(data) {
     return (
       <View style={{marginTop: 10}}>
-        <Text style={{textAlign: 'center', fontSize: 20}}>{data.first} doesn't want to be your friend. Stop checking.</Text>
+        <Text style={{textAlign: 'center', fontSize: 20}}>Friend request still pending...</Text>
       </View>
     );
   }
@@ -30,9 +30,9 @@ export default class FriendMap extends Component {
   renderLabel(data) {
     return (
       <View style={{marginTop: 10}}>
-        <Text style={{textAlign: 'center', fontSize: 20}}>{data.first} is in a ditch a block away from his house.</Text> 
-        <Text style={{textAlign: 'center', fontSize: 20}}>Find his fingers.</Text>
-        <Text style={{textAlign: 'center', fontSize: 20}}>Call him at { data.phoneNumber }</Text>
+        <Text style={{textAlign: 'center', fontSize: 20}}>{data.first} checked in at:</Text> 
+        <Text style={{textAlign: 'center', fontSize: 20}}>Home</Text>
+        <Text style={{textAlign: 'center', fontSize: 20}}>5 min ago</Text>
       </View>
     );
   }
@@ -45,7 +45,7 @@ export default class FriendMap extends Component {
           style={{justifyContent: 'center'}}
           source={require('./Image/MapImage.png')}
         />
-        <Text style={{textAlign: 'center', fontSize: 20}}>{data.updatedAt} Ago.</Text>
+        <Text style={{textAlign: 'center', fontSize: 20}}>Office 12 min Ago.</Text>
       </View>
     );
   }

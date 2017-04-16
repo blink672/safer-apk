@@ -40,7 +40,6 @@ export default class GroupsList extends Component {
       <View>
         <Button
           onPress={() => navigate('CreateGroup',{
-            information: 'random',
             title: "Create Group"
           })
         }

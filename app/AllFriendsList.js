@@ -65,6 +65,10 @@ export default class AllFriendsList extends Component {
 
   renderContacts(friend) {
     const { navigate } = this.props.navigation;
+    let title = '';
+    if(friend.showSetting === 'pending') { title = 'Pending'; };
+    if(friend.showSetting === 'label') { title = 'Home 5 min ago'; }
+    if(friend.showSetting === 'GPS') { title = 'Office 12 min ago'}
     return (
       <View style={styles.container}>
         <Button
@@ -73,11 +77,10 @@ export default class AllFriendsList extends Component {
             data: friend
             })
           }
-          title="Home 5 min ago"
+          title={title}
         />
         <View style={styles.rightContainer}>
-          <Text style={styles.title}>{friend.first}</Text>
-          <Text style={styles.year}>{friend.last}</Text>
+          <Text style={styles.title}>{`${friend.first} ${friend.last}`}</Text>
         </View>
       </View>
     )
@@ -93,6 +96,7 @@ let styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   rightContainer: {
+    // justifyContent: 'right',
     flex: 1,
   },
   title: {
@@ -101,7 +105,7 @@ let styles = StyleSheet.create({
     textAlign: 'center',
   },
   year: {
-    textAlign: 'center',
+    textAlign: 'right',
   },
   thumbnail: {
     width: 53,

@@ -29,9 +29,9 @@ export default class GroupMap extends Component {
     });
   };
 
-  static navigationOptions = {
-    title: ({state}) => (state.params.data.name)
-  };
+  static navigationOptions = ({navigation}) => ({
+    title: navigation.state.params.data.name
+  });
 
   render() {
     const params = this.props.navigation.state.params;

@@ -8,9 +8,9 @@ export default class FriendMap extends Component {
     console.log(this.props.navigation.state.params);
   }
 
-  static navigationOptions = {
-    title: ({state}) => (state.params.data.first)
-  };
+  static navigationOptions = ({navigation}) => ({
+    title: navigation.state.params.data.first
+  });
 
   render() {
     const { data } = this.props.navigation.state.params;

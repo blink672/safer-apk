@@ -73,7 +73,7 @@ export default class AllFriendsList extends Component {
             data: friend
             })
           }
-          title={friend.showSetting}
+          title="Home 5 min ago"
         />
         <View style={styles.rightContainer}>
           <Text style={styles.title}>{friend.first}</Text>

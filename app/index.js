@@ -7,6 +7,7 @@ import Settings from './Settings.js';
 import AddFriendList from './AddFriendList.js';
 import CreateGroup from './CreateGroup.js';
 import GroupMap from './GroupMap.js';
+import LogOut from './LogOut.js';
 
 import React from 'react';
 import { Button } from 'react-native';
@@ -20,7 +21,8 @@ const HomePageTabs = TabNavigator({
 
 HomePageTabs.navigationOptions = ({navigation}) => ({
   title: 'Safely',
-  headerLeft: <Button title='Menu' onPress={ () => navigation.navigate('DrawerOpen') } />
+  headerLeft: <Button title='Menu' onPress={ () => navigation.navigate('DrawerOpen') } />,
+  hederRight: <Button title='LogOut' onpress={ () => console.log('logout')} />
 });
 
 const Stack = StackNavigator({
@@ -40,8 +42,8 @@ Stack.navigationOptions = {
 const MenuDrawer = DrawerNavigator({
   Stack: { screen: Stack },
   AddFriend: { screen: AddFriendList },  
-  Settings: { screen: Settings }
-
+  Settings: { screen: Settings },
+  LogOut: { screen: LogOut },
 }, {
   drawerWidth: 200
 });

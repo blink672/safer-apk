@@ -40,7 +40,7 @@ export default class HomeFavorite extends Component {
         />
         <ListView
           dataSource={this.state.members}
-          renderRow={(rowData) => <Text>{rowData.first}</Text>}
+          renderRow={(rowData) => <Text style={{textAlign: 'center', fontSize: 20}}>{rowData.first}</Text>}
         />
       </View>
     );

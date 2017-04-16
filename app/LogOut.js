@@ -10,7 +10,7 @@ export default class LogOut extends Component {
   }
 
   static navigationOptions = ({navigation}) => ({
-    title: 'LogOut'
+    title: 'Log Out'
   });
 
   render() {

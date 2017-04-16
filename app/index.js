@@ -40,10 +40,10 @@ Stack.navigationOptions = {
 
 const MenuDrawer = DrawerNavigator({
   Stack: { screen: Stack },
-  'Add Friend': { screen: AddFriendList },  
+  AddFriend: { screen: AddFriendList },  
   Settings: { screen: Settings },
-  'Add Fence': { screen: AddFence },
-  'Log Out': { screen: LogOut },
+  AddFence: { screen: AddFence },
+  LogOut: { screen: LogOut },
 }, {
   drawerWidth: 200
 });

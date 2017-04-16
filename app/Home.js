@@ -68,9 +68,11 @@ export default class HomeScreen extends Component {
     if (!this.state.user && this.state.phoneNumber.length < 10) {
       return (
         <View>
-          <Text>Please enter your phone number</Text>
+          <Text style={{fontSize: 25}}>
+            Please enter your phone number
+          </Text>
           <TextInput
-            style={{fontSize: 18, borderColor: 'black', borderWidth: 0.5,}}
+            style={{fontSize: 25}}
             onChangeText={(text) => this.setState( {phoneNumber: text} )}
             // placeholder='Insert Group Name'
             value={this.state.text}
@@ -142,6 +144,10 @@ export default class HomeScreen extends Component {
     .then((user) => {
       console.log(user);
       this.setState({user: user});
+    })
+    .then(()=>{
+      FireAuth.googleLogin();
+      console.log('fireauth called');
     })
     .then(() => {
       return fetch(`${endpoint}/`, {

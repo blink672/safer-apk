@@ -88,7 +88,9 @@ export default class Settings extends Component {
     return (
       <View style={styles.container}>
 
-        <Text style={styles.text}>Privacy Settings</Text>
+        <Text style={styles.text}>Default Privacy Settings</Text>
+        <Text style={styles.description}>This is the default information presented to your connections</Text>
+        <Text style={styles.description}>You can edit individual privacy settings from their location details screen</Text>
         <Picker 
           style={{width: 200}} 
           selectedValue={this.state.selected}
@@ -97,7 +99,7 @@ export default class Settings extends Component {
           <Picker.Item label='GPS' value='gps' />
         </Picker>
 
-        <Text style={styles.text}>Incognito Mode</Text>
+        <Text style={styles.text}>Incognito Mode - Stop sharing your location</Text>
         <Switch
           onValueChange={this.switchChange}
           style={{marginBottom: 10}}
@@ -117,11 +119,15 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'flex-start'
   },
-
   text: {
     fontSize: 16,
     fontWeight: 'bold',
     textAlign: 'auto'
+  },
+  description: {
+    fontSize: 14,
+    textAlign: 'auto'
   }
+
 });
 

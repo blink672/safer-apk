@@ -15,9 +15,14 @@ export default class AddFriendList extends Component {
     };
     this.checkPermissionAndGet = this.checkPermissionAndGet.bind(this);
   };
+
   componentWillMount(){
     console.log("will mount in addfriend")
     this.checkPermissionAndGet();
+  };
+
+  static navigationOptions = {
+    title: 'Add Friend'
   };
 
   checkPermissionAndGet() {
@@ -84,10 +89,6 @@ export default class AddFriendList extends Component {
         // x.x
       }
     })
-  };
-
-  static navigationOptions = {
-    title: 'AddFriend'
   };
 
   render() {

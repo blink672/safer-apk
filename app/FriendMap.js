@@ -42,8 +42,8 @@ export default class FriendMap extends Component {
       <View style={{marginTop: 10}}>
         <Text style={{textAlign: 'center', fontSize: 20}}>Checked In At:</Text>
         <Image
-          style={{justifyContent: 'center'}}
-          source={require('./Image/MapImage.png')}
+          style={{justifyContent: 'center', height: 350, width: 350}}
+          source={require('./Image/HackReactor2.png')}
         />
         <Text style={{textAlign: 'center', fontSize: 20}}>Office 12 min Ago.</Text>
       </View>

@@ -67,8 +67,8 @@ export default class AllFriendsList extends Component {
     const { navigate } = this.props.navigation;
     let title = '';
     if(friend.showSetting === 'pending') { title = 'Pending'; };
-    if(friend.showSetting === 'label') { title = 'Home 5 min ago'; }
-    if(friend.showSetting === 'GPS') { title = 'Office 12 min ago'}
+    if(friend.showSetting === 'label') { title = 'Home'; }
+    if(friend.showSetting === 'GPS') { title = 'Office'}
     return (
       <View style={styles.container}>
         <Button

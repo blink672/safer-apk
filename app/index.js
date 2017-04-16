@@ -20,9 +20,8 @@ const HomePageTabs = TabNavigator({
 });
 
 HomePageTabs.navigationOptions = ({navigation}) => ({
-  title: 'Safely',
-  headerLeft: <Button title='Menu' onPress={ () => navigation.navigate('DrawerOpen') } />,
-  hederRight: <Button title='LogOut' onpress={ () => console.log('logout')} />
+  title: 'Safer',
+  headerLeft: <Button title='Menu' onPress={ () => navigation.navigate('DrawerOpen') } />
 });
 
 const Stack = StackNavigator({

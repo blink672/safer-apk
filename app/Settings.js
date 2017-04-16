@@ -88,7 +88,7 @@ export default class Settings extends Component {
     return (
       <View style={styles.container}>
 
-        <Text>Privacy Settings</Text>
+        <Text style={styles.text}>Privacy Settings</Text>
         <Picker 
           style={{width: 200}} 
           selectedValue={this.state.selected}
@@ -97,7 +97,7 @@ export default class Settings extends Component {
           <Picker.Item label='GPS' value='gps' />
         </Picker>
 
-        <Text>Incognito Mode</Text>
+        <Text style={styles.text}>Incognito Mode</Text>
         <Switch
           onValueChange={this.switchChange}
           style={{marginBottom: 10}}
@@ -116,6 +116,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'flex-start'
+  },
+
+  text: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'auto'
   }
 });
 

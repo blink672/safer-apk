@@ -61,7 +61,9 @@ export default class CreateGroup extends Component {
       .catch((error) => {
         console.log('There was an error in fetching your data: ', error);
         return error;
-      });    
+      });
+    const { navigate } = this.props.navigation;
+    navigate('GroupsList');
   }
 
   handleUserChange(userObj) {

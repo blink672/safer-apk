@@ -14,6 +14,7 @@ export default class FriendMap extends Component {
 
   render() {
     const { data } = this.props.navigation.state.params;
+    console.log(data);
     if(data.showSetting === 'GPS') { return this.renderGPS(data); }
     if(data.showSetting === 'label') { return this.renderLabel(data); }
     if(data.showSetting === 'pending') { return this.renderPending(data); }

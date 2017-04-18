@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { endpoint } from './endpoint.js';
-import { ListView, View, Text, StyleSheet } from 'react-native';
+import { ListView, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 export default class GroupMap extends Component {
   constructor(props) {
@@ -20,6 +20,7 @@ export default class GroupMap extends Component {
       return response.json();
     })
     .then(members => {
+      console.log(members);
       this.setState({
         members: this.state.members.cloneWithRows(members)
       });
@@ -39,9 +40,27 @@ export default class GroupMap extends Component {
       <View>
         <ListView
           dataSource={this.state.members}
-          renderRow={(rowData) => <Text style={{textAlign: 'center', fontSize: 23}}>{rowData.first}</Text>}
+          renderRow={(rowData) => this.renderMembers(rowData) }
         />
       </View>
     );
+  }
+
+  renderMembers(memberData) {
+    const { navigate } = this.props.navigation;
+    let title = '';
+    if(memberData.showSetting === 'pending') { title = 'Pending'; };
+    if(memberData.showSetting === 'label') { title = 'Home'; }
+    if(memberData.showSetting === 'GPS') { title = 'Office'}
+    return (
+      <TouchableOpacity
+        onPress={() => navigate('FriendMap', {data: memberData}) }
+      >
+        <View>
+          <Text style={{textAlign: 'left', fontSize: 23}}>{memberData.first}</Text>
+          <Text style={{textAlign: 'right', fontSize: 23}}>{title}</Text>
+        </View>
+      </TouchableOpacity>
+    )
   }
 }

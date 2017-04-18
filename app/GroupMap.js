@@ -48,17 +48,13 @@ export default class GroupMap extends Component {
 
   renderMembers(memberData) {
     const { navigate } = this.props.navigation;
-    let title = '';
-    if(memberData.showSetting === 'pending') { title = 'Pending'; };
-    if(memberData.showSetting === 'label') { title = 'Home'; }
-    if(memberData.showSetting === 'GPS') { title = 'Office'}
     return (
       <TouchableOpacity
         onPress={() => navigate('FriendMap', {data: memberData}) }
       >
         <View>
           <Text style={{textAlign: 'left', fontSize: 23}}>{memberData.first}</Text>
-          <Text style={{textAlign: 'right', fontSize: 23}}>{title}</Text>
+          <Text style={{textAlign: 'right', fontSize: 23}}>{memberData.currentLabel ? memberData.currentLabel : 'Pending'}</Text>
         </View>
       </TouchableOpacity>
     )

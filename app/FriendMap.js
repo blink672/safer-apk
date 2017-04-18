@@ -32,7 +32,7 @@ export default class FriendMap extends Component {
     return (
       <View style={{marginTop: 10}}>
         <Text style={{textAlign: 'center', fontSize: 20}}>{data.first} checked in at:</Text> 
-        <Text style={{textAlign: 'center', fontSize: 20}}>Home</Text>
+        <Text style={{textAlign: 'center', fontSize: 20}}>{data.currentLabel}</Text>
         <Text style={{textAlign: 'center', fontSize: 20}}>5 min ago</Text>
       </View>
     );
@@ -46,7 +46,7 @@ export default class FriendMap extends Component {
           style={{justifyContent: 'center', height: 350, width: 350}}
           source={require('./Image/HackReactor2.png')}
         />
-        <Text style={{textAlign: 'center', fontSize: 20}}>Office 12 min Ago.</Text>
+        <Text style={{textAlign: 'center', fontSize: 20}}>{data.currentLabel} 12 min Ago.</Text>
       </View>
     );
   }

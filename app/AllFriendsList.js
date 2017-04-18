@@ -65,10 +65,10 @@ export default class AllFriendsList extends Component {
 
   renderContacts(friend) {
     const { navigate } = this.props.navigation;
-    let title = '';
-    if(friend.showSetting === 'pending') { title = 'Pending'; };
-    if(friend.showSetting === 'label') { title = 'Home'; }
-    if(friend.showSetting === 'GPS') { title = 'Office'}
+    // let title = '';
+    // if(friend.showSetting === 'pending') { title = 'Pending'; };
+    // if(friend.showSetting === 'label') { title = 'Home'; }
+    // if(friend.showSetting === 'GPS') { title = 'Office'}
     return (
       <View style={styles.container}>
         <Button
@@ -77,7 +77,7 @@ export default class AllFriendsList extends Component {
             data: friend
             })
           }
-          title={title}
+          title={friend.currentLabel ? friend.currentLabel : 'Pending'}
         />
         <View style={styles.rightContainer}>
           <Text style={styles.title}>{`${friend.first} ${friend.last}`}</Text>

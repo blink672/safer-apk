@@ -57,12 +57,15 @@ export default class HomeScreen extends Component {
   checkFences(currentPoint) {
     let inFence = false;
     let phoneNumber = '1234567'
-    fetch(`${endpoint}/api/labels/?id=${phoneNumber}`, {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
+    // fetch(`${endpoint}/api/labels/?id=${phoneNumber}`, {
+    //   method: 'GET',
+    //   headers: {
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'application/json'
+    //   }
+    // })
+    return AuthAxios({
+      url: `/api/labels/?id=${phoneNumber}`
     })
     .then(function (response) {
       return response.json()
@@ -167,18 +170,17 @@ export default class HomeScreen extends Component {
   _signIn() {
     GoogleSignin.signIn()
     .then((user) => {
-      console.log(user);
       this.setState({user: user});
     })
     .then(() => {
       return AuthAxios({
-        url: '/login',
-        method: 'post',
+        url: '/api/user/',
+        method: 'put',
         data: {phoneNumber: this.state.phoneNumber}
       })
     })
     .catch((err) => {
-      console.log('WRONG SIGNIN', err);
+      console.error('Sign in error: ', err);
     })
     .done();
   }

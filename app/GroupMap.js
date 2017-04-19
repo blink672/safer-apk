@@ -39,12 +39,30 @@ export default class GroupMap extends Component {
     const params = this.props.navigation.state.params;
     return (
       <View>
+        <Button
+          onPress={() => console.log('add friend')}
+          title='Add/Delete Friends'
+        />
         <ListView
           dataSource={this.state.members}
           renderRow={(rowData) => this.renderMembers(rowData) }
         />
       </View>
     );
+  }
+
+  renderChangeMembers(memberData) {
+    return (
+      <View>
+        <Button
+          onPress={() => console.log('Add/Delete')}
+          title='Add/Delte'
+        />
+        <View>
+          <Text>{memberData.first}</Text>
+        </View>
+      </View>
+    )
   }
 
   renderMembers(memberData) {

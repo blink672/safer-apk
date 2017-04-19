@@ -18,7 +18,7 @@ export default class AddFence extends Component {
   };
 
   static navigationOptions = {
-    title: 'Your fences',
+    title: 'Your Fences',
   };
 
   componentDidMount () {

@@ -19,7 +19,7 @@ export default class CreateGroup extends Component {
   }
 
   componentWillMount() {
-    fetch(`${endpoint}/api/friends`, {
+    fetch(`${endpoint}/api/friends?groups=true`, {
       method: 'GET',
     })
       .then(function(response) {

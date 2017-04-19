@@ -9,9 +9,9 @@ export default class LogOut extends Component {
     };
   }
 
-  static navigationOptions = {
-    title: 'LogOut'
-  };
+  static navigationOptions = ({ navigation }) => ({
+    title: 'Log Out'
+  });
 
   render() {
     const params = this.props.navigation.state.params;

@@ -68,7 +68,7 @@ export default class AllFriendsList extends Component {
         <Button
           style={styles.button}
           onPress={() => navigate('FriendMap', {
-            data: friend
+              data: friend
             })
           }
           title={friend.currentLabel ? friend.currentLabel : 'Pending'}

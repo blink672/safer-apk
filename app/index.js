@@ -32,6 +32,7 @@ const Stack = StackNavigator({
   AddFriend: { screen: AddFriendList },
   CreateGroup: { screen: CreateGroup },
   GroupMap: { screen: GroupMap },
+  LogOut: { screen: LogOut },
 });
 
 Stack.navigationOptions = {

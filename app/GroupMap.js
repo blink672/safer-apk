@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { endpoint } from './endpoint.js';
 import { ListView, View, Text, StyleSheet, TouchableOpacity, Button } from 'react-native';
 import AuthAxios from './AuthAxios.js';
+import AddDeleteGroupMembers from './AddDeleteGroupMembers.js';
 
 export default class GroupMap extends Component {
   constructor(props) {
@@ -13,9 +14,15 @@ export default class GroupMap extends Component {
       nonMembers: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2
       }),
+      membersToAdd: [],
+      membersToDelete: [],
       addAndDelete: false
     };
-    this.fetchNonGroupMembers = this.fetchNonGroupMembers.bind(this);
+    this.changeToEditGroup = this.changeToEditGroup.bind(this);
+    this.updateGroupMembers = this.updateGroupMembers.bind(this);
+    this.addMember = this.addMember.bind(this);
+    this.removeMember = this.removeMember.bind(this);
+    this.updateGroupMembers = this.updateGroupMembers.bind(this);
   }
 
   componentWillMount() {
@@ -34,20 +41,52 @@ export default class GroupMap extends Component {
     });
   };
 
-  fetchNonGroupMembers() {
-    let {name} = this.props.navigation.state.params.data; 
-    AuthAxios({
-      url: `api/nonGroupUsers?name=${name}`,
+  changeToEditGroup() {
+    this.setState({
+      addAndDelete: !this.state.addAndDelete
     })
-    .then(({data}) => {
-      this.setState({
-        nonMembers: this.state.nonMembers.cloneWithRows(data),
-        addAndDelete: !this.state.addAndDelete
-      })
+  }
+
+  updateGroupMembers() {
+    console.log('UPDATING GROUP');
+    let groupChanges = {
+      toAdd: this.state.membersToAdd,
+      toDelete: this.state.membersToDelete,
+    }
+    console.log(groupChanges);
+    this.setState({
+      addAndDelete: !this.state.addAndDelete
     })
-    .catch(err => {
-      console.log('there was an error in fetching non members', err);
-    });
+  }
+
+  addMember(friendData) {
+    console.log('adding member', friendData);
+    let membersToAdd = this.state.membersToAdd;
+    let index = membersToAdd.indexOf(friendData);
+    if(index === -1) {
+      membersToAdd.push(friendData);
+    } else {
+      userArr.splice(index, 1);
+    }
+    this.setState({
+      membersToAdd: membersToAdd
+    })
+    console.log(this.state.membersToAdd);
+  }
+
+  removeMember(friendData) {
+    console.log('removeMember', friendData);
+    let membersToDelete = this.state.membersToDelete;
+    let index = membersToDelete.indexOf(friendData);
+    if(index === -1) {
+      membersToDelete.push(friendData);
+    } else {
+      userArr.splice(index, 1);
+    }
+    this.setState({
+      membersToDelete: membersToDelete
+    })
+    console.log(this.state.membersToDelete);
   }
 
   static navigationOptions = ({navigation}) => ({
@@ -55,19 +94,18 @@ export default class GroupMap extends Component {
   });
 
   render() {
-    const params = this.props.navigation.state.params;
+    const { data } = this.props.navigation.state.params;
     return (
       <View>
         <Button
-          onPress={() => !this.state.addAndDelete ? this.fetchNonGroupMembers() : console.log('confirm') }
+          onPress={() => !this.state.addAndDelete ? this.changeToEditGroup() : this.updateGroupMembers() }
           title={ !this.state.addAndDelete ? 'Add/Delete Friends' : 'Confirm'}
         />
-        {this.state.addAndDelete ? this.renderAddAndDeleteList() : this.renderNoChangeList()}
+        {this.state.addAndDelete ? <AddDeleteGroupMembers members={this.state.members} name={data.name} toAdd={this.addMember} toDelete={this.removeMember} /> : this.renderNoChangeList()}
       </View>
     );
   }
 
-/******* Render view for when user IS NOT editing group ****************/
   renderNoChangeList() {
     return (
       <ListView
@@ -91,56 +129,6 @@ export default class GroupMap extends Component {
       </TouchableOpacity>
     )
   }
-/*********************************************************************/
-
-/********** Render view for when user IS editing grou ****************/
-  renderAddAndDeleteList() {
-    return (
-      <View>
-        <ListView
-          dataSource={this.state.members}
-          renderRow={rowData => this.renderMembersToBeChanged(rowData)}
-          style={styles.listView}
-        />
-        <ListView
-          dataSource={this.state.nonMembers}
-          renderRow={rowData => this.renderNonMembers(rowData)}
-          style={styles.listView}
-        />
-      </View>
-    )
-  }
-
-  renderMembersToBeChanged(data) {
-    return (
-      <View style={styles.container}>
-        <Button
-          onPress={() => console.log('Add/Delete')}
-          title='Delete'
-          style={styles.button}
-        />
-        <View style={styles.nameContainer}>
-          <Text style={styles.name}>{`${data.first} ${data.last}`}</Text>
-        </View>
-      </View>
-    )
-  }
- 
-  renderNonMembers(data) {
-    return (
-      <View style={styles.container}>
-        <Button
-          onPress={() => console.log('Add/Delete')}
-          title='Add'
-          style={styles.button}
-        />
-        <View style={styles.nameContainer}>
-          <Text style={styles.name}>{`${data.first} ${data.last}`}</Text>
-        </View>
-      </View>
-    )
-  }
-/*********************************************************************/
 };
 
 let styles = StyleSheet.create({

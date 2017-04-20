@@ -82,7 +82,6 @@ export default class CreateGroup extends Component {
   handleUserChange(userObj) {
     let userArr = this.state.users;
     let index = userArr.indexOf(userObj);
-    console.log(userArr, index, userObj);
     if(index === -1) {
       userArr.push(userObj);
     } else {

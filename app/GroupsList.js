@@ -14,14 +14,11 @@ export default class GroupsList extends Component {
   }
 
   componentWillMount () {
-    console.log('getgroups')
-
     AuthAxios({
-      url: `/api/groups`
+      url: `api/groups`
     })
     .then(({data}) => {
       let groups = data;
-      console.log(groups);
       this.setState({
         groups: this.state.groups.cloneWithRows(groups)
       });

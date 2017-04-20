@@ -64,22 +64,18 @@ export default class AllFriendsList extends Component {
 
   renderContacts(friend) {
     const { navigate } = this.props.navigation;
-    // let title = '';
-    // if(friend.showSetting === 'pending') { title = 'Pending'; };
-    // if(friend.showSetting === 'label') { title = 'Home'; }
-    // if(friend.showSetting === 'GPS') { title = 'Office'}
     return (
       <View style={styles.container}>
         <Button
-          style={styles.thumbnail}
+          style={styles.button}
           onPress={() => navigate('FriendMap', {
             data: friend
             })
           }
           title={friend.currentLabel ? friend.currentLabel : 'Pending'}
         />
-        <View style={styles.rightContainer}>
-          <Text style={styles.title}>{`${friend.first} ${friend.last}`}</Text>
+        <View style={styles.nameContainer}>
+          <Text style={styles.name}>{`${friend.first} ${friend.last}`}</Text>
         </View>
       </View>
     )
@@ -94,11 +90,11 @@ let styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  rightContainer: {
+  nameContainer: {
     // justifyContent: 'right',
     flex: 1,
   },
-  title: {
+  name: {
     fontSize: 20,
     marginBottom: 8,
     textAlign: 'center',
@@ -106,7 +102,7 @@ let styles = StyleSheet.create({
   year: {
     textAlign: 'right',
   },
-  thumbnail: {
+  button: {
     width: 53,
     height: 81,
   },

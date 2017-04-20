@@ -9,7 +9,8 @@ export default class GroupMap extends Component {
     this.state =  {
       members: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2
-      })
+      }),
+      addAndDelete: false
     };
   }
 
@@ -40,7 +41,7 @@ export default class GroupMap extends Component {
     return (
       <View>
         <Button
-          onPress={() => console.log('add friend')}
+          onPress={() => this.setState({addAndDelete: !this.state.addAndDelete}) }
           title='Add/Delete Friends'
         />
         <ListView
@@ -59,7 +60,7 @@ export default class GroupMap extends Component {
           title='Add/Delte'
         />
         <View>
-          <Text>{memberData.first}</Text>
+          <Text>testsat</Text>
         </View>
       </View>
     )

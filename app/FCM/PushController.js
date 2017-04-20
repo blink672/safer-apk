@@ -32,19 +32,16 @@ export default class PushController extends Component {
         })
       });
     }).then(response => {
-      console.log('response in pushcontroller: ', response);
     }).catch(err => {
-      console.log(err);
+      console.error(err);
     });
-
 
     FCM.getInitialNotification()
     .then( notif => {
-      console.log('initial notification: ', notif);
+      // console.log('initial notification: ', notif);
     });
 
     this.notificationListener = FCM.on(FCMEvent.Notification, notif => {
-      console.log('Notification', notif);
       if (notif.local_notification) { return; }
       if (notif.opened_from_tray) { return; }
       this.showLocalNotification(notif);

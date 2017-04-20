@@ -12,27 +12,29 @@ export default class AddFriendList extends Component {
   }
 
   addFriend (contact) {
-    AuthAxios({
-      url: '/api/friends',
-      method: 'post',
-      data: {contact: contact}
-    })
-    .then(function(response) {
+    if (contact.hasApp) {
+      AuthAxios({
+        url: '/api/friends',
+        method: 'post',
+        data: {user: contact}
+      })
+      .then(function(response) {
 
-      // TODO: move setState from below here once we set up the invite friend functionality
-      // This ensures that the client properly reflects the status of our db/their 
-      // friend requests (ie, their add/invite friend button and friend only disappear
-      // once our server returns a 200 message that we have successfully added/invited them)
+        // TODO: move setState from below here once we set up the invite friend functionality
+        // This ensures that the client properly reflects the status of our db/their 
+        // friend requests (ie, their add/invite friend button and friend only disappear
+        // once our server returns a 200 message that we have successfully added/invited them)
 
-      return response.json();
-    }).catch((error) => {
-      console.log('There was an error in fetching your data: ', error);
-      return error;
-    });
+        return response.json();
+      }).catch((error) => {
+        console.log('There was an error in fetching your data: ', error);
+        return error;
+      });
 
-    this.setState({
-      buttonPressed: true
-    });
+      this.setState({
+        buttonPressed: true
+      });
+    }
   }
 
   render() {

@@ -16,18 +16,9 @@ export default class AddFriendList extends Component {
       AuthAxios({
         url: '/api/friends',
         method: 'post',
-        data: {user: contact}
-      })
-      .then(function(response) {
-
-        // TODO: move setState from below here once we set up the invite friend functionality
-        // This ensures that the client properly reflects the status of our db/their 
-        // friend requests (ie, their add/invite friend button and friend only disappear
-        // once our server returns a 200 message that we have successfully added/invited them)
-
-        return response.json();
+        data: {phoneNumber: contact.phoneNumber}
       }).catch((error) => {
-        console.log('There was an error in fetching your data: ', error);
+        console.log('There was an error in adding your friend: ', error);
         return error;
       });
 

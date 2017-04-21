@@ -15,7 +15,7 @@ export default class GroupsList extends Component {
 
   componentWillMount () {
     AuthAxios({
-      url: `api/groups`
+      url: `/api/groups`
     })
     .then(({data}) => {
       let groups = data;

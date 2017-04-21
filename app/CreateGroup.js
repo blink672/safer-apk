@@ -69,7 +69,7 @@ export default class CreateGroup extends Component {
         return response.json();
       })
       .then((friends) => {
-        console.log(friends);
+        console.log('Successful Post');
       })
       .catch((error) => {
         console.log('There was an error in fetching your data: ', error);
@@ -91,7 +91,6 @@ export default class CreateGroup extends Component {
     this.setState({
       users: userArr
     })
-    console.log(this.state);
   }
 
   // static navigationOptions = {

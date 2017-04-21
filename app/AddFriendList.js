@@ -18,7 +18,6 @@ export default class AddFriendList extends Component {
   };
 
   componentWillMount(){
-    console.log("will mount in addfriend")
     this.checkPermissionAndGet();
   };
 
@@ -29,7 +28,6 @@ export default class AddFriendList extends Component {
   checkPermissionAndGet() {
     Contacts.checkPermission( (err, permission) => {
       // Contacts.PERMISSION_AUTHORIZED || Contacts.PERMISSION_UNDEFINED || Contacts.PERMISSION_DENIED
-      console.log(permission)
       if(permission === 'undefined'){
         Contacts.requestPermission( (err, permission) => {
           // ...
@@ -55,7 +53,6 @@ export default class AddFriendList extends Component {
               data: {friends: friends}
             })
             .then(({data}) => {
-              console.log(friends);
               let friends = data
               friends.sort((a, b) => {
                 if (a.hasApp && b.hasApp) {

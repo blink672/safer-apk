@@ -28,7 +28,6 @@ export default class GroupMap extends Component {
   }
 
   componentWillMount() {
-    console.log('GROUPMAP',this.props.navigation.state.params)
     let {name, privacy} = this.props.navigation.state.params.data;
     let showLabel = (privacy === 'label' ? true : false);
     AuthAxios({
@@ -77,7 +76,6 @@ export default class GroupMap extends Component {
   }
 
   addMember(friendData) {
-    console.log('adding member', friendData);
     let membersToAdd = this.state.membersToAdd;
     let index = membersToAdd.indexOf(friendData);
     if(index === -1) {
@@ -88,11 +86,9 @@ export default class GroupMap extends Component {
     this.setState({
       membersToAdd: membersToAdd
     })
-    console.log(this.state.membersToAdd);
   }
 
   removeMember(friendData) {
-    console.log('removeMember', friendData);
     let membersToDelete = this.state.membersToDelete;
     let index = membersToDelete.indexOf(friendData);
     if(index === -1) {
@@ -103,22 +99,20 @@ export default class GroupMap extends Component {
     this.setState({
       membersToDelete: membersToDelete
     })
-    console.log(this.state.membersToDelete);
   }
 
   switchChange() {
-    console.log('herel');
+    this.setState({
+      showLabel: !this.state.showLabel
+    });
     let {name} = this.props.navigation.state.params.data;
     AuthAxios({
       url: `/api/groups?name=${name}`,
       method: 'put',
-      data: JSON.stringify({showLabel: !this.state.showLabel})
+      data: {showLabel: !this.state.showLabel}
     })
     .then(({data}) => {
-      console.log(data);
-      this.setState({
-        showLabel: !this.state.showLabel
-      });
+      console.log('Successful update');
     })
     .catch(err => {
       console.log('there was an error in fetching members', err);

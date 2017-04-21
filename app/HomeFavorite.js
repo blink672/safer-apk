@@ -14,7 +14,6 @@ export default class HomeFavorite extends Component {
   }
 
   componentWillMount() {
-    console.log('HOME FAVORITE')
     // let {name} = this.props.navigation.state.params.data;
 
     AuthAxios({

@@ -1,24 +1,61 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
 /*import { MapView } from 'react-native-maps';*/
+import { View, Text, StyleSheet, Image, Switch } from 'react-native';
+import AuthAxios from './AuthAxios.js';
 
 export default class FriendMap extends Component {
   constructor(props) {
     super(props);
-    this.state =  {};
-    console.log(this.props.navigation.state.params);
+
+    let {showFriendSetting} = this.props.navigation.state.params.data;
+    let showLabel = (showFriendSetting === 'label' ? true : false); 
+
+    this.state =  {
+      showLabel: showLabel
+    };
+    this.switchChange = this.switchChange.bind(this);
+  }
+
+  switchChange() {
+    this.setState({
+      showLabel: !this.state.showLabel
+    })
+    let {id} = this.props.navigation.state.params.data;
+    AuthAxios({
+      url: `/api/friends/${id}`,
+      method: 'put',
+      data: {showLabel: !this.state.showLabel}
+    })
+    .then(({data}) => {
+      console.log('Succesfull Update', data.privacy);
+    })
+    .catch(err => {
+      console.log(err);
+    }) 
   }
 
   static navigationOptions = ({navigation}) => ({
     title: navigation.state.params.data.first
   });
 
-  render() {
+  whichPageToRender () {
     const { data } = this.props.navigation.state.params;
-    console.log(data);
     if(data.showSetting === 'GPS') { return this.renderGPS(data); }
     if(data.showSetting === 'label') { return this.renderLabel(data); }
     if(data.showSetting === 'pending') { return this.renderPending(data); }
+  }
+
+  render() {
+    return (
+      <View>
+      <Switch
+          onValueChange={this.switchChange}
+          value={this.state.showLabel}
+        />
+        <Text>{this.state.showLabel ? 'Show Only Label' : 'Show GPS'}</Text>
+        {this.whichPageToRender()}
+      </View>
+    )
   }
 
   renderPending(data) {

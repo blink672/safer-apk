@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { endpoint } from './endpoint.js';
 import { ListView, View, Text, StyleSheet } from 'react-native';
 
 export default class LogOut extends Component {

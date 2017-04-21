@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { endpoint } from './endpoint.js';
 import { ListView, View, Text, StyleSheet, TouchableOpacity, Button, Switch } from 'react-native';
 import AuthAxios from './AuthAxios.js';
 import AddDeleteGroupMembers from './AddDeleteGroupMembers.js';

@@ -1,6 +1,5 @@
 import FriendMap from './FriendMap.js';
 import React, { Component } from 'react';
-import { endpoint } from './endpoint.js';
 import Contacts from 'react-native-contacts';
 import { View, Text, StyleSheet, Button, ListView } from 'react-native';
 import AuthAxios from './AuthAxios.js';

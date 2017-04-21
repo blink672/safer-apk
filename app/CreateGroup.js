@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import CheckBox from 'react-native-checkbox';
-import { endpoint } from './endpoint.js';
 import { View, Text, StyleSheet, TextInput, ListView, Picker, Button } from 'react-native';
 import AuthAxios from './AuthAxios.js';
 
@@ -20,13 +19,11 @@ export default class CreateGroup extends Component {
   }
 
   componentWillMount() {
-
     AuthAxios({
       url: `/api/friends?groups=true`
     })
     .then(({data}) => {
       let friends = data;
-      console.log(friends);
       this.setState({
         friends: this.state.friends.cloneWithRows(friends),
       })
@@ -43,38 +40,16 @@ export default class CreateGroup extends Component {
       users: this.state.users,
       privacy: this.state.privacy,
     };
-
-
     AuthAxios({
       url: `/api/groups`,
       method: `post`,
       data:{groupSettings: groupSettings}
     })
     .then(({data}) => {
-      console.log('Your group was created')
     })
     .catch((error) => {
       alert('There was a problem creating your group')
     })
-    
-/*    fetch(`${endpoint}/api/groups`, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({groupSettings: groupSettings})
-    })
-      .then(function(response) {
-        return response.json();
-      })
-      .then((friends) => {
-        console.log('Successful Post');
-      })
-      .catch((error) => {
-        console.log('There was an error in fetching your data: ', error);
-        return error;
-      });*/
     const { navigate } = this.props.navigation;
     navigate('GroupsList');
   }
@@ -92,10 +67,6 @@ export default class CreateGroup extends Component {
       users: userArr
     })
   }
-
-  // static navigationOptions = {
-  //   title: ({state}) => (state.params.title)
-  // };
 
   static navigationOptions = ({ navigation }) => {
     title: navigation.state.params.title

@@ -28,7 +28,6 @@ export default class FriendMap extends Component {
       data: {privacy: privacy}
     })
     .then(({data}) => {
-      console.log('Succesfull Update', data.privacy);
     })
     .catch(err => {
       console.log(err);

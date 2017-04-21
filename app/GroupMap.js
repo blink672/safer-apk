@@ -108,9 +108,21 @@ export default class GroupMap extends Component {
 
   switchChange() {
     console.log('herel');
-    this.setState({
-      showLabel: !this.state.showLabel
+    let {name} = this.props.navigation.state.params.data;
+    AuthAxios({
+      url: `/api/groups?name=${name}`,
+      method: 'put',
+      data: JSON.stringify({showLabel: !this.state.showLabel})
     })
+    .then(({data}) => {
+      console.log(data);
+      this.setState({
+        showLabel: !this.state.showLabel
+      });
+    })
+    .catch(err => {
+      console.log('there was an error in fetching members', err);
+    });
   }
 
   static navigationOptions = ({navigation}) => ({
@@ -127,7 +139,6 @@ export default class GroupMap extends Component {
         />
         <Switch
           onValueChange={this.switchChange}
-          style={{marginBotton: 10}}
           value={this.state.showLabel}
         />
         <Text>{this.state.showLabel ? 'Show Only Label' : 'Show GPS'}</Text>

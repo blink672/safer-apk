@@ -130,6 +130,7 @@ export default class GroupMap extends Component {
           style={{marginBotton: 10}}
           value={this.state.showLabel}
         />
+        <Text>{this.state.showLabel ? 'Show Only Label' : 'Show GPS'}</Text>
         {this.state.addAndDelete ? <AddDeleteGroupMembers members={this.state.members} name={data.name} toAdd={this.addMember} toDelete={this.removeMember} /> : this.renderNoChangeList()}
       </View>
     );

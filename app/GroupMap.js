@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { endpoint } from './endpoint.js';
-import { ListView, View, Text, StyleSheet, TouchableOpacity, Button } from 'react-native';
+import { ListView, View, Text, StyleSheet, TouchableOpacity, Button, Switch } from 'react-native';
 import AuthAxios from './AuthAxios.js';
 import AddDeleteGroupMembers from './AddDeleteGroupMembers.js';
 
@@ -16,6 +16,7 @@ export default class GroupMap extends Component {
       }),
       membersToAdd: [],
       membersToDelete: [],
+      showLabel: false,
       addAndDelete: false
     };
     this.changeToEditGroup = this.changeToEditGroup.bind(this);
@@ -23,17 +24,26 @@ export default class GroupMap extends Component {
     this.addMember = this.addMember.bind(this);
     this.removeMember = this.removeMember.bind(this);
     this.updateGroupMembers = this.updateGroupMembers.bind(this);
+    this.switchChange = this.switchChange.bind(this);
   }
 
   componentWillMount() {
     console.log('GROUPMAP',this.props.navigation.state.params)
-    let {name} = this.props.navigation.state.params.data;
+    let {name, privacy} = this.props.navigation.state.params.data;
+    let showLabel = (privacy === 'label' ? true : false);
     AuthAxios({
       url: `/api/groupUsers?name=${name}`
     })
     .then(({data}) => {
+      let newDataSource = new ListView.DataSource({
+        rowHasChanged: (row1, row2) => row1 !== row2
+      });
       this.setState({
-        members: this.state.members.cloneWithRows(data)
+        members: newDataSource.cloneWithRows(data),
+        membersToAdd: [],
+        membersToDelete: [],
+        showLabel: showLabel,
+        addAndDelete: false
       });
     })
     .catch(err => {
@@ -48,14 +58,21 @@ export default class GroupMap extends Component {
   }
 
   updateGroupMembers() {
-    console.log('UPDATING GROUP');
     let groupChanges = {
       toAdd: this.state.membersToAdd,
       toDelete: this.state.membersToDelete,
     }
-    console.log(groupChanges);
-    this.setState({
-      addAndDelete: !this.state.addAndDelete
+    let {name} = this.props.navigation.state.params.data;
+    AuthAxios({
+      url: `/api/groupUsers?name=${name}`,
+      method: 'put',
+      data: JSON.stringify(groupChanges),
+    })
+    .then(({data}) => {
+      this.componentWillMount();
+    })
+    .catch(err => {
+      console.log(err);
     })
   }
 
@@ -81,12 +98,19 @@ export default class GroupMap extends Component {
     if(index === -1) {
       membersToDelete.push(friendData);
     } else {
-      userArr.splice(index, 1);
+      membersToDelete.splice(index, 1);
     }
     this.setState({
       membersToDelete: membersToDelete
     })
     console.log(this.state.membersToDelete);
+  }
+
+  switchChange() {
+    console.log('herel');
+    this.setState({
+      showLabel: !this.state.showLabel
+    })
   }
 
   static navigationOptions = ({navigation}) => ({
@@ -100,6 +124,11 @@ export default class GroupMap extends Component {
         <Button
           onPress={() => !this.state.addAndDelete ? this.changeToEditGroup() : this.updateGroupMembers() }
           title={ !this.state.addAndDelete ? 'Add/Delete Friends' : 'Confirm'}
+        />
+        <Switch
+          onValueChange={this.switchChange}
+          style={{marginBotton: 10}}
+          value={this.state.showLabel}
         />
         {this.state.addAndDelete ? <AddDeleteGroupMembers members={this.state.members} name={data.name} toAdd={this.addMember} toDelete={this.removeMember} /> : this.renderNoChangeList()}
       </View>

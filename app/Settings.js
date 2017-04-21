@@ -24,17 +24,10 @@ export default class Settings extends Component {
   };
 
   pickerChange(privacySetting) {
-    fetch(endpoint + '/api/privacySettings', {
-      method: 'PUT',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        userId: this.state.userId,
-        privacy: privacySetting
-      })
-
+    AuthAxios({
+      url: '/user',
+      method: 'put',
+      data: {defaultPrivacy: privacySetting}
     }).then((response) => {
       if (response.err) {
         this.setState({
@@ -53,18 +46,10 @@ export default class Settings extends Component {
   }
 
   switchChange(value) {
-    console.log('value in switch change: ', value);
-    fetch(endpoint + '/api/privacySettings', {
-      method: 'PUT',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        userId: this.state.userId,
-        incognito: value
-      })
-
+    AuthAxios({
+      url: '/user',
+      method: 'put',
+      data: { incognito: value }
     }).then((response) => {
       if (response.err) {
         this.setState({

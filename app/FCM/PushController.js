@@ -2,25 +2,27 @@ import React, { Component } from "react";
 import { Platform } from 'react-native';
 import FCM, {FCMEvent, RemoteNotificationResult, WillPresentNotificationResult, NotificationType} from "react-native-fcm";
 import { endpoint, firebaseClient } from  "../endpoint.js";
-import AuthAxios from './AuthAxios.js';
+import AuthAxios from '../AuthAxios.js';
 
 export default class PushController extends Component {
   constructor(props) {
     super(props);
+    //TODO: get user id from sql server upon login
+    //and pass it along with props
   };
 
   componentDidMount() {
-    FCM.getFCMToken()
-    .then( (token) => {
-      this.props.onChangeToken(token);
+    // FCM.requestPermissions(); //iOS only
 
-      return AuthAxios({
-        url: '/user',
+    FCM.getFCMToken()
+    .then((token) => {
+      AuthAxios({
+        url: '/api/user',
         method: 'put',
-        data: {FCMToken: token}
+        data: {FCMToken: token},
       })
     }).catch(err => {
-      console.error(err);
+      console.error('Error in updating FCM Token: ', err);
     });
 
     FCM.getInitialNotification()
@@ -36,7 +38,14 @@ export default class PushController extends Component {
 
     this.refreshTokenListener = FCM.on(FCMEvent.RefreshToken, (token) => {
       console.log('token (refreshUnsubcribe)', token);
-      this.props.onChangeToken(token);
+      AuthAxios({
+        url: '/user',
+        method: 'put',
+        data: {FCMToken: token}
+      })
+      .catch((err) => {
+        console.error('There was an error in refreshTokenListener: ', err);
+      })
     })
   };
 

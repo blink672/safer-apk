@@ -137,7 +137,7 @@ export default class HomeScreen extends Component {
     if (this.state.user) {
       return (
         <View>
-          <PushController onChangeToken={(token) => {this.setState({FCMToken: token})}}/>
+          <PushController />
           <HomeFavorite />
           <TouchableOpacity onPress={() => {this._signOut()} }>
             <Text>Log Out</Text>

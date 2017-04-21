@@ -16,6 +16,7 @@ export default class PushController extends Component {
 
     FCM.getFCMToken()
     .then((token) => {
+      console.log('FCMToken: ', token);
       AuthAxios({
         url: '/api/user',
         method: 'put',

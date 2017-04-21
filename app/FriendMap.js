@@ -21,10 +21,11 @@ export default class FriendMap extends Component {
       showLabel: !this.state.showLabel
     })
     let {id} = this.props.navigation.state.params.data;
+    let privacy = (this.state.showLabel ? 'GPS' : 'Label');
     AuthAxios({
       url: `/api/friends/${id}`,
       method: 'put',
-      data: {showLabel: !this.state.showLabel}
+      data: {privacy: privacy}
     })
     .then(({data}) => {
       console.log('Succesfull Update', data.privacy);

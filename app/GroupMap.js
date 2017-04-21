@@ -106,13 +106,14 @@ export default class GroupMap extends Component {
       showLabel: !this.state.showLabel
     });
     let {name} = this.props.navigation.state.params.data;
+    let privacy = (this.state.showLabel ? 'GPS' : 'label');
     AuthAxios({
       url: `/api/groups?name=${name}`,
       method: 'put',
-      data: {showLabel: !this.state.showLabel}
+      data: {privacy: privacy}
     })
     .then(({data}) => {
-      console.log('Successful update');
+      console.log('Successful update', data.privacy);
     })
     .catch(err => {
       console.log('there was an error in fetching members', err);

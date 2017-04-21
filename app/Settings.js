@@ -10,8 +10,7 @@ export default class Settings extends Component {
     // and pass it along in the req.body
     // currently hard coded to 1
     this.state = {
-      userId: 1, 
-      selected: 'GPS', //TODO: set this to the privacy setting grabbed from the sql database
+      selected: 'gps', //TODO: set this to the privacy setting grabbed from the sql database
       incognito: false,
       error: false
     };
@@ -25,7 +24,7 @@ export default class Settings extends Component {
 
   pickerChange(privacySetting) {
     AuthAxios({
-      url: '/user',
+      url: '/api/user',
       method: 'put',
       data: {defaultPrivacy: privacySetting}
     }).then((response) => {
@@ -46,8 +45,9 @@ export default class Settings extends Component {
   }
 
   switchChange(value) {
+    console.log(value);
     AuthAxios({
-      url: '/user',
+      url: '/api/user',
       method: 'put',
       data: { incognito: value }
     }).then((response) => {

@@ -51,9 +51,8 @@ export default class HomeScreen extends Component {
   }
 
   checkFences(currentPoint) {
-    let phoneNumber = '1234567'
     AuthAxios({
-      url: `/api/labels/?id=${phoneNumber}`
+      url: `/api/labels`
     })
     .then(({data}) => {
       let fences = data;

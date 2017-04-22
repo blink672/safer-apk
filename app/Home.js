@@ -31,7 +31,6 @@ export default class HomeScreen extends Component {
   geoMonitoring() {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        console.log('got the position!')
         var initialPosition = JSON.stringify(position);
         this.setState({initialPosition});
       },
@@ -77,20 +76,20 @@ export default class HomeScreen extends Component {
 
   saveLocation () {
     console.log('Save location called', this.state.currentlyAt)
-    let location = {};
     let position = JSON.parse(this.state.lastPosition);
-    location.lat = position.coords.latitude;
-    location.lng = position.coords.longitude;
-    location.label = this.state.currentlyAt;
-    location.user = '1234567'
+    let location = {
+      lat: position.coords.latitude,
+      long: position.coords.longitude,
+      currentLabel: this.state.currentlyAt
+    };
 
     AuthAxios({
-      url: `/api/users/location`,
+      url: `/api/user`,
       method: 'put',
       data: location
     })
     .then(response => console.log('Location updated'))
-    .catch(error => alert('Location not updated'))
+    .catch(error => console.log('Location not updated'))
   }
 
   componentDidMount() {

@@ -12,8 +12,6 @@ export default class PushController extends Component {
   };
 
   componentDidMount() {
-    // FCM.requestPermissions(); //iOS only
-
     FCM.getFCMToken()
     .then((token) => {
       console.log('FCMToken: ', token);
@@ -27,9 +25,6 @@ export default class PushController extends Component {
     });
 
     FCM.getInitialNotification()
-    .then((notif) => {
-      // console.log('initial notification: ', notif);
-    });
 
     this.notificationListener = FCM.on(FCMEvent.Notification, (notif) => {
       if (notif.local_notification) { return; }
@@ -38,7 +33,6 @@ export default class PushController extends Component {
     });
 
     this.refreshTokenListener = FCM.on(FCMEvent.RefreshToken, (token) => {
-      console.log('token (refreshUnsubcribe)', token);
       AuthAxios({
         url: '/user',
         method: 'put',

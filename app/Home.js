@@ -72,7 +72,7 @@ export default class HomeScreen extends Component {
       }
     })
     .catch((error) => {
-      alert(`Oh no, we couldn't get your fences!`)
+      console.log(`Oh no, we couldn't get your fences!`)
     })
   }
 
@@ -170,11 +170,14 @@ export default class HomeScreen extends Component {
       this.setState({user: user});
     })
     .then(() => {
-      return AuthAxios({
+      AuthAxios({
         url: '/api/user/',
         method: 'put',
         data: {phoneNumber: this.state.phoneNumber}
       })
+    })
+    .then((result) => {
+      console.log('phone number updated: ', result);
     })
     .catch((err) => {
       console.log('Sign in error: ', err);

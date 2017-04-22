@@ -63,5 +63,10 @@ const MenuDrawer = DrawerNavigator({
   drawerWidth: 200
 });
 
+const Safer = StackNavigator({
+  SplashScreen: { screen: SplashScreen },
+  MenuDrawer: { screen: MenuDrawer },
+})
+
 export default MenuDrawer;
 

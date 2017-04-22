@@ -45,7 +45,6 @@ export default class Settings extends Component {
   }
 
   switchChange(value) {
-    console.log(value);
     AuthAxios({
       url: '/api/user',
       method: 'put',

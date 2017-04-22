@@ -44,9 +44,6 @@ export default class FriendMap extends Component {
       method: 'post',
       data: {phoneNumber: data.phoneNumber}
     })
-    .then((response) => {
-      console.log('response after subscribing: ', response);
-    })
     .catch((err) => {
       console.error('There was an error subscribing to the friend: ', err);
     })

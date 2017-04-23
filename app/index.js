@@ -8,6 +8,7 @@ import AddFriendList from './AddFriendList.js';
 import CreateGroup from './CreateGroup.js';
 import GroupMap from './GroupMap.js';
 import LogOut from './LogOut.js';
+import SplashScreen from './SplashScreen.js';
 
 import React from 'react';
 import { Button, TouchableOpacity, Image } from 'react-native';

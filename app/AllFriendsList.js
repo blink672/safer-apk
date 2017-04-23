@@ -1,7 +1,7 @@
 import FriendMap from './FriendMap.js';
 import React, { Component } from 'react';
 import Contacts from 'react-native-contacts';
-import { View, Text, StyleSheet, Button, ListView } from 'react-native';
+import { View, Text, StyleSheet, Button, ListView, TouchableOpacity } from 'react-native';
 import AuthAxios from './AuthAxios.js';
 
 export default class AllFriendsList extends Component {
@@ -65,17 +65,14 @@ export default class AllFriendsList extends Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-        <Button
-          style={styles.button}
-          onPress={() => navigate('FriendMap', {
-              data: friend
-            })
-          }
-          title={friend.currentLabel ? friend.currentLabel : 'Pending'}
-        />
-        <View style={styles.nameContainer}>
-          <Text style={styles.name}>{`${friend.first} ${friend.last}`}</Text>
-        </View>
+        <TouchableOpacity
+          onPress={() => navigate('FriendMap', {data: friend}) }
+        >
+          <View style={styles.nameContainer}>
+            <Text style={{textAlign: 'left', fontSize: 23}}>{friend.first} {friend.last}</Text>
+            <Text style={{textAlign: 'left', fontSize: 18}}>{friend.currentLabel ? friend.currentLabel : 'Pending'}</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     )
   }
@@ -85,13 +82,14 @@ let styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    // justifyContent: 'center',
+    // alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
   nameContainer: {
     // justifyContent: 'right',
     flex: 1,
+    marginBottom: 8,
   },
   name: {
     fontSize: 20,

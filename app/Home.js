@@ -104,47 +104,47 @@ export default class HomeScreen extends Component {
 
   render() {
     const { navigate } = this.props.navigation;
-    if (!this.state.user && this.state.phoneNumber.length < 10) {
+    // if (!this.state.user && this.state.phoneNumber.length < 10) {
+    //   return (
+    //     <View>
+    //       <Text style={{fontSize: 25}}>
+    //         Please enter your phone number
+    //       </Text>
+    //       <TextInput
+    //         style={{fontSize: 25}}
+    //         onChangeText={(text) => this.setState( {phoneNumber: text} )}
+    //         // placeholder='Insert Group Name'
+    //         value={this.state.text}
+    //       />
+    //     </View>
+    //   )
+    // }
+    // if (!this.state.user && this.state.phoneNumber.length === 10) {
+    //   return (
+    //       <View style={styles.container}>
+    //         <Text>Your phone number: {this.state.phoneNumber}</Text>
+    //         <GoogleSigninButton
+    //           style={{width: 312, height: 48}}
+    //           color={GoogleSigninButton.Color.Dark}
+    //           size={GoogleSigninButton.Size.Wide}
+    //           onPress={() => { this._signIn(); }}
+    //         />
+    //       </View>
+    //   );
+    // }
+    // if (this.state.user) {
       return (
-        <View>
-          <Text style={{fontSize: 25}}>
-            Please enter your phone number
-          </Text>
-          <TextInput
-            style={{fontSize: 25}}
-            onChangeText={(text) => this.setState( {phoneNumber: text} )}
-            // placeholder='Insert Group Name'
-            value={this.state.text}
-          />
-        </View>
-      )
-    }
-    if (!this.state.user && this.state.phoneNumber.length === 10) {
-      return (
-          <View style={styles.container}>
-            <Text>Your phone number: {this.state.phoneNumber}</Text>
-            <GoogleSigninButton
-              style={{width: 312, height: 48}}
-              color={GoogleSigninButton.Color.Dark}
-              size={GoogleSigninButton.Size.Wide}
-              onPress={() => { this._signIn(); }}
-            />
-          </View>
-      );
-    }
-    if (this.state.user) {
-      return (
-        <View>
+        <View style={styles.container}>
           <PushController />
-          <HomeFavorite />
-          <TouchableOpacity onPress={() => {this._signOut()} }>
-            <Text>Log Out</Text>
-          </TouchableOpacity>
+          <HomeFavorite navigate={navigate}/>
         </View>
       )
-    }
+    // }
   }
 
+          // <TouchableOpacity onPress={() => {this._signOut()} }>
+          //   <Text>Log Out</Text>
+          // </TouchableOpacity>
 
   async _setupGoogleSignin() {
     try {
@@ -198,8 +198,11 @@ export default class HomeScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: 20,
+    backgroundColor: '#F5FAFF',
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    // flexDirection: 'column',
+    // justifyContent: 'center',
+    // alignItems: 'center',
   }
 });

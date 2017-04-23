@@ -35,7 +35,7 @@ export default class GroupsList extends Component {
     const params = this.props.navigation.state.params;
     const { navigate } = this.props.navigation;
     return (
-      <View>
+      <View style={styles.container}>
         <Button
           onPress={() => navigate('CreateGroup',{
             title: "Create Group"
@@ -44,6 +44,7 @@ export default class GroupsList extends Component {
         title="Create Group"
         />
         <ListView
+          style={styles.listView}
           dataSource={this.state.groups}
           renderRow={(rowData) => (
             <TouchableOpacity 
@@ -62,3 +63,41 @@ export default class GroupsList extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 10,
+    // flexDirection: 'row',
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  nameContainer: {
+    // justifyContent: 'right',
+    flex: 1,
+    marginBottom: 8,
+  },
+  name: {
+    fontSize: 23,
+    // marginBottom: 8,
+    textAlign: 'center',
+  },
+  year: {
+    textAlign: 'right',
+    
+  },
+  button: {
+    width: 100,
+    height: 81,
+  },
+  listView: {
+    paddingTop: 10,
+    backgroundColor: '#F5FCFF',
+  },
+  separator: {
+    flex: 1,
+    height: StyleSheet.hairlineWidth,
+    backgroundColor: '#8E8E8E',
+  },
+});

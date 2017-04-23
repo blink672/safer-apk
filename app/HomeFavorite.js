@@ -20,27 +20,80 @@ export default class HomeFavorite extends Component {
     })
     .then(({data}) => {
       let members = data;
-      this.setState({members: this.state.members.cloneWithRows(members)})
+      this.setState({members: this.state.members.cloneWithRows(members)});
     })
     .catch(err => {
       console.log('There was an error fetching members', err);
-    })
-  };
+    });
+  }
 
   render() {
     // const params = this.props.navigation.state.params;
     // const { navigate } = this.props.navigation;
     return (
-      <View>
+      <View style={styles.container}>
         <Button
           onPress={() => console.log("PRESSED")}
         title="Add Member To Favorite"
         />
         <ListView
           dataSource={this.state.members}
-          renderRow={(rowData) => <Text style={{textAlign: 'center', fontSize: 20}}>{rowData.first}</Text>}
+          style={styles.listView}
+          renderRow={(rowData) => this.renderMembers(rowData) }
         />
       </View>
     );
   }
+
+  renderMembers(memberData) {
+    // const { navigate } = this.props.navigation;
+    console.log(this.props);
+    return (
+      <TouchableOpacity
+        onPress={() => this.props.navigate('FriendMap', {data: memberData}) }
+      >
+        <View style={styles.nameContainer}>
+          <Text style={{textAlign: 'left', fontSize: 23}}>{memberData.first} {memberData.last}</Text>
+          <Text style={{textAlign: 'left', fontSize: 18}}>{memberData.currentLabel ? memberData.currentLabel : 'Pending'}</Text>
+        </View>
+      </TouchableOpacity>
+    );
+  }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    // flex: 1,
+    // flexDirection: 'row',
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  nameContainer: {
+    // justifyContent: 'right',
+    flex: 1,
+    marginBottom: 8,
+  },
+  name: {
+    fontSize: 23,
+    // marginBottom: 8,
+    textAlign: 'center',
+  },
+  year: {
+    textAlign: 'right',
+
+  },
+  button: {
+    width: 100,
+    height: 81,
+  },
+  listView: {
+    paddingTop: 10,
+    backgroundColor: '#F5FCFF',
+  },
+  separator: {
+    flex: 1,
+    height: StyleSheet.hairlineWidth,
+    backgroundColor: '#8E8E8E',
+  },
+});

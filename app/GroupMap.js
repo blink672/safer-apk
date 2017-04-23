@@ -126,16 +126,22 @@ export default class GroupMap extends Component {
   render() {
     const { data } = this.props.navigation.state.params;
     return (
-      <View>
+      <View style={styles.container}>
         <Button
           onPress={() => !this.state.addAndDelete ? this.changeToEditGroup() : this.updateGroupMembers() }
           title={ !this.state.addAndDelete ? 'Add/Delete Friends' : 'Confirm'}
         />
-        <Switch
-          onValueChange={this.switchChange}
-          value={this.state.showLabel}
-        />
-        <Text>{this.state.showLabel ? 'Show Only Label' : 'Show GPS'}</Text>
+        <View style={styles.switchContainer}>
+          <View >
+            <Switch
+              onValueChange={this.switchChange}
+              value={this.state.showLabel}
+            />
+          </View>
+          <View >
+            <Text>{this.state.showLabel ? 'Show Only Label' : 'Show GPS'}</Text>
+          </View>
+        </View>
         {this.state.addAndDelete ? <AddDeleteGroupMembers members={this.state.members} name={data.name} toAdd={this.addMember} toDelete={this.removeMember} /> : this.renderNoChangeList()}
       </View>
     );
@@ -169,10 +175,16 @@ export default class GroupMap extends Component {
 let styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    // flexDirection: 'column',
+    // justifyContent: 'center',
+    // alignItems: 'center',
     backgroundColor: '#F5FCFF',
+  },
+  switchContainer: {
+    // flex: 1,
+    height: 25,
+    flexDirection: 'row',
+    justifyContent: 'center'
   },
   nameContainer: {
     // justifyContent: 'right',
@@ -187,11 +199,8 @@ let styles = StyleSheet.create({
   year: {
     textAlign: 'right',
   },
-  button: {
-    width: 100,
-    height: 81,
-  },
   listView: {
+    flex: 1,
     paddingTop: 10,
     backgroundColor: '#F5FCFF',
   },

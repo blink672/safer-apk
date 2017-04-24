@@ -34,7 +34,7 @@ export default class HomeFavorite extends Component {
       <View style={styles.container}>
         <Button
           onPress={() => console.log("PRESSED")}
-        title="Add Member To Favorite"
+          title="Add Member To Favorite"
         />
         <ListView
           dataSource={this.state.members}
@@ -63,10 +63,10 @@ export default class HomeFavorite extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
+    flex: 1,
     // flexDirection: 'row',
     // justifyContent: 'center',
-    // alignItems: 'center',
+    // alignItems: 'flex-start',
     backgroundColor: '#F5FCFF',
   },
   nameContainer: {
@@ -84,8 +84,7 @@ const styles = StyleSheet.create({
 
   },
   button: {
-    width: 100,
-    height: 81,
+
   },
   listView: {
     paddingTop: 10,

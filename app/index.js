@@ -25,7 +25,7 @@ const renderBurgerButton = (navigation) => {
       onPress={() => navigation.navigate('DrawerOpen')}
     >
       <Image
-        style={{height: 25, width: 25}}
+        style={{height: 30, width: 30}}
         source={ require('./Image/BurgerButton.png') }
       />
     </TouchableOpacity>
@@ -33,7 +33,7 @@ const renderBurgerButton = (navigation) => {
 };
 
 HomePageTabs.navigationOptions = ({navigation}) => ({
-  title: 'Safer',
+  title: 'SAFER',
   headerLeft: renderBurgerButton(navigation)
 });
 

@@ -53,7 +53,6 @@ const Stack = StackNavigator({
 });
 
 Stack.navigationOptions = {
-  title: 'Home',
   headerVisible: false
 };
 

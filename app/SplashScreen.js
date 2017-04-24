@@ -41,11 +41,7 @@ export default class SplashScreen extends Component {
   }
 
   saveLocation () {
-    console.log('Save location called from splash screen')
-    console.log('last position: ', this.state.lastPosition);
-    console.log('initial position: ', this.state.initialPosition);
     let position = this.state.lastPosition || this.state.initialPosition;
-    console.log('position: ', position);
     let location = {
       lat: position.coords.latitude,
       long: position.coords.longitude

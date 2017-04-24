@@ -54,7 +54,7 @@ export default class SignUp extends Component {
       console.log('Error saving location to db: ', err);
     })
     .done(() => {
-      this.props.navigation.navigate('AddFence');
+      this.props.navigation.navigate('AddFence', {SignUp: true});
     });
   }
 

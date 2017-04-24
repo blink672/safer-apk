@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, Button, Picker, ListView } from 'react-native';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import AuthAxios from './AuthAxios.js';
 
-
 const Item = Picker.Item
 export default class AddFence extends Component {
   constructor(props) {
@@ -23,7 +22,7 @@ export default class AddFence extends Component {
 
   componentDidMount () {
     AuthAxios({
-      url: `/api/labels/?id=${this.state.user}`
+      url: `/api/labels/`
     })
     .then(({data}) => {
       let fences = data;
@@ -57,6 +56,10 @@ export default class AddFence extends Component {
     })
     .then(function (response) {
       alert('Fence created!');
+      console.log(this.props.naviation.state.SignUp);
+      if (this.props.naviation.state.SignUp) {
+        console.log('YOOOOOOOOOOOOOOO')
+      }
     })
     .catch(function (error) {
       alert('There was an error creating your fence');

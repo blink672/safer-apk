@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Button, Text, Picker, Switch, StyleSheet } from 'react-native';
+import { View, Button, Text, Picker, Switch, TouchableOpacity, StyleSheet } from 'react-native';
+import {GoogleSignin} from 'react-native-google-signin';
 import FriendMap from './FriendMap.js';
 import AuthAxios from './AuthAxios.js';
 import styles from './styles.js';
@@ -67,6 +68,20 @@ export default class Settings extends Component {
     })
   }
 
+    // TODO: Move log out to settings screen
+  _signOut() {
+    GoogleSignin.revokeAccess()
+    .then(() => {
+      GoogleSignin.signOut();
+    })
+    .then(() => {
+      this.setState({user: null});
+    })
+    .done(() => {
+      this.props.navigation.navigate('SignUp');
+    });
+  }
+
   render() {
     const { navigate } = this.props.navigation;
     return (
@@ -87,6 +102,10 @@ export default class Settings extends Component {
         <Switch
           onValueChange={this.switchChange}
           value={this.state.incognito} />
+
+        <TouchableOpacity onPress={() => {this._signOut()} }>
+          <Text>Log Out</Text>
+        </TouchableOpacity>
 
         {this.state.error &&
           (<Text>There was an error updating your privacy settings. Please try again later.</Text>)}

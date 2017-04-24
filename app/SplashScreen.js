@@ -54,12 +54,12 @@ export default class SplashScreen extends Component {
     };
 
     AuthAxios({
-      url: `/api/users/location`,
+      url: `/api/user/location`,
       method: 'put',
       data: location
     })
     .then(response => console.log('Location updated'))
-    .catch(error => alert('Location not updated'))
+    .catch(error => console.log('Location not updated', error));
   }
 
   async _setupGoogleSignin() {
@@ -76,7 +76,7 @@ export default class SplashScreen extends Component {
       if (user === null) {//TODO: set up conditional navigation here based on whether use is null
         navigate('SignUp', {location: this.state.initialPosition});
       } else {
-        saveLocation();
+        this.saveLocation();
         navigate('HomePageTabs');
       }
       this.setState({user});

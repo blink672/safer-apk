@@ -26,7 +26,7 @@ export default class SignUp extends Component {
     };
 
     AuthAxios({
-      url: `/api/users/location`,
+      url: `/api/user/location`,
       method: 'put',
       data: location
     })

@@ -30,6 +30,9 @@ module.exports = StyleSheet.create({
     alignItems: 'center',
   },
   friendMapContainer: {
+    flex: 1,
+    alignItems: 'center',
+    // justifyContent: 'center',
     marginTop: 10,
   },
   nameContainer: {
@@ -58,7 +61,7 @@ module.exports = StyleSheet.create({
     fontSize: 15,
   },
   friendMapText: {
-    textAlign: 'center',
+    // textAlign: 'center',
     fontSize: 20,
   },
   createGroupText: {
@@ -87,4 +90,9 @@ module.exports = StyleSheet.create({
     fontSize: 14,
     textAlign: 'auto'
   },
+  labelImage: {
+    width: 300,
+    height: 300,
+    alignItems: 'center',
+  }
 });

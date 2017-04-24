@@ -87,7 +87,8 @@ export default class FriendMap extends Component {
         <Button title='Let me know when they get home' onPress={() => {this.subscribeTo(data)}} />
         <Text style={styles.friendMapText}>{data.first} checked in at:</Text> 
         <Image
-          source={require('./Image/gym.png')}
+          source={require('./Image/home.png')}
+          style={styles.labelImage}
         />
         <Text style={styles.friendMapText}>{data.currentLabel}</Text>
         <Text style={styles.friendMapText}>5 min ago</Text>

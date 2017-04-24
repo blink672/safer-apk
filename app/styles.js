@@ -14,9 +14,9 @@ module.exports = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   mapContainer: {
-    ...StyleSheet.absoluteFillObject,
-    height: 400,
-    width: 400,
+    // ...StyleSheet.absoluteFillObject,
+    height: 360,
+    width: 360,
     justifyContent: 'flex-end',
     alignItems: 'center',
   },

@@ -7,14 +7,11 @@ import AuthAxios from '../AuthAxios.js';
 export default class PushController extends Component {
   constructor(props) {
     super(props);
-    //TODO: get user id from sql server upon login
-    //and pass it along with props
   };
 
   componentDidMount() {
     FCM.getFCMToken()
     .then((token) => {
-      console.log('FCMToken: ', token);
       AuthAxios({
         url: '/api/user',
         method: 'put',

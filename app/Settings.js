@@ -65,7 +65,6 @@ export default class Settings extends Component {
     })
   }
 
-    // TODO: Move log out to settings screen
   _signOut() {
     GoogleSignin.revokeAccess()
     .then(() => {

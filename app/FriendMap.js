@@ -4,19 +4,6 @@ import styles from './styles.js';
 import MapView from 'react-native-maps';
 import AuthAxios from './AuthAxios.js';
 
-const dariostyles = StyleSheet.create({
-  mapContainer: {
-    ...StyleSheet.absoluteFillObject,
-    height: 400,
-    width: 400,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-  map: {
-    ...StyleSheet.absoluteFillObject,
-  },
-});
-
 export default class FriendMap extends Component {
   constructor(props) {
     super(props);
@@ -27,7 +14,7 @@ export default class FriendMap extends Component {
       showLabel: showLabel
     };
     this.switchChange = this.switchChange.bind(this);
-    this.subscribeTo = this.subscribeTo.bind(this);
+    // this.subscribeTo = this.subscribeTo.bind(this);
   }
 
   switchChange() {
@@ -52,7 +39,7 @@ export default class FriendMap extends Component {
     title: navigation.state.params.data.first
   });
 
-  render() {
+  whichPageToRender() {
     const { data } = this.props.navigation.state.params;
     if(data.showSetting === 'GPS' && data.currentLabel === 'Elsewhere') {return this.renderElsewhere(data)}
     if(data.showSetting === 'GPS') { return this.renderGPS(data); }
@@ -108,9 +95,9 @@ export default class FriendMap extends Component {
 
   renderMapView(data) {
     return (
-      <View style={dariostyles.mapContainer}>
+      <View style={styles.mapContainer}>
         <MapView
-          style={dariostyles.map}
+          style={styles.map}
           region={{
             latitude: data.lat,
             longitude: data.long,
@@ -136,13 +123,13 @@ export default class FriendMap extends Component {
         </MapView>
       </View>
     );
-  }ß
+  }
 
   renderElsewhere(data) {
     return (
-      <View style={dariostyles.mapContainer}>
+      <View style={styles.mapContainer}>
         <MapView
-         style={dariostyles.map}
+         style={styles.map}
          region={{
           latitude: data.lat,
           longitude: data.long,

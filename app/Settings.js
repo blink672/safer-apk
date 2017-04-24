@@ -8,9 +8,6 @@ import styles from './styles.js';
 export default class Settings extends Component {
   constructor(props) {
     super(props);
-    // TODO: grab logged in userId (for SQL table)
-    // and pass it along in the req.body
-    // currently hard coded to 1
     this.state = {
       selected: 'gps', //TODO: set this to the privacy setting grabbed from the sql database
       incognito: false,

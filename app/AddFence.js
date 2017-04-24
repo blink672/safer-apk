@@ -56,10 +56,6 @@ export default class AddFence extends Component {
     })
     .then(function (response) {
       alert('Fence created!');
-      console.log(this.props.naviation.state.SignUp);
-      if (this.props.naviation.state.SignUp) {
-        console.log('YOOOOOOOOOOOOOOO')
-      }
     })
     .catch(function (error) {
       alert('There was an error creating your fence');
@@ -124,9 +120,7 @@ renderFence(fence) {
             renderDescription={(row) => row.description}
             onPress={(data, details = null) => {
               this.setState({address: data.description});
-              this.setState({coordinates: details.geometry.location}, function () {
-                console.log('This is the state', this.state.coordinates);
-              })
+              this.setState({coordinates: details.geometry.location})
             }}
             getDefaultValue={() => {
               return '';

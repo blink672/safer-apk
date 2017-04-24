@@ -9,6 +9,7 @@ import CreateGroup from './CreateGroup.js';
 import GroupMap from './GroupMap.js';
 import LogOut from './LogOut.js';
 import SplashScreen from './SplashScreen.js';
+import SignUp from './SignUp.js';
 
 import React from 'react';
 import { Button, TouchableOpacity, Image } from 'react-native';
@@ -40,6 +41,8 @@ HomePageTabs.navigationOptions = ({navigation}) => ({
 
 
 const Stack = StackNavigator({
+  SplashScreen: { screen: SplashScreen },
+  SignUp: { screen: SignUp },
   HomePageTabs: { screen: HomePageTabs },
   FriendMap: { screen: FriendMap },
   AddFence: { screen: AddFence },
@@ -47,11 +50,11 @@ const Stack = StackNavigator({
   AddFriend: { screen: AddFriendList },
   CreateGroup: { screen: CreateGroup },
   GroupMap: { screen: GroupMap },
-  LogOut: { screen: LogOut },
 });
 
 Stack.navigationOptions = {
-  title: 'Home'
+  title: 'Home',
+  headerVisible: false
 };
 
 const MenuDrawer = DrawerNavigator({
@@ -59,15 +62,9 @@ const MenuDrawer = DrawerNavigator({
   AddFriend: { screen: AddFriendList },  
   AddFence: { screen: AddFence },
   Settings: { screen: Settings },
-  LogOut: { screen: LogOut },
 }, {
-  drawerWidth: 200
+  drawerWidth: 200,
 });
-
-const Safer = StackNavigator({
-  SplashScreen: { screen: SplashScreen },
-  MenuDrawer: { screen: MenuDrawer },
-})
 
 export default MenuDrawer;
 

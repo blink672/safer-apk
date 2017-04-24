@@ -68,24 +68,25 @@ export default class CreateGroup extends Component {
     })
   }
 
-  static navigationOptions = ({ navigation }) => {
-    title: navigation.state.params.title
-  }
+  static navigationOptions = ({ navigation }) => ({
+    title: 'Create Group'
+  });
 
   render() {
     const params = this.props.navigation.state.params;
     return (
-      <View>
-        <Text style={styles.button}>Create Group:</Text>
+      <View style={styles.container}>
+        <Text style={styles.CreateGroupText}>Create Group:</Text>
         <TextInput
           style={{fontSize: 18}}
           onChangeText={(text) => this.setState( {groupName: text} )}
           placeholder='Insert Group Name'
           value={this.state.text}
         />
-        <Text style={styles.button}>Members:</Text>
+        <Text style={styles.CreateGroupText}>Members:</Text>
         <ListView
           dataSource={this.state.friends}
+          style={styles.listView}
           renderRow={(rowData) => (
             <CheckBox
               label={rowData.first}
@@ -113,10 +114,10 @@ export default class CreateGroup extends Component {
 
 let styles = StyleSheet.create({
   container: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flex: 0,
+    // flexDirection: 'column',
+    // justifyContent: 'center',
+    // alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
   rightContainer: {
@@ -130,13 +131,15 @@ let styles = StyleSheet.create({
   phoneNumber: {
     textAlign: 'center',
   },
-  button: {
+  CreateGroupText: {
     fontSize: 20,
     // width: 53,
     // height: 81,
   },
   listView: {
-    paddingTop: 20,
+    flex: 1,
+    paddingTop: 10,
+    paddingBottom: 110,
     backgroundColor: '#F5FCFF',
   },
 });

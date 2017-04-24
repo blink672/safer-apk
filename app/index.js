@@ -10,7 +10,7 @@ import GroupMap from './GroupMap.js';
 import LogOut from './LogOut.js';
 
 import React from 'react';
-import { Button } from 'react-native';
+import { Button, TouchableOpacity, Image } from 'react-native';
 import { StackNavigator, TabNavigator, DrawerNavigator } from 'react-navigation';
 
 const HomePageTabs = TabNavigator({
@@ -19,10 +19,24 @@ const HomePageTabs = TabNavigator({
   AllFriendsList: { screen: AllFriendsList },
 });
 
+const renderBurgerButton = (navigation) => {
+  return (
+    <TouchableOpacity
+      onPress={() => navigation.navigate('DrawerOpen')}
+    >
+      <Image
+        style={{height: 25, width: 25}}
+        source={ require('./Image/BurgerButton.png') }
+      />
+    </TouchableOpacity>
+  );
+};
+
 HomePageTabs.navigationOptions = ({navigation}) => ({
   title: 'Safer',
-  headerLeft: <Button title='Menu' onPress={ () => navigation.navigate('DrawerOpen') } />
+  headerLeft: renderBurgerButton(navigation)
 });
+
 
 const Stack = StackNavigator({
   HomePageTabs: { screen: HomePageTabs },

@@ -132,15 +132,11 @@ export default class GroupMap extends Component {
           title={ !this.state.addAndDelete ? 'Add/Delete Friends' : 'Confirm'}
         />
         <View style={styles.switchContainer}>
-          <View >
-            <Switch
-              onValueChange={this.switchChange}
-              value={this.state.showLabel}
-            />
-          </View>
-          <View >
-            <Text>{this.state.showLabel ? 'Show Only Label' : 'Show GPS'}</Text>
-          </View>
+          <Switch
+            onValueChange={this.switchChange}
+            value={this.state.showLabel}
+          />
+          <Text style={{fontSize: 15}}>{this.state.showLabel ? 'Show Only Label' : 'Show GPS'}</Text>
         </View>
         {this.state.addAndDelete ? <AddDeleteGroupMembers members={this.state.members} name={data.name} toAdd={this.addMember} toDelete={this.removeMember} /> : this.renderNoChangeList()}
       </View>
@@ -184,7 +180,8 @@ let styles = StyleSheet.create({
     // flex: 1,
     height: 25,
     flexDirection: 'row',
-    justifyContent: 'center'
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   nameContainer: {
     // justifyContent: 'right',

@@ -18,7 +18,33 @@ const styles = StyleSheet.create({
 export default class FriendMap extends Component {
   constructor(props) {
     super(props);
-    this.state =  {};
+    let {showFriendSetting} = this.props.navigation.state.params.data;
+    let showLabel = (showFriendSetting === 'label' ? true : false); 
+
+    this.state =  {
+      showLabel: showLabel
+    };
+    this.switchChange = this.switchChange.bind(this);
+    this.subscribeTo = this.subscribeTo.bind(this);
+  }
+
+  switchChange() {
+    this.setState({
+      showLabel: !this.state.showLabel
+    })
+    let {id} = this.props.navigation.state.params.data;
+    let privacy = (this.state.showLabel ? 'GPS' : 'label');
+    AuthAxios({
+      url: `/api/friends/${id}`,
+      method: 'put',
+      data: {privacy: privacy}
+    })
+    .then(({data}) => {
+      console.log(data);
+    })
+    .catch(err => {
+      console.log(err);
+    }) 
   }
 
   static navigationOptions = ({navigation}) => ({
@@ -31,6 +57,21 @@ export default class FriendMap extends Component {
     if(data.showSetting === 'GPS') { return this.renderGPS(data); }
     if(data.showSetting === 'label') { return this.renderLabel(data); }
     if(data.showSetting === 'pending') { return this.renderPending(data); }
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <View style={styles.switchContainer}>
+          <Switch
+              onValueChange={this.switchChange}
+              value={this.state.showLabel}
+            />
+          <Text>{this.state.showLabel ? 'Show Only Label' : 'Show GPS'}</Text>
+        </View>
+        {this.whichPageToRender()}
+      </View>
+    )
   }
 
   renderPending(data) {
@@ -108,3 +149,43 @@ export default class FriendMap extends Component {
     );
   }
 }
+
+let styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    // flexDirection: 'column',
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  switchContainer: {
+    // flex: 1,
+    height: 25,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  nameContainer: {
+    // justifyContent: 'right',
+    flex: 1,
+    marginBottom: 8,
+  },
+  name: {
+    fontSize: 23,
+    // marginBottom: 8,
+    textAlign: 'center',
+  },
+  year: {
+    textAlign: 'right',
+  },
+  listView: {
+    flex: 1,
+    paddingTop: 10,
+    backgroundColor: '#F5FCFF',
+  },
+  separator: {
+    flex: 1,
+    height: StyleSheet.hairlineWidth,
+    backgroundColor: '#8E8E8E',
+  },
+});

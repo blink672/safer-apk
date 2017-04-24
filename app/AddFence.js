@@ -61,7 +61,6 @@ export default class AddFence extends Component {
     .done(() => {
       const {params} = this.props.navigation.state;
       const {navigate} = this.props.navigation;
-      console.log('params in add fence: ', params);
       if (params && params.SignUp) {
         navigate('AddFriend', params);
       }

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, Switch, Button } from 'react-native';
+import styles from './styles.js';
 import MapView from 'react-native-maps';
+import AuthAxios from './AuthAxios.js';
 
-const styles = StyleSheet.create({
+const dariostyles = StyleSheet.create({
   mapContainer: {
     ...StyleSheet.absoluteFillObject,
     height: 400,
@@ -40,7 +42,6 @@ export default class FriendMap extends Component {
       data: {privacy: privacy}
     })
     .then(({data}) => {
-      console.log(data);
     })
     .catch(err => {
       console.log(err);
@@ -67,7 +68,7 @@ export default class FriendMap extends Component {
               onValueChange={this.switchChange}
               value={this.state.showLabel}
             />
-          <Text>{this.state.showLabel ? 'Show Only Label' : 'Show GPS'}</Text>
+          <Text style={styles.switchText}>{this.state.showLabel ? 'Show Only Label' : 'Show GPS'}</Text>
         </View>
         {this.whichPageToRender()}
       </View>
@@ -76,18 +77,19 @@ export default class FriendMap extends Component {
 
   renderPending(data) {
     return (
-      <View style={{marginTop: 10}}>
-        <Text style={{textAlign: 'center', fontSize: 20}}>Friend request still pending...</Text>
+      <View style={styles.friendMapContainer}>
+        <Text style={styles.friendMapText}>Friend request still pending...</Text>
       </View>
     );
   }
 
   renderLabel(data) {
     return (
-      <View style={{marginTop: 10}}>
-        <Text style={{textAlign: 'center', fontSize: 20}}>{data.first} checked in at:</Text> 
-        <Text style={{textAlign: 'center', fontSize: 20}}>{data.currentLabel}</Text>
-        <Text style={{textAlign: 'center', fontSize: 20}}>5 min ago</Text>
+      <View style={styles.friendMapContainer}>
+        <Button title='Let me know when they get home' onPress={() => {this.subscribeTo(data)}} />
+        <Text style={styles.friendMapText}>{data.first} checked in at:</Text> 
+        <Text style={styles.friendMapText}>{data.currentLabel}</Text>
+        <Text style={styles.friendMapText}>5 min ago</Text>
       </View>
     );
   }
@@ -95,9 +97,20 @@ export default class FriendMap extends Component {
   renderGPS(data) {
     const { region } = this.props;
     return (
-      <View style={styles.mapContainer}>
+      <View style={styles.friendMapContainer}>
+        <Button title='Let me know when they get home' onPress={() => {this.subscribeTo(data)}} />
+        <Text style={styles.friendMapText}>Checked In At:</Text>
+        {this.renderMapView(data)}
+        <Text style={styles.friendMapText}>{data.currentLabel} 12 min Ago.</Text>
+      </View>
+    );
+  }
+
+  renderMapView(data) {
+    return (
+      <View style={dariostyles.mapContainer}>
         <MapView
-          style={styles.map}
+          style={dariostyles.map}
           region={{
             latitude: data.lat,
             longitude: data.long,
@@ -123,13 +136,13 @@ export default class FriendMap extends Component {
         </MapView>
       </View>
     );
-  }
+  }ß
 
-    renderElsewhere(data) {
+  renderElsewhere(data) {
     return (
-      <View style={styles.mapContainer}>
+      <View style={dariostyles.mapContainer}>
         <MapView
-         style={styles.map}
+         style={dariostyles.map}
          region={{
           latitude: data.lat,
           longitude: data.long,
@@ -148,44 +161,5 @@ export default class FriendMap extends Component {
       </View>
     );
   }
-}
 
-let styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    // flexDirection: 'column',
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  switchContainer: {
-    // flex: 1,
-    height: 25,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  nameContainer: {
-    // justifyContent: 'right',
-    flex: 1,
-    marginBottom: 8,
-  },
-  name: {
-    fontSize: 23,
-    // marginBottom: 8,
-    textAlign: 'center',
-  },
-  year: {
-    textAlign: 'right',
-  },
-  listView: {
-    flex: 1,
-    paddingTop: 10,
-    backgroundColor: '#F5FCFF',
-  },
-  separator: {
-    flex: 1,
-    height: StyleSheet.hairlineWidth,
-    backgroundColor: '#8E8E8E',
-  },
-});
+};

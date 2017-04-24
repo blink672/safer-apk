@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Contacts from 'react-native-contacts';
 import { View, Text, StyleSheet, Button, ListView, TouchableOpacity } from 'react-native';
 import AuthAxios from './AuthAxios.js';
+import styles from './styles.js';
 
 export default class AllFriendsList extends Component {
   constructor(props) {
@@ -56,7 +57,6 @@ export default class AllFriendsList extends Component {
         dataSource={this.state.friends}
         renderRow={(rowData) => this.renderContacts(rowData)}
         style={styles.listView}
-        renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
       />
     )
   }
@@ -69,47 +69,11 @@ export default class AllFriendsList extends Component {
           onPress={() => navigate('FriendMap', {data: friend}) }
         >
           <View style={styles.nameContainer}>
-            <Text style={{textAlign: 'left', fontSize: 23}}>{friend.first} {friend.last}</Text>
-            <Text style={{textAlign: 'left', fontSize: 18}}>{friend.currentLabel ? friend.currentLabel : 'Pending'}</Text>
+            <Text style={styles.name}>{friend.first} {friend.last}</Text>
+            <Text style={styles.label}>{friend.currentLabel ? friend.currentLabel : 'Pending'}</Text>
           </View>
         </TouchableOpacity>
       </View>
     )
   }
-}
-
-let styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  nameContainer: {
-    // justifyContent: 'right',
-    flex: 1,
-    marginBottom: 8,
-  },
-  name: {
-    fontSize: 20,
-    marginBottom: 8,
-    textAlign: 'center',
-  },
-  year: {
-    textAlign: 'right',
-  },
-  button: {
-    width: 53,
-    height: 81,
-  },
-  listView: {
-    paddingTop: 20,
-    backgroundColor: '#F5FCFF',
-  },
-  separator: {
-    flex: 1,
-    height: StyleSheet.hairlineWidth,
-    backgroundColor: '#8E8E8E',
-  },
-});
+};

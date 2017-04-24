@@ -3,6 +3,7 @@ import Contacts from 'react-native-contacts';
 import AddFriendItem from './AddFriendItem.js';
 import { View, Text, StyleSheet, Button, ListView } from 'react-native';
 import AuthAxios from './AuthAxios.js';
+import styles from './styles.js';
 
 export default class AddFriendList extends Component {
   constructor(props) {
@@ -107,37 +108,7 @@ export default class AddFriendList extends Component {
         dataSource={this.state.friends}
         renderRow={(rowData) => <AddFriendItem friend={rowData} /> }
         style={styles.listView}
-        renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
       />
     )
   }
-}
-
-let styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  rightContainer: {
-    flex: 1,
-  },
-  name: {
-    fontSize: 20,
-    marginBottom: 8,
-    textAlign: 'center',
-  },
-  phoneNumber: {
-    textAlign: 'center',
-  },
-  button: {
-    width: 53,
-    height: 81,
-  },
-  listView: {
-    paddingTop: 20,
-    backgroundColor: '#F5FCFF',
-  },
-});
+};

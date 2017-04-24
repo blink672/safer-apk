@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ListView, View, Text, StyleSheet, TouchableOpacity, Button, Switch } from 'react-native';
 import AuthAxios from './AuthAxios.js';
 import AddDeleteGroupMembers from './AddDeleteGroupMembers.js';
+import styles from './styles.js';
 
 export default class GroupMap extends Component {
   constructor(props) {
@@ -112,7 +113,6 @@ export default class GroupMap extends Component {
       data: {privacy: privacy}
     })
     .then(({data}) => {
-      console.log('Successful update', data.privacy);
     })
     .catch(err => {
       console.log('there was an error in fetching members', err);
@@ -136,7 +136,7 @@ export default class GroupMap extends Component {
             onValueChange={this.switchChange}
             value={this.state.showLabel}
           />
-          <Text style={{fontSize: 15}}>{this.state.showLabel ? 'Show Only Label' : 'Show GPS'}</Text>
+          <Text style={styles.switchText}>{this.state.showLabel ? 'Show Only Label' : 'Show GPS'}</Text>
         </View>
         {this.state.addAndDelete ? <AddDeleteGroupMembers members={this.state.members} name={data.name} toAdd={this.addMember} toDelete={this.removeMember} /> : this.renderNoChangeList()}
       </View>
@@ -160,50 +160,10 @@ export default class GroupMap extends Component {
         onPress={() => navigate('FriendMap', {data: memberData}) }
       >
         <View style={styles.nameContainer}>
-          <Text style={{textAlign: 'left', fontSize: 23}}>{memberData.first}</Text>
-          <Text style={{textAlign: 'left', fontSize: 18}}>{memberData.currentLabel ? memberData.currentLabel : 'Pending'}</Text>
+          <Text style={styles.name}>{memberData.first}</Text>
+          <Text style={styles.label}>{memberData.currentLabel ? memberData.currentLabel : 'Pending'}</Text>
         </View>
       </TouchableOpacity>
     )
   }
 };
-
-let styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    // flexDirection: 'column',
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  switchContainer: {
-    // flex: 1,
-    height: 25,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  nameContainer: {
-    // justifyContent: 'right',
-    flex: 1,
-    marginBottom: 8,
-  },
-  name: {
-    fontSize: 23,
-    // marginBottom: 8,
-    textAlign: 'center',
-  },
-  year: {
-    textAlign: 'right',
-  },
-  listView: {
-    flex: 1,
-    paddingTop: 10,
-    backgroundColor: '#F5FCFF',
-  },
-  separator: {
-    flex: 1,
-    height: StyleSheet.hairlineWidth,
-    backgroundColor: '#8E8E8E',
-  },
-});

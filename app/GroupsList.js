@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, View, Text, StyleSheet, ListView, TouchableOpacity } from 'react-native';
 import AuthAxios from './AuthAxios.js';
+import styles from './styles.js';
 
 export default class GroupsList extends Component {
   constructor(props) {
@@ -53,8 +54,8 @@ export default class GroupsList extends Component {
               })
             }
             >
-              <View style={{marginTop: 10}}>
-                <Text style={{textAlign: 'center', fontSize: 20}}>{rowData.name}</Text>
+              <View style={styles.nameContainer}>
+                <Text style={styles.groupName}>{rowData.name}</Text>
               </View>
             </TouchableOpacity>
           )}
@@ -63,41 +64,3 @@ export default class GroupsList extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 10,
-    // flexDirection: 'row',
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  nameContainer: {
-    // justifyContent: 'right',
-    flex: 1,
-    marginBottom: 8,
-  },
-  name: {
-    fontSize: 23,
-    // marginBottom: 8,
-    textAlign: 'center',
-  },
-  year: {
-    textAlign: 'right',
-    
-  },
-  button: {
-    width: 100,
-    height: 81,
-  },
-  listView: {
-    paddingTop: 10,
-    backgroundColor: '#F5FCFF',
-  },
-  separator: {
-    flex: 1,
-    height: StyleSheet.hairlineWidth,
-    backgroundColor: '#8E8E8E',
-  },
-});

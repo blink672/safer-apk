@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, View, Text, StyleSheet, ListView, TouchableOpacity } from 'react-native';
 import AuthAxios from './AuthAxios.js';
+import styles from './styles.js';
 
 export default class HomeFavorite extends Component {
   constructor(props) {
@@ -53,46 +54,10 @@ export default class HomeFavorite extends Component {
         onPress={() => this.props.navigate('FriendMap', {data: memberData}) }
       >
         <View style={styles.nameContainer}>
-          <Text style={{textAlign: 'left', fontSize: 23}}>{memberData.first} {memberData.last}</Text>
-          <Text style={{textAlign: 'left', fontSize: 18}}>{memberData.currentLabel ? memberData.currentLabel : 'Pending'}</Text>
+          <Text style={styles.name}>{memberData.first} {memberData.last}</Text>
+          <Text style={styles.label}>{memberData.currentLabel ? memberData.currentLabel : 'Pending'}</Text>
         </View>
       </TouchableOpacity>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    // flexDirection: 'row',
-    // justifyContent: 'center',
-    // alignItems: 'flex-start',
-    backgroundColor: '#F5FCFF',
-  },
-  nameContainer: {
-    // justifyContent: 'right',
-    flex: 1,
-    marginBottom: 8,
-  },
-  name: {
-    fontSize: 23,
-    // marginBottom: 8,
-    textAlign: 'center',
-  },
-  year: {
-    textAlign: 'right',
-
-  },
-  button: {
-
-  },
-  listView: {
-    paddingTop: 10,
-    backgroundColor: '#F5FCFF',
-  },
-  separator: {
-    flex: 1,
-    height: StyleSheet.hairlineWidth,
-    backgroundColor: '#8E8E8E',
-  },
-});

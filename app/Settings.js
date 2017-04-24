@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Button, Text, Picker, Switch, StyleSheet } from 'react-native';
 import FriendMap from './FriendMap.js';
 import AuthAxios from './AuthAxios.js';
+import styles from './styles.js';
 
 export default class Settings extends Component {
   constructor(props) {
@@ -69,11 +70,11 @@ export default class Settings extends Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <View style={styles.container}>
+      <View style={styles.settingContainer}>
 
-        <Text style={styles.text}>Default Privacy Settings</Text>
-        <Text style={styles.description}>This is the default information presented to your connections</Text>
-        <Text style={styles.description}>You can edit individual privacy settings from their location details screen</Text>
+        <Text style={styles.settingText}>Default Privacy Settings</Text>
+        <Text style={styles.settingDescription}>This is the default information presented to your connections</Text>
+        <Text style={styles.settingDescription}>You can edit individual privacy settings from their location details screen</Text>
         <Picker 
           style={{width: 200}} 
           selectedValue={this.state.selected}
@@ -82,10 +83,9 @@ export default class Settings extends Component {
           <Picker.Item label='GPS' value='gps' />
         </Picker>
 
-        <Text style={styles.text}>Incognito Mode - Stop sharing your location</Text>
+        <Text style={styles.settingText}>Incognito Mode - Stop sharing your location</Text>
         <Switch
           onValueChange={this.switchChange}
-          style={{marginBottom: 10}}
           value={this.state.incognito} />
 
         {this.state.error &&
@@ -94,24 +94,5 @@ export default class Settings extends Component {
       </View>
     )
   }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    backgroundColor: '#F5FCFF',
-  },
-  text: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    textAlign: 'auto'
-  },
-  description: {
-    fontSize: 14,
-    textAlign: 'auto'
-  }
-
-});
+};
 

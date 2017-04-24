@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ListView, View, Text, StyleSheet, TouchableOpacity, Button } from 'react-native';
 import AuthAxios from './AuthAxios.js';
+import styles from './styles.js';
 
 export default class GroupMap extends Component {
   constructor(props) {
@@ -51,7 +52,7 @@ export default class GroupMap extends Component {
 
   renderMembersToBeChanged(data) {
     return (
-      <View style={styles.container}>
+      <View style={styles.centerContainer}>
         <Button
           onPress={() => this.props.toDelete(data)}
           title='Delete'
@@ -66,7 +67,7 @@ export default class GroupMap extends Component {
  
   renderNonMembers(data) {
     return (
-      <View style={styles.container}>
+      <View style={styles.centerContainer}>
         <Button
           onPress={() => this.props.toAdd(data)}
           title='Add'
@@ -79,39 +80,3 @@ export default class GroupMap extends Component {
     )
   }
 };
-
-let styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  nameContainer: {
-    // justifyContent: 'right',
-    flex: 1,
-    marginBottom: 8,
-  },
-  name: {
-    fontSize: 23,
-    // marginBottom: 8,
-    textAlign: 'center',
-  },
-  year: {
-    textAlign: 'right',
-  },
-  button: {
-    width: 100,
-    height: 81,
-  },
-  listView: {
-    paddingTop: 10,
-    backgroundColor: '#F5FCFF',
-  },
-  separator: {
-    flex: 1,
-    height: StyleSheet.hairlineWidth,
-    backgroundColor: '#8E8E8E',
-  },
-});

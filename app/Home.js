@@ -7,8 +7,8 @@ import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
 import PushController from './FCM/PushController.js';
 import AuthAxios from './AuthAxios.js';
 import axios from 'axios';
-import { distanceBetweenCoordinates } from './geoFencingUtils/geoFencingUtils.js'
-
+import { distanceBetweenCoordinates } from './geoFencingUtils/geoFencingUtils.js';
+import styles from './styles.js';
 
 export default class HomeScreen extends Component {
   constructor(props) {
@@ -104,47 +104,46 @@ export default class HomeScreen extends Component {
 
   render() {
     const { navigate } = this.props.navigation;
-    // if (!this.state.user && this.state.phoneNumber.length < 10) {
-    //   return (
-    //     <View>
-    //       <Text style={{fontSize: 25}}>
-    //         Please enter your phone number
-    //       </Text>
-    //       <TextInput
-    //         style={{fontSize: 25}}
-    //         onChangeText={(text) => this.setState( {phoneNumber: text} )}
-    //         // placeholder='Insert Group Name'
-    //         value={this.state.text}
-    //       />
-    //     </View>
-    //   )
-    // }
-    // if (!this.state.user && this.state.phoneNumber.length === 10) {
-    //   return (
-    //       <View style={styles.container}>
-    //         <Text>Your phone number: {this.state.phoneNumber}</Text>
-    //         <GoogleSigninButton
-    //           style={{width: 312, height: 48}}
-    //           color={GoogleSigninButton.Color.Dark}
-    //           size={GoogleSigninButton.Size.Wide}
-    //           onPress={() => { this._signIn(); }}
-    //         />
-    //       </View>
-    //   );
-    // }
-    // if (this.state.user) {
+    if (!this.state.user && this.state.phoneNumber.length < 10) {
+      return (
+        <View>
+          <Text style={{fontSize: 25}}>
+            Please enter your phone number
+          </Text>
+          <TextInput
+            style={{fontSize: 25}}
+            onChangeText={(text) => this.setState( {phoneNumber: text} )}
+            // placeholder='Insert Group Name'
+            value={this.state.text}
+          />
+        </View>
+      )
+    }
+    if (!this.state.user && this.state.phoneNumber.length === 10) {
+      return (
+          <View style={styles.container}>
+            <Text>Your phone number: {this.state.phoneNumber}</Text>
+            <GoogleSigninButton
+              style={{width: 312, height: 48}}
+              color={GoogleSigninButton.Color.Dark}
+              size={GoogleSigninButton.Size.Wide}
+              onPress={() => { this._signIn(); }}
+            />
+          </View>
+      );
+    }
+    if (this.state.user) {
       return (
         <View style={styles.container}>
           <PushController />
           <HomeFavorite navigate={navigate}/>
+          <TouchableOpacity onPress={() => {this._signOut()} }>
+            <Text>Log Out</Text>
+          </TouchableOpacity>
         </View>
       )
-    // }
+    }
   }
-
-          // <TouchableOpacity onPress={() => {this._signOut()} }>
-          //   <Text>Log Out</Text>
-          // </TouchableOpacity>
 
   async _setupGoogleSignin() {
     try {
@@ -195,14 +194,3 @@ export default class HomeScreen extends Component {
     .done();
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: 20,
-    backgroundColor: '#F5FAFF',
-    flex: 1,
-    // flexDirection: 'column',
-    // justifyContent: 'center',
-    // alignItems: 'center',
-  }
-});

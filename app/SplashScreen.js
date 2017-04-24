@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
-import { AppState, View, Button, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 import { googleAuthWebClientId } from './endpoint.js';
 import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
 import AuthAxios from './AuthAxios.js';
-import { distanceBetweenCoordinates } from './geoFencingUtils/geoFencingUtils.js'
-
 
 export default class SplashScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
       user: null,
-      initialPosition: 'unknown',
-      lastPosition: 'unknown',
     };
   };
 
@@ -34,20 +30,22 @@ export default class SplashScreen extends Component {
   geoMonitoring() {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        console.log('got the position!', position);
         this.setState({initialPosition: position});
       },
       (error) => alert(`We couldn't get your location`),
       {enableHighAccuracy: false, timeout: 20000, maximumAge: 90000000000000}
     );
     this.watchID = navigator.geolocation.watchPosition((position) => {
-      this.setState({lastPosition: position});
+      this.setState({lastPosition: position}, () => {this.saveLocation()});
     });
   }
 
   saveLocation () {
     console.log('Save location called from splash screen')
-    let position = this.state.initialPosition;
+    console.log('last position: ', this.state.lastPosition);
+    console.log('initial position: ', this.state.initialPosition);
+    let position = this.state.lastPosition || this.state.initialPosition;
+    console.log('position: ', position);
     let location = {
       lat: position.coords.latitude,
       long: position.coords.longitude
@@ -59,13 +57,12 @@ export default class SplashScreen extends Component {
       data: location
     })
     .then(response => console.log('Location updated'))
-    .catch(error => console.log('Location not updated', error));
+    .catch(error => console.log('There was an error in SaveLocation: ', error));
   }
 
   async _setupGoogleSignin() {
     const { navigate } = this.props.navigation;
     try {
-      console.log('in setup google sign in');
       await GoogleSignin.hasPlayServices({ autoResolve: true });
       await GoogleSignin.configure({
         webClientId: googleAuthWebClientId, //replace with client_id from google-services.json
@@ -73,7 +70,7 @@ export default class SplashScreen extends Component {
       });
 
       const user = await GoogleSignin.currentUserAsync();
-      if (user === null) {//TODO: set up conditional navigation here based on whether use is null
+      if (user === null) {
         navigate('SignUp', {location: this.state.initialPosition});
       } else {
         this.saveLocation();

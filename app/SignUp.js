@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { View, Button, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
-import FriendMap from './FriendMap.js';
 import AuthAxios from './AuthAxios.js';
 
 export default class SignUp extends Component {
@@ -14,7 +13,6 @@ export default class SignUp extends Component {
   };
 
   static navigationOptions = {
-    title: 'Sign Up',
     headerVisible: false
   };
 
@@ -31,7 +29,7 @@ export default class SignUp extends Component {
       data: location
     })
     .then(response => console.log('Location updated'))
-    .catch(error => console.log('Location not updated', error));
+    .catch(error => console.log('Location not updated in SignUp: ', error));
   }
 
   _signIn() {

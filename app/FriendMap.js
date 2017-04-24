@@ -14,8 +14,12 @@ export default class FriendMap extends Component {
       showLabel: showLabel
     };
     this.switchChange = this.switchChange.bind(this);
-    // this.subscribeTo = this.subscribeTo.bind(this);
+    this.subscribeTo = this.subscribeTo.bind(this);
   }
+
+  static navigationOptions = ({navigation}) => ({
+    title: navigation.state.params.data.first
+  });
 
   switchChange() {
     this.setState({
@@ -35,9 +39,16 @@ export default class FriendMap extends Component {
     }) 
   }
 
-  static navigationOptions = ({navigation}) => ({
-    title: navigation.state.params.data.first
-  });
+  subscribeTo(data) {
+    AuthAxios({
+      url: '/api/subscribe',
+      method: 'post',
+      data: {phoneNumber: data.phoneNumber}
+    })
+    .catch((err) => {
+      console.error('There was an error subscribing to the friend: ', err);
+    })
+  }
 
   whichPageToRender() {
     const { data } = this.props.navigation.state.params;

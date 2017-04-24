@@ -19,7 +19,7 @@ export default class SplashScreen extends Component {
   };
 
   static navigationOptions = {
-    title: 'Favorites'
+    title: 'Welcome'
   };
   
   watchID: ?number = null;
@@ -27,7 +27,6 @@ export default class SplashScreen extends Component {
   geoMonitoring() {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        console.log('got the position!')
         var initialPosition = JSON.stringify(position);
         this.setState({initialPosition});
       },
@@ -42,7 +41,6 @@ export default class SplashScreen extends Component {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
       };
-      // this.checkFences(point); //TODO: move this to fire once a user is logged in
     });
   }
 
@@ -54,16 +52,13 @@ export default class SplashScreen extends Component {
     })
     .then(({data}) => {
       let fences = data;
-      console.log(data)
       for (let fence of fences) {
         let proximity = distanceBetweenCoordinates(currentPoint.lat, currentPoint.lng, fence.lat, fence.lng);
         const radius = 0.5;
         if (proximity < radius) {
-          console.log(`You're in`, fence.label)
           this.setState({currentlyAt: fence.label}, () => this.saveLocation());
           break;  
         } else {
-          console.log('getting in the else block')
           this.setState({currentlyAt: 'Elsewhere'}, () => this.saveLocation());
         }
       }
@@ -93,59 +88,31 @@ export default class SplashScreen extends Component {
 
   componentDidMount() {
     this._setupGoogleSignin();
-
-    this.geoMonitoring();
   };
 
   componentWillUnmount() {
     navigator.geolocation.clearWatch(this.watchID);
   }
 
+  // if (this.state.user) {
+  //   return (
+  //     <View>
+  //       <PushController />
+  //       <HomeFavorite />
+  //     </View>
+  //   )
+  // }
+
+
   render() {
     const { navigate } = this.props.navigation;
-    if (!this.state.user && this.state.phoneNumber.length < 10) {
-      return (
-        <View>
-          <Text style={{fontSize: 25}}>
-            Please enter your phone number
-          </Text>
-          <TextInput
-            style={{fontSize: 25}}
-            onChangeText={(text) => this.setState( {phoneNumber: text} )}
-            // placeholder='Insert Group Name'
-            value={this.state.text}
-          />
-        </View>
-      )
-    }
-    if (!this.state.user && this.state.phoneNumber.length === 10) {
-      return (
-          <View style={styles.container}>
-            <Text>Your phone number: {this.state.phoneNumber}</Text>
-            <GoogleSigninButton
-              style={{width: 312, height: 48}}
-              color={GoogleSigninButton.Color.Dark}
-              size={GoogleSigninButton.Size.Wide}
-              onPress={() => { this._signIn(); }}
-            />
-          </View>
-      );
-    }
-    if (this.state.user) {
-      return (
-        <View>
-          <PushController />
-          <HomeFavorite />
-          <TouchableOpacity onPress={() => {this._signOut()} }>
-            <Text>Log Out</Text>
-          </TouchableOpacity>
-        </View>
-      )
-    }
+    return (
+      <Text>Safer SplashScreen</Text> 
+    );
   }
 
-
   async _setupGoogleSignin() {
+    const { navigate } = this.props.navigation;
     try {
       await GoogleSignin.hasPlayServices({ autoResolve: true });
       await GoogleSignin.configure({
@@ -154,7 +121,11 @@ export default class SplashScreen extends Component {
       });
 
       const user = await GoogleSignin.currentUserAsync();
-      // if (user === null) //TODO: set up conditional navigation here based on whether use is null
+      if (user === null) {//TODO: set up conditional navigation here based on whether use is null
+        navigate('SignUp');
+      } else {
+        navigate('HomePageTabs');
+      }
       this.setState({user});
     }
     catch(err) {
@@ -162,36 +133,6 @@ export default class SplashScreen extends Component {
     }
   }
 
-  _signIn() {
-    GoogleSignin.signIn()
-    .then((user) => {
-      this.setState({user: user});
-    })
-    .then(() => {
-      return AuthAxios({
-        url: '/api/user/',
-        method: 'put',
-        data: {phoneNumber: this.state.phoneNumber}
-      })
-    })
-    .catch((err) => {
-      console.log('Sign in error: ', err);
-    })
-    .done();
-  }
-
-  // TODO: Move log out to settings screen
-  _signOut() {
-    GoogleSignin.revokeAccess()
-    .then(() => {
-      GoogleSignin.signOut();
-      console.log('Google access revoked');
-    })
-    .then(() => {
-      this.setState({user: null});
-    })
-    .done();
-  }
 }
 
 const styles = StyleSheet.create({

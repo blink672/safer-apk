@@ -124,8 +124,10 @@ export default class AddFence extends Component {
             fetchDetails={true}
             renderDescription={(row) => row.description}
             onPress={(data, details = null) => {
-              this.setState({address: data.description});
-              this.setState({coordinates: details.geometry.location})
+              this.setState({
+                address: data.description,
+                coordinates: details.geometry.location
+              });
             }}
             getDefaultValue={() => {
               return '';

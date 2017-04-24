@@ -29,8 +29,6 @@ export default class HomeFavorite extends Component {
   }
 
   render() {
-    // const params = this.props.navigation.state.params;
-    // const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
         <Button
@@ -47,8 +45,6 @@ export default class HomeFavorite extends Component {
   }
 
   renderMembers(memberData) {
-    // const { navigate } = this.props.navigation;
-    console.log(this.props);
     return (
       <TouchableOpacity
         onPress={() => this.props.navigate('FriendMap', {data: memberData}) }

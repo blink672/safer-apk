@@ -8,7 +8,7 @@ export default class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: 
+      user: '',
       phoneNumber: '',
     };
   };
@@ -18,64 +18,12 @@ export default class SignUp extends Component {
     headerVisible: false
   };
 
-  watchID: ?number = null;
-
-
-  componentDidMount() {
-    this.geoMonitoring();
-  }
-
-  geoMonitoring() {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        console.log('got the position!', position);
-        this.setState({initialPosition: position});
-      },
-      (error) => alert(`We couldn't get your location`),
-      {enableHighAccuracy: false, timeout: 20000, maximumAge: 90000000000000}
-    );
-    this.watchID = navigator.geolocation.watchPosition((position) => {
-      this.setState({lastPosition: position});
-    });
-  }
-
-  // TODO: check fences once confirmed that user is logged in (this function calls saveLocation)
-  checkFences(currentPoint) {
-    let phoneNumber = '1234567'
-    AuthAxios({
-      url: `/api/labels/?id=${phoneNumber}`
-    })
-    .then(({data}) => {
-      let fences = data;
-      for (let fence of fences) {
-        let proximity = distanceBetweenCoordinates(currentPoint.lat, currentPoint.lng, fence.lat, fence.lng);
-        const radius = 0.5;
-        if (proximity < radius) {
-          this.setState({currentlyAt: fence.label}, () => this.saveLocation());
-          break;  
-        } else {
-          this.setState({currentlyAt: 'Elsewhere'}, () => this.saveLocation());
-        }
-      }
-    })
-    .catch((error) => {
-      alert(`Oh no, we couldn't get your fences!`)
-    })
-  }
-
-      // let point = {
-      //   lat: position.coords.latitude,
-      //   lng: position.coords.longitude,
-      // };
-
-
   saveLocation () {
-    console.log('Save location called', this.state.currentlyAt)
-    let location = {};
-    let position = this.state.lastPosition;
-    location.lat = position.coords.latitude;
-    location.lng = position.coords.longitude;
-    location.label = this.state.currentlyAt;
+    let position = this.props.navigation.state.params.location;
+    let location = {
+      lat: position.coords.latitude,
+      long: position.coords.longitude
+    };
 
     AuthAxios({
       url: `/api/users/location`,
@@ -83,7 +31,7 @@ export default class SignUp extends Component {
       data: location
     })
     .then(response => console.log('Location updated'))
-    .catch(error => alert('Location not updated'))
+    .catch(error => console.log('Location not updated', error));
   }
 
   _signIn() {
@@ -98,12 +46,14 @@ export default class SignUp extends Component {
         data: {phoneNumber: this.state.phoneNumber}
       })
     })
-    .then(() => {
-      console.log('in sign up:: ', this.state.user);
-      this.checkFences(point); //TODO: move this to fire once a user is logged in
-    })
     .catch((err) => {
       console.log('Sign in error: ', err);
+    })
+    .then(() => {
+      this.saveLocation();
+    })
+    .catch((err) => {
+      console.log('Error saving location to db: ', err);
     })
     .done(() => {
       this.props.navigation.navigate('AddFence');

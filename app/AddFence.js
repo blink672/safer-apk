@@ -12,7 +12,6 @@ export default class AddFence extends Component {
         rowHasChanged: (row1, row2) => row1 !== row2
       }),
       label: 'Home',
-      user: '1234567'
     };
   };
 
@@ -47,7 +46,6 @@ export default class AddFence extends Component {
     };
 
     fence.label = this.state.label;
-    fence.user = this.state.user;
 
     AuthAxios({
       url: '/api/labels',
@@ -60,20 +58,28 @@ export default class AddFence extends Component {
     .catch(function (error) {
       alert('There was an error creating your fence');
     })
+    .done(() => {
+      const {params} = this.props.navigation.state;
+      const {navigate} = this.props.navigation;
+      console.log('params in add fence: ', params);
+      if (params && params.SignUp) {
+        navigate('AddFriend', params);
+      }
+    })
   };
 
-renderFence(fence) {
-  return (
-    <View>
-      <Text>
-        {fence.label}
-      </Text>
-      <Text>
-        {fence.address}{'\n'}{'\n'}
-      </Text>
-    </View>
-  )
-}
+  renderFence(fence) {
+    return (
+      <View>
+        <Text>
+          {fence.label}
+        </Text>
+        <Text>
+          {fence.address}{'\n'}{'\n'}
+        </Text>
+      </View>
+    )
+  }
 
   render() {
     return (
@@ -148,7 +154,7 @@ renderFence(fence) {
         </View>
           <Button
               title='Set this fence'
-              onPress={() => this.makeFence(this.state.coordinates, )}
+              onPress={() => this.makeFence(this.state.coordinates)}
           />
       </View>
     );

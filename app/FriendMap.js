@@ -82,12 +82,18 @@ export default class FriendMap extends Component {
   }
 
   renderLabel(data) {
+    let path;
+    if( data.currentLabel === 'School' ) { path = require('./Image/School.png') };
+    if( data.currentLabel === 'Home' ) { path = require('./Image/Home.png') };
+    if( data.currentLabel === 'Office' ) { path = require('./Image/Office.png') };
+    if( data.currentLabel === 'Bar' ) { path = require('./Image/Bar.png') };
+    if( data.currentLabel === 'Gym' ) { path = require('./Image/Gym.png') };
     return (
       <View style={styles.friendMapContainer}>
         <Button title='Let me know when they get home' onPress={() => {this.subscribeTo(data)}} />
         <Text style={styles.friendMapText}>{data.first} checked in at:</Text> 
         <Image
-          source={require('./Image/office.png')}
+          source={path}
           style={styles.labelImage}
         />
         <Text style={styles.friendMapText}>{data.currentLabel}</Text>

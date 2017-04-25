@@ -39,7 +39,7 @@ export default class FriendMap extends Component {
     }) 
   }
 
-  subscribeTo(data) {
+  subscribeTo(data, privacy) {
     AuthAxios({
       url: '/api/subscribe',
       method: 'post',
@@ -59,6 +59,7 @@ export default class FriendMap extends Component {
   }
 
   render() {
+    const { data } = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
         <Button title='Let me know when they get home' onPress={() => {this.subscribeTo(data)}} />
@@ -69,6 +70,7 @@ export default class FriendMap extends Component {
             />
           <Text style={styles.switchText}>{this.state.showLabel ? 'Show Only Label' : 'Show GPS'}</Text>
         </View>
+        <Button title='Let me know when they get home' onPress={() => {this.subscribeTo(data)}} />
         {this.whichPageToRender()}
       </View>
     )

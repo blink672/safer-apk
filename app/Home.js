@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
-import HomeFavorite from './HomeFavorite.js';
+import { Button, View, Text, StyleSheet, ListView, TouchableOpacity } from 'react-native';
+
 import PushController from './FCM/PushController.js';
 import AuthAxios from './AuthAxios.js';
 import styles from './styles.js';
@@ -8,20 +8,61 @@ import styles from './styles.js';
 export default class HomeScreen extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      members: new ListView.DataSource({
+        rowHasChanged: (row1, row2) => row1 !== row2
+      })
+    };
   };
+
+  componentWillMount() {
+    // let {name} = this.props.navigation.state.params.data;
+    console.log('componentWillMount')
+    AuthAxios({
+      url: `/api/groupUsers?name=FAVORITES`
+    })
+    .then(({data}) => {
+      let members = data;
+      this.setState({members: this.state.members.cloneWithRows(members)});
+    })
+    .catch(err => {
+      console.log('There was an error fetching members', err);
+    });
+  }
 
   static navigationOptions = {
     title: 'Favorites'
   };
   
+        // <Button
+        //   onPress={() => console.log("PRESSED")}
+        //   title="Add Member To Favorite"
+        // />
   render() {
-    const { navigate } = this.props.navigation;    
+    console.log('HomeFavorite')
     return (
-      <View>
+      <View style={styles.container}>
         <PushController />
-        <HomeFavorite />
+        <ListView
+          dataSource={this.state.members}
+          style={styles.listView}
+          renderRow={(rowData) => this.renderMembers(rowData) }
+        />
       </View>
-    )
+    );
+  }
+
+  renderMembers(memberData) {
+    const { navigate } = this.props.navigation;
+    return (
+      <TouchableOpacity
+        onPress={() => navigate('FriendMap', {data: memberData}) }
+      >
+        <View style={styles.nameContainer}>
+          <Text style={styles.name}>{memberData.first} {memberData.last}</Text>
+          <Text style={styles.label}>{memberData.currentLabel ? memberData.currentLabel : 'Pending'}</Text>
+        </View>
+      </TouchableOpacity>
+    );
   }
 }

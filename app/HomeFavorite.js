@@ -15,7 +15,7 @@ export default class HomeFavorite extends Component {
 
   componentWillMount() {
     // let {name} = this.props.navigation.state.params.data;
-
+    console.log('componentWillMount')
     AuthAxios({
       url: `/api/groupUsers?name=FAVORITES`
     })
@@ -29,6 +29,7 @@ export default class HomeFavorite extends Component {
   }
 
   render() {
+    console.log('HomeFavorite')
     return (
       <View style={styles.container}>
         <Button

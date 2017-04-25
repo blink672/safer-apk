@@ -68,6 +68,7 @@ export default class FriendMap extends Component {
             />
           <Text style={styles.switchText}>{this.state.showLabel ? 'Show Only Label' : 'Show GPS'}</Text>
         </View>
+        <Button title='Let me know when they get home' onPress={() => {this.subscribeTo(data)}} />
         {this.whichPageToRender()}
       </View>
     )
@@ -90,14 +91,12 @@ export default class FriendMap extends Component {
     if( data.currentLabel === 'Gym' ) { path = require('./Image/Gym.png') };
     return (
       <View style={styles.friendMapContainer}>
-        <Button title='Let me know when they get home' onPress={() => {this.subscribeTo(data)}} />
         <Text style={styles.friendMapText}>{data.first} checked in at:</Text> 
         <Image
           source={path}
           style={styles.labelImage}
         />
-        <Text style={styles.friendMapText}>{data.currentLabel}</Text>
-        <Text style={styles.friendMapText}>5 min ago</Text>
+        <Text style={styles.friendMapText}>{data.currentLabel} 5 min ago</Text>
       </View>
     );
   }
@@ -106,7 +105,6 @@ export default class FriendMap extends Component {
     const { region } = this.props;
     return (
       <View style={styles.friendMapContainer}>
-        <Button title='Let me know when they get home' onPress={() => {this.subscribeTo(data)}} />
         <Text style={styles.friendMapText}>Checked In At:</Text>
         {this.renderMapView(data)}
         <Text style={styles.friendMapText}>{data.currentLabel} 12 min Ago.</Text>

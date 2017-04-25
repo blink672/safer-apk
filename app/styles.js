@@ -15,8 +15,8 @@ module.exports = StyleSheet.create({
   },
   mapContainer: {
     // ...StyleSheet.absoluteFillObject,
-    height: 360,
-    width: 360,
+    height: 350,
+    width: 350,
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
@@ -24,16 +24,17 @@ module.exports = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
   },
   switchContainer: {
-    height: 25,
+    // height: 25,
+    flex: 0.08,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
   },
   friendMapContainer: {
     flex: 1,
     alignItems: 'center',
-    // justifyContent: 'center',
-    marginTop: 10,
+    justifyContent: 'center',
+    // marginTop: 10,
   },
   nameContainer: {
     flex: 1,
@@ -48,51 +49,65 @@ module.exports = StyleSheet.create({
   name: {
     fontSize: 23,
     textAlign: 'left',
+    color: 'black',
   },
   label: {
     fontSize: 18,
     textAlign: 'left',
+    color: 'black',
+    fontStyle: 'italic',
   },
   addName: {
     fontSize: 20,
     textAlign: 'center',
+    color: 'black',
   },
   switchText: {
+    color: 'black',
     fontSize: 15,
   },
   friendMapText: {
     // textAlign: 'center',
+    color: 'black',
+    fontWeight: 'bold',
     fontSize: 20,
+    margin: 20,
   },
   createGroupText: {
     fontSize: 20,
   },
   phoneNumber: {
     textAlign: 'center',
+    color: 'black',
   },
   groupName: {
     fontSize: 23,
     textAlign: 'center',
+    color: 'black',
   },
   button: {
 
   },
   listView: {
-    paddingTop: 10,
+    flex: 1,
+    flexDirection: 'column',
+    padding: 10,
     backgroundColor: '#F5FCFF',
   },
   settingText: {
     fontSize: 16,
     fontWeight: 'bold',
-    textAlign: 'auto'
+    textAlign: 'auto',
+    color: 'black',
   },
   settingDescription: {
     fontSize: 14,
-    textAlign: 'auto'
+    textAlign: 'auto',
+    color: 'black',
   },
   labelImage: {
-    width: 300,
-    height: 300,
+    width: 225,
+    height: 225,
     alignItems: 'center',
   }
 });

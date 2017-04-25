@@ -131,13 +131,13 @@ export default class GroupMap extends Component {
           onPress={() => !this.state.addAndDelete ? this.changeToEditGroup() : this.updateGroupMembers() }
           title={ !this.state.addAndDelete ? 'Add/Delete Friends' : 'Confirm'}
         />
-        <View style={styles.switchContainer}>
-          <Switch
-            onValueChange={this.switchChange}
-            value={this.state.showLabel}
-          />
-          <Text style={styles.switchText}>{this.state.showLabel ? 'Show Only Label' : 'Show GPS'}</Text>
-        </View>
+          <View style={styles.switchContainer}>
+            <Switch
+              onValueChange={this.switchChange}
+              value={this.state.showLabel}
+            />
+            <Text style={styles.switchText}>{this.state.showLabel ? 'Show Only Label' : 'Show GPS'}</Text>
+          </View>
         {this.state.addAndDelete ? <AddDeleteGroupMembers members={this.state.members} name={data.name} toAdd={this.addMember} toDelete={this.removeMember} /> : this.renderNoChangeList()}
       </View>
     );

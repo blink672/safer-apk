@@ -4,6 +4,7 @@ import { StyleSheet } from 'react-native';
 module.exports = StyleSheet.create({
   container: {
     flex: 1,
+    // justifyContent: 'center',
     backgroundColor: '#F5FCFF',
   },
   centerContainer: {
@@ -24,10 +25,10 @@ module.exports = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
   },
   switchContainer: {
-    // height: 25,
-    flex: 0.08,
+    // paddingTop: 10, 
+    paddingLeft: 10,
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
   },
   friendMapContainer: {
@@ -38,10 +39,13 @@ module.exports = StyleSheet.create({
   },
   nameContainer: {
     flex: 1,
-    marginBottom: 8,
+    marginBottom: 10,
+    paddingLeft: 10,
+    // backgroundColor: 'blue'
   },
   settingContainer: {
     flex: 1,
+    padding: 10,
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
     backgroundColor: '#F5FCFF',
@@ -89,8 +93,8 @@ module.exports = StyleSheet.create({
 
   },
   listView: {
-    flex: 1,
-    flexDirection: 'column',
+    // flex: 1,
+    // flexDirection: 'column',
     padding: 10,
     backgroundColor: '#F5FCFF',
   },

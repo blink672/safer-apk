@@ -78,7 +78,8 @@ export default class FriendMap extends Component {
     const { data } = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
-        <Button title='Let me know when they get home' onPress={() => {this.subscribeTo(data)}} />
+        { (data.showSetting === 'GPS' || data.showSetting === 'label') &&
+          <Button title='Let me know when they get home' onPress={() => {this.subscribeTo(data)}} /> }
         <View style={styles.switchContainer}>
           <Switch
               onValueChange={this.switchChange}
@@ -86,28 +87,24 @@ export default class FriendMap extends Component {
             />
           <Text style={styles.switchText}>{this.state.showLabel ? 'Show Only Label' : 'Show GPS'}</Text>
         </View>
-        { (data.showSetting === 'GPS' || data.showSetting === 'label') &&
-          <Button title='Let me know when they get home' onPress={() => {this.subscribeTo(data)}} /> }
         {this.whichPageToRender()}
       </View>
     )
   }
 
   renderPending(data) {
-    console.log('data in render pending: ', data);
     return (
       <View style={styles.friendMapContainer}>
-          <Button title='Confirm Friend' onPress={() => this.addFriend(data)} />
-          <Text style={styles.friendMapText}>{data.first} {data.last} sent a friend request!</Text>
+        <Button title='Confirm Friend' onPress={() => this.addFriend(data)} />
+        <Text style={styles.friendMapText}>You have a pending friend request from {data.first} {data.last}!</Text>
       </View>
     );
   }
 
   renderRequest(data) {
-    console.log('data in render pending: ', data);
     return (
       <View style={styles.friendMapContainer}>
-          <Text style={styles.friendMapText}>Friend request pending...</Text>
+          <Text style={styles.friendMapText}>You've sent a friend request to {data.first} {data.last}.</Text>
       </View>
     );
   }

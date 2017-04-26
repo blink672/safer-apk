@@ -42,6 +42,9 @@ export default class PushController extends Component {
   };
 
   showLocalNotification(notif) {
+    console.log('notification: ', notif);
+    if (notif.friendRequest === 'true') {
+    }
     FCM.presentLocalNotification({
       title: notif.title,
       body: notif.body,

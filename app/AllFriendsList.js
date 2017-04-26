@@ -70,7 +70,7 @@ export default class AllFriendsList extends Component {
         >
           <View style={styles.nameContainer}>
             <Text style={styles.name}>{friend.first} {friend.last}</Text>
-            <Text style={styles.label}>{friend.currentLabel ? friend.currentLabel : 'Pending'}</Text>
+            <Text style={styles.label}>{friend.currentLabel !== 'request' ? friend.currentLabel : 'Pending'}</Text>
           </View>
         </TouchableOpacity>
       </View>

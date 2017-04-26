@@ -14,6 +14,12 @@ module.exports = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
+  signUpContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'stretch',
+    backgroundColor: '#F5FCFF',
+  },
   mapContainer: {
     // ...StyleSheet.absoluteFillObject,
     height: 350,
@@ -54,6 +60,10 @@ module.exports = StyleSheet.create({
     alignItems: 'flex-start',
     backgroundColor: '#F5FCFF',
   },
+  googleContainer: {
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
   name: {
     fontSize: 23,
     textAlign: 'left',
@@ -73,6 +83,11 @@ module.exports = StyleSheet.create({
   switchText: {
     color: 'black',
     fontSize: 15,
+  },
+  signUpText: {
+    fontSize: 25,
+    color: 'black',
+    textAlign: 'center',
   },
   friendMapText: {
     // textAlign: 'center',

@@ -26,10 +26,12 @@ const renderBurgerButton = (navigation) => {
     <TouchableOpacity
       onPress={() => navigation.navigate('DrawerOpen')}
     >
-      <Image
-        style={{height: 30, width: 30}}
-        source={ require('./Image/BurgerButton.png') }
-      />
+
+        <Image
+          style={{height: 30, width: 30, marginLeft: 10}}
+          source={ require('./Image/BurgerButton.png') }
+        />
+
     </TouchableOpacity>
   );
 };

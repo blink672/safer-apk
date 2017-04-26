@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
 import AuthAxios from './AuthAxios.js';
+import styles from './styles.js';
 
 export default class SignUp extends Component {
   constructor(props) {
@@ -33,6 +34,8 @@ export default class SignUp extends Component {
   }
 
   _signIn() {
+    const phoneNumber = this.state.phoneNumber;
+    if (phoneNumber.length !== 10) { return alert('Phone number needs to be 10 digits'); }
     GoogleSignin.signIn()
     .then((user) => {
       this.setState({user: user});
@@ -62,48 +65,29 @@ export default class SignUp extends Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <View>
-        <Text style={{fontSize: 25}}>
+      <View style={styles.signUpContainer}>
+        <Text style={styles.signUpText}> SAFER </Text>
+        <Text style={styles.signUpText}>
           Please enter your phone number
         </Text>
         <TextInput
-          style={{fontSize: 25}}
+          style={styles.signUpText}
           onChangeText={(text) => this.setState( {phoneNumber: text} )}
-          // placeholder='Insert Group Name'
+          maxLength = {10}
           value={this.state.text}
+          underlineColorAndroid={'black'}
         />
 
-        {(this.state.phoneNumber.length === 10) && (
-          <View style={styles.container}>
-            <Text>Your phone number: {this.state.phoneNumber}</Text>
-            <GoogleSigninButton
-              style={{width: 312, height: 48}}
-              color={GoogleSigninButton.Color.Dark}
-              size={GoogleSigninButton.Size.Wide}
-              onPress={() => { this._signIn(); }}
-            />
+          <View style={styles.googleContainer}>
+              <GoogleSigninButton
+                style={{width: 312, height: 48, alignItems: 'center'}}
+                color={GoogleSigninButton.Color.Dark}
+                size={GoogleSigninButton.Size.Wide}
+                onPress={() => this._signIn() }
+              />
           </View>
-        )}
+
       </View>
     )
   }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start'
-  },
-  text: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    textAlign: 'auto'
-  },
-  description: {
-    fontSize: 14,
-    textAlign: 'auto'
-  }
-
-});
-
+};

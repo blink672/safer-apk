@@ -84,11 +84,11 @@ export default class FriendMap extends Component {
 
   renderLabel(data) {
     let path;
-    if( data.currentLabel === 'School' ) { path = require('./Image/School.png') };
-    if( data.currentLabel === 'Home' ) { path = require('./Image/Home.png') };
-    if( data.currentLabel === 'Office' ) { path = require('./Image/Office.png') };
-    if( data.currentLabel === 'Bar' ) { path = require('./Image/Bar.png') };
-    if( data.currentLabel === 'Gym' ) { path = require('./Image/Gym.png') };
+    if( data.currentLabel === 'School' ) { path = require('./Image/school.png') };
+    if( data.currentLabel === 'Home' ) { path = require('./Image/home.png') };
+    if( data.currentLabel === 'Office' ) { path = require('./Image/office.png') };
+    if( data.currentLabel === 'Bar' ) { path = require('./Image/bar.png') };
+    if( data.currentLabel === 'Gym' ) { path = require('./Image/gym.png') };
     return (
       <View style={styles.friendMapContainer}>
         <Text style={styles.friendMapText}>{data.first} checked in at:</Text> 

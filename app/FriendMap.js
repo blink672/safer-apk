@@ -80,6 +80,8 @@ export default class FriendMap extends Component {
       <View style={styles.container}>
         { (data.showSetting === 'GPS' || data.showSetting === 'label') &&
           <Button title='Let me know when they get home' onPress={() => {this.subscribeTo(data)}} /> }
+        { (data.showSetting === 'pending') &&
+          <Button title='Confirm friend request' onPress={() => {this.addFriend(data)}} /> }
         <View style={styles.switchContainer}>
           <Switch
               onValueChange={this.switchChange}
@@ -95,7 +97,6 @@ export default class FriendMap extends Component {
   renderPending(data) {
     return (
       <View style={styles.friendMapContainer}>
-        <Button title='Confirm Friend' onPress={() => this.addFriend(data)} />
         <Text style={styles.friendMapText}>You have a pending friend request from {data.first} {data.last}!</Text>
       </View>
     );

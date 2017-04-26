@@ -35,7 +35,7 @@ export default class GroupMap extends Component {
 
   render() {
     return (
-      <View >
+      <View>
         <ListView
           dataSource={this.props.members}
           renderRow={rowData => this.renderMembersToBeChanged(rowData)}

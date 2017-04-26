@@ -16,7 +16,6 @@ export default class HomeScreen extends Component {
   };
 
   componentWillMount() {
-    // let {name} = this.props.navigation.state.params.data;
     console.log('componentWillMount')
     AuthAxios({
       url: `/api/groupUsers?name=FAVORITES`
@@ -33,13 +32,7 @@ export default class HomeScreen extends Component {
   static navigationOptions = {
     title: 'Favorites'
   };
-  
-        // <Button
-        //   onPress={() => console.log("PRESSED")}
-        //   title="Add Member To Favorite"
-        // />
   render() {
-    console.log('HomeFavorite')
     return (
       <View style={styles.container}>
         <PushController />

@@ -16,7 +16,6 @@ export default class HomeScreen extends Component {
   };
 
   componentWillMount() {
-    console.log('componentWillMount')
     AuthAxios({
       url: `/api/groupUsers?name=FAVORITES`
     })

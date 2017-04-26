@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Button, Picker, ListView } from 'react-native';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import AuthAxios from './AuthAxios.js';
+import styles from './styles.js';
 
 const Item = Picker.Item
 export default class AddFence extends Component {
@@ -69,12 +70,12 @@ export default class AddFence extends Component {
 
   renderFence(fence) {
     return (
-      <View>
-        <Text>
+      <View style={styles.container}>
+        <Text style={styles.settingText}>
           {fence.label}
         </Text>
-        <Text>
-          {fence.address}{'\n'}{'\n'}
+        <Text style={styles.fenceAddress}>
+          {fence.address}
         </Text>
       </View>
     )
@@ -82,13 +83,11 @@ export default class AddFence extends Component {
 
   render() {
     return (
-      <View>
-        <View>
-          <ListView
-            dataSource={this.state.fences}
-            renderRow={this.renderFence}
-          />
-        </View>
+      <View style={styles.container}>
+        <Button
+            title='Set this fence'
+            onPress={() => this.makeFence(this.state.coordinates)}
+        />
         <Picker 
           selectedValue={this.state.label}
           onValueChange={this.onValueChange.bind(this)}>
@@ -153,10 +152,13 @@ export default class AddFence extends Component {
             debounce={200}
         />
         </View>
-          <Button
-              title='Set this fence'
-              onPress={() => this.makeFence(this.state.coordinates)}
+        <View>
+          <ListView
+            dataSource={this.state.fences}
+            renderRow={this.renderFence}
+            style={styles.listView}
           />
+        </View>
       </View>
     );
   }

@@ -24,6 +24,10 @@ module.exports = StyleSheet.create({
   map: {
     ...StyleSheet.absoluteFillObject,
   },
+  createGroupContainer: {
+    flex: 1,
+    paddingLeft: 10,
+  },
   switchContainer: {
     // paddingTop: 10, 
     paddingLeft: 10,
@@ -75,10 +79,11 @@ module.exports = StyleSheet.create({
     color: 'black',
     fontWeight: 'bold',
     fontSize: 20,
-    margin: 20,
+    margin: 10,
   },
   createGroupText: {
     fontSize: 20,
+    color: 'black',
   },
   phoneNumber: {
     textAlign: 'center',
@@ -109,9 +114,20 @@ module.exports = StyleSheet.create({
     textAlign: 'auto',
     color: 'black',
   },
+  fenceAddress: {
+    fontSize: 14,
+    textAlign: 'auto',
+    color: 'black',
+    fontStyle: 'italic'
+  },
   labelImage: {
     width: 225,
     height: 225,
     alignItems: 'center',
+  },
+  createGroupTextInput: {
+    fontSize: 18,
+    textAlign: 'left',
+    color: 'black',
   }
 });

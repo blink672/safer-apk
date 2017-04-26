@@ -61,6 +61,7 @@ export default class FriendMap extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Button title='Let me know when they get home' onPress={() => {this.subscribeTo(data)}} />
         <View style={styles.switchContainer}>
           <Switch
               onValueChange={this.switchChange}
@@ -68,7 +69,6 @@ export default class FriendMap extends Component {
             />
           <Text style={styles.switchText}>{this.state.showLabel ? 'Show Only Label' : 'Show GPS'}</Text>
         </View>
-        <Button title='Let me know when they get home' onPress={() => {this.subscribeTo(data)}} />
         {this.whichPageToRender()}
       </View>
     )

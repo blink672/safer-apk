@@ -77,37 +77,40 @@ export default class CreateGroup extends Component {
     const params = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
-        <Text style={styles.createGroupText}>Create Group:</Text>
-        <TextInput
-          style={{fontSize: 18, textAlign: 'left'}}
-          onChangeText={(text) => this.setState( {groupName: text} )}
-          placeholder='Insert Group Name'
-          value={this.state.text}
-        />
-        <Text style={styles.createGroupText}>Privacy Setting:</Text>
-        <Picker
-          selectedValue={this.state.privacy}
-          onValueChange={(privacy) => this.setState({ privacy: privacy })}
-        >
-          <Picker.Item label='Label' value='label' />
-          <Picker.Item label='GPS' value='gps' />
-        </Picker>
-        <Text style={styles.createGroupText}>Members:</Text>
-        <ListView
-          dataSource={this.state.friends}
-          style={styles.listView}
-          renderRow={(rowData) => (
-            <CheckBox
-              label={rowData.first}
-              onChange={() => this.handleUserChange(rowData)}
-              underlayColor='transparent'
-            />
-          )}
-        />
         <Button 
           title="Create Group"
           onPress={this.submitGroup}
         />
+        <View style={styles.createGroupContainer}>
+          <Text style={styles.createGroupText}>Create Group:</Text>
+          <TextInput
+            style={styles.createGroupTextInput}
+            onChangeText={(text) => this.setState( {groupName: text} )}
+            placeholder='Insert Group Name'
+            value={this.state.text}
+          />
+          <Text style={styles.createGroupText}>Privacy Setting:</Text>
+          <Picker
+            selectedValue={this.state.privacy}
+            onValueChange={(privacy) => this.setState({ privacy: privacy })}
+          >
+            <Picker.Item label='Label' value='label' />
+            <Picker.Item label='GPS' value='gps' />
+          </Picker>
+          <Text style={styles.createGroupText}>Members:</Text>
+          <ListView
+            dataSource={this.state.friends}
+            style={styles.listView}
+            renderRow={(rowData) => (
+              <CheckBox
+                label={rowData.first}
+                labelStyle={styles.fenceAddress}
+                onChange={() => this.handleUserChange(rowData)}
+                underlayColor='transparent'
+              />
+            )}
+          />
+        </View>
       </View>
     );
   }

@@ -95,11 +95,6 @@ export default class AddFriendList extends Component {
 
     return (
       <View style={styles.container}>
-        <Text>Contacts List</Text>
-        <Button
-          onPress={() => console.log('get contacts')}
-          title="Get Contacts"
-        />
       </View>
     );
   }

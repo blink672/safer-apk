@@ -50,12 +50,28 @@ export default class FriendMap extends Component {
     })
   }
 
+  addFriend (contact) {
+    AuthAxios({
+      url: '/api/friends',
+      method: 'post',
+      data: {phoneNumber: contact.phoneNumber}
+    }).catch((error) => {
+      console.log('There was an error in adding your friend: ', error);
+      return error;
+    });
+
+    this.setState({
+      buttonPressed: true
+    });
+  }
+
   whichPageToRender() {
     const { data } = this.props.navigation.state.params;
     if(data.showSetting === 'GPS' && data.currentLabel === 'Elsewhere') {return this.renderElsewhere(data)}
     if(data.showSetting === 'GPS') { return this.renderGPS(data); }
     if(data.showSetting === 'label') { return this.renderLabel(data); }
     if(data.showSetting === 'pending') { return this.renderPending(data); }
+    if(data.showSetting === 'request') { return this.renderRequest(data); }
   }
 
   render() {
@@ -70,16 +86,28 @@ export default class FriendMap extends Component {
             />
           <Text style={styles.switchText}>{this.state.showLabel ? 'Show Only Label' : 'Show GPS'}</Text>
         </View>
-        <Button title='Let me know when they get home' onPress={() => {this.subscribeTo(data)}} />
+        { (data.showSetting === 'GPS' || data.showSetting === 'label') &&
+          <Button title='Let me know when they get home' onPress={() => {this.subscribeTo(data)}} /> }
         {this.whichPageToRender()}
       </View>
     )
   }
 
   renderPending(data) {
+    console.log('data in render pending: ', data);
     return (
       <View style={styles.friendMapContainer}>
-        <Text style={styles.friendMapText}>Friend request still pending...</Text>
+          <Button title='Confirm Friend' onPress={() => this.addFriend(data)} />
+          <Text style={styles.friendMapText}>{data.first} {data.last} sent a friend request!</Text>
+      </View>
+    );
+  }
+
+  renderRequest(data) {
+    console.log('data in render pending: ', data);
+    return (
+      <View style={styles.friendMapContainer}>
+          <Text style={styles.friendMapText}>Friend request pending...</Text>
       </View>
     );
   }

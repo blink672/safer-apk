@@ -39,7 +39,7 @@ export default class FriendMap extends Component {
     }) 
   }
 
-  subscribeTo(data, privacy) {
+  subscribeTo(data) {
     AuthAxios({
       url: '/api/subscribe',
       method: 'post',

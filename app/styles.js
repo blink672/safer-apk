@@ -34,6 +34,12 @@ module.exports = StyleSheet.create({
     flex: 1,
     paddingLeft: 10,
   },
+  splashScreenContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
   switchContainer: {
     // paddingTop: 10, 
     paddingLeft: 10,
@@ -62,6 +68,7 @@ module.exports = StyleSheet.create({
   },
   googleContainer: {
     alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: '#F5FCFF',
   },
   name: {
@@ -99,6 +106,12 @@ module.exports = StyleSheet.create({
   createGroupText: {
     fontSize: 20,
     color: 'black',
+  },
+  splashScreenText: {
+    fontSize: 32,
+    color: 'black',
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
   phoneNumber: {
     textAlign: 'center',

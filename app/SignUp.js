@@ -34,8 +34,6 @@ export default class SignUp extends Component {
   }
 
   _signIn() {
-    const phoneNumber = this.state.phoneNumber;
-    if (phoneNumber.length !== 10) { return alert('Phone number needs to be 10 digits'); }
     GoogleSignin.signIn()
     .then((user) => {
       this.setState({user: user});
@@ -66,7 +64,7 @@ export default class SignUp extends Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.signUpContainer}>
-        <Text style={styles.signUpText}> SAFER </Text>
+        <Text style={styles.splashScreenText}> SAFER </Text>
         <Text style={styles.signUpText}>
           Please enter your phone number
         </Text>
@@ -78,15 +76,16 @@ export default class SignUp extends Component {
           underlineColorAndroid={'black'}
         />
 
+        {(this.state.phoneNumber.length === 10) && (
           <View style={styles.googleContainer}>
-              <GoogleSigninButton
-                style={{width: 312, height: 48, alignItems: 'center'}}
-                color={GoogleSigninButton.Color.Dark}
-                size={GoogleSigninButton.Size.Wide}
-                onPress={() => this._signIn() }
-              />
+            <GoogleSigninButton
+              style={{width: 312, height: 48, alignItems: 'center'}}
+              color={GoogleSigninButton.Color.Dark}
+              size={GoogleSigninButton.Size.Wide}
+              onPress={() => { this._signIn(); }}
+            />
           </View>
-
+        )}
       </View>
     )
   }

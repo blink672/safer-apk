@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { googleAuthWebClientId } from './endpoint.js';
 import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
 import AuthAxios from './AuthAxios.js';
+import styles from './styles.js';
 
 export default class SplashScreen extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ export default class SplashScreen extends Component {
   };
 
   static navigationOptions = {
-    title: 'Welcome'
+    headerVisible: false
   };
   
   componentDidMount() {
@@ -66,13 +67,15 @@ export default class SplashScreen extends Component {
       });
 
       const user = await GoogleSignin.currentUserAsync();
-      if (user === null) {
-        navigate('SignUp', {location: this.state.initialPosition});
-      } else {
-        this.saveLocation();
-        navigate('HomePageTabs');
-      }
       this.setState({user});
+      setTimeout(() => {
+        if (user === null) {
+          navigate('SignUp', {location: this.state.initialPosition});
+        } else {
+          this.saveLocation();
+          navigate('HomePageTabs');
+        }
+      }, 1000)
     }
     catch(err) {
       console.log("Play services error", err.code, err.message);
@@ -82,16 +85,9 @@ export default class SplashScreen extends Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <Text>Safer SplashScreen</Text> 
+      <View style={styles.splashScreenContainer}>
+        <Text style={styles.splashScreenText}>SAFER</Text> 
+      </View>
     );
   }
-
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
-});
+};

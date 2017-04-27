@@ -73,10 +73,6 @@ export default class CreateGroup extends Component {
     title: 'Create Group'
   });
 
-        // <Button 
-        //   color='black'
-        //   title="Create Group"
-        // />
   render() {
     const params = this.props.navigation.state.params;
     return (

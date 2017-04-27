@@ -111,7 +111,7 @@ module.exports = StyleSheet.create({
     textAlign: 'center',
   },
   friendMapText: {
-    // textAlign: 'center',
+    textAlign: 'center',
     color: 'black',
     fontWeight: 'bold',
     fontSize: 20,

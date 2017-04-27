@@ -107,7 +107,7 @@ export default class FriendMap extends Component {
       <View style={styles.container}>
         {this.whichButtonToRender()}
 
-        {data.showSetting === 'pending' || data.showSetting === 'request' ? null : (
+        {!(data.showSetting === 'pending' || data.showSetting === 'request') && (
         <View style={styles.switchContainer}>
           <Switch
               onValueChange={this.switchChange}

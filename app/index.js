@@ -45,17 +45,17 @@ const renderBurgerButton = (navigation) => {
 };
 
 const renderHeader = () => {
-  return (
-      <Image
-        source={require('./Image/safer.png')}
-        style={{height: 125, width: 125}}
-      />
-  );
 };
 
 HomePageTabs.navigationOptions = ({navigation}) => ({
   title: 'SAFER',
-  headerLeft: renderBurgerButton(navigation)
+  headerLeft: renderBurgerButton(navigation),
+  tabBarIcon: (
+      <Image
+        source={require('./Image/safer.png')}
+        style={{height: 125, width: 125}}
+      />
+  ),
 });
 
 

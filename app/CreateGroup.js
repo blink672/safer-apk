@@ -36,23 +36,25 @@ export default class CreateGroup extends Component {
   }
 
   submitGroup() {
-    let groupSettings = {
-      groupName: this.state.groupName,
-      users: this.state.users,
-      privacy: this.state.privacy,
-    };
-    AuthAxios({
-      url: `/api/groups`,
-      method: `post`,
-      data:{groupSettings: groupSettings}
-    })
-    .then(({data}) => {
-    })
-    .catch((error) => {
-      alert('There was a problem creating your group')
-    })
-    const { navigate } = this.props.navigation;
-    navigate('GroupsList');
+    if (this.state.groupName) {
+      let groupSettings = {
+        groupName: this.state.groupName,
+        users: this.state.users,
+        privacy: this.state.privacy,
+      };
+      AuthAxios({
+        url: `/api/groups`,
+        method: `post`,
+        data:{groupSettings: groupSettings}
+      })
+      .then(({data}) => {
+      })
+      .catch((error) => {
+        alert('There was a problem creating your group')
+      })
+      const { navigate } = this.props.navigation;
+      navigate('GroupsList');      
+    }
   }
 
   handleUserChange(userObj) {

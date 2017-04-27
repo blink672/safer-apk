@@ -28,13 +28,12 @@ Allows users to see at a glance and give them the peace of mind that their loved
 # Table of Contents
 
 1. [Requirements](#requirements)
-1. [Usage](#Usage)
 1. [Development](#development)
     1. [Setup](#setup)
     1. [Installing Dependencies](#installing-dependencies)
-    1. [Tasks](#tasks)
-1. [Roadmap](#roadmap)
+    1. [Roadamp](#roadmap)
 1. [Contributing](#contributing)
+1. [Troubleshooting](#troubleshooting)
 1. [Credits](#credits)
 
 ## Requirements
@@ -117,12 +116,12 @@ Then run React Native's packager with the --reset-cache option:
 npm start --reset-cache
 ```
 
-### If you're not using an emulator, make sure wifi is on and you're connected to the same network.
 
 ### Try deleting node_modules and reinstalling:
 ```sh
 rm -rf node_modules && npm install
 ```
+### If you're not using an emulator, make sure wifi is on and you're connected to the same network.
 
 ### Turn it off and back on again. Turn off your emulator, unplug your phone, close your terminals, and if that doesn't work, restart your computer.
 

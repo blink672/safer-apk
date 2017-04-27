@@ -67,7 +67,6 @@ export default class FriendMap extends Component {
 
   whichPageToRender() {
     const { data } = this.props.navigation.state.params;
-    // if(data.showSetting === 'GPS' && data.currentLabel === 'Elsewhere') {return this.renderElsewhere(data)}
     if(data.showSetting === 'GPS') { return this.renderGPS(data); }
     if(data.showSetting === 'label') { return this.renderLabel(data); }
     if(data.showSetting === 'pending') { return this.renderPending(data); }

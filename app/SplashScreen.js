@@ -37,7 +37,11 @@ export default class SplashScreen extends Component {
       {enableHighAccuracy: false, timeout: 20000, maximumAge: 90000000000000}
     );
     this.watchID = navigator.geolocation.watchPosition((position) => {
-      this.setState({lastPosition: position}, () => {this.saveLocation()});
+      this.setState({lastPosition: position}, () => {
+        if (this.state.user) {
+          this.saveLocation()
+        }
+      });
     });
   }
 

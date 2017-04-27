@@ -25,11 +25,17 @@ export default class SignUp extends Component {
       long: position.coords.longitude
     };
 
-    return AuthAxios({
+    AuthAxios({
       url: `/api/user/location`,
       method: 'put',
       data: location
     })
+    .then(() => {
+      console.log('location updated');
+    })
+    .catch((err) => {
+      console.log('location failed to update: ', err);
+    });
   }
 
   _signIn() {
@@ -37,13 +43,17 @@ export default class SignUp extends Component {
     GoogleSignin.signIn()
     .then((user) => {
       this.setState({user: user});
-      return this.saveLocation();
+      return AuthAxios({
+        url: '/api/user'
+      })
     })
     .then(({data}) => {
       this.setState({dbUser: data});
-      if (!data.created) {
+      console.log('new user? ', data.created, data);
+      if (data.created === false) {
         navigate('HomePageTabs');
       }
+      this.saveLocation();
     })
     .catch((err) => {
       console.log('Error: ', err);

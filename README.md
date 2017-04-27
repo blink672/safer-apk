@@ -38,6 +38,10 @@ Follow the installation instructions [here](https://facebook.github.io/react-nat
 
 Folow instructions [here](https://facebook.github.io/react-native/docs/running-on-device.html) to run the app on your device.
 
+Figure out how to setup Firebase
+
+If working on local dev server, follow directions at [endpoint.example.js](app/endpoint.example.js)
+
 ## Development
 
 ### Installing Dependencies

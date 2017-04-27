@@ -63,8 +63,8 @@ export default class AllFriendsList extends Component {
 
   renderContacts(friend) {
     const { navigate } = this.props.navigation;
-    var privacy = friend.showSetting;
-    var label = friend.currentLabel;
+    let privacy = friend.showSetting;
+    let label = friend.currentLabel;
     if (privacy === 'request' || privacy === 'pending') {
       label = privacy.charAt(0).toUpperCase() + privacy.slice(1);
     }

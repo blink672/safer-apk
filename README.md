@@ -96,3 +96,7 @@ rm -rf node_modules && npm install
 ```
 
 - Turn it off and back on again. Turn off your emulator, unplug your phone, close your terminals, and if that doesn't work, restart your computer.
+
+## Credits
+
+Icons made by [Freepick](http://www.freepik.com) from [Flaticon](http://www.flaticon.com) is licensed by [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/).

@@ -34,13 +34,18 @@ Allows users to see at a glance and give them the peace of mind that their loved
 
 ## Usage
 
+If working on local dev server, follow directions at [endpoint.example.js](app/endpoint.example.js) to setup your endpoint.
+If you want to connect to production server, set endpoint to https://safer-prod.herokuapp.com/.
+
 Follow the installation instructions [here](https://facebook.github.io/react-native/docs/getting-started.html) to setup React-Native. Be sure to select the proper MobileOS and DevOS.
+
+Follow only steps 1 - 2 [here](https://github.com/devfd/react-native-google-signin/blob/master/android-guide.md) to setup google-signin.
+After step 2, copy and paste the "client_id" under "oauth_client" with the "client_type" of 3 "googleAuthWebClientId" to endpoint.js
 
 Folow instructions [here](https://facebook.github.io/react-native/docs/running-on-device.html) to run the app on your device.
 
 Figure out how to setup Firebase
 
-If working on local dev server, follow directions at [endpoint.example.js](app/endpoint.example.js)
 
 ## Development
 

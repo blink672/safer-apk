@@ -63,6 +63,12 @@ export default class AllFriendsList extends Component {
 
   renderContacts(friend) {
     const { navigate } = this.props.navigation;
+    var privacy = friend.showSetting;
+    var label = friend.currentLabel;
+    if (privacy === 'request' || privacy === 'pending') {
+      label = privacy.charAt(0).toUpperCase() + privacy.slice(1);
+    }
+
     return (
       <View style={styles.container}>
         <TouchableOpacity
@@ -70,7 +76,7 @@ export default class AllFriendsList extends Component {
         >
           <View style={styles.nameContainer}>
             <Text style={styles.name}>{friend.first} {friend.last}</Text>
-            <Text style={styles.label}>{friend.currentLabel !== 'request' ? friend.currentLabel : 'Pending'}</Text>
+            <Text style={styles.label}>{label}</Text>
           </View>
         </TouchableOpacity>
       </View>

@@ -1,7 +1,7 @@
 # Safer
 
 > React Native &amp; client side files for the Safer project
->> Safer - A peace of mind
+>> Safer - A peace of mind this is a test
 >> Safer allows users to see at a glance that their loved ones are safe using labeled geolocation fencing.
 
 ## Team

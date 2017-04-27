@@ -37,14 +37,15 @@ export default class GroupsList extends Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-        <Button
-          color='black'
-          onPress={() => navigate('CreateGroup',{
-            title: "Create Group"
-          })
-        }
-        title="Create Group"
-        />
+        <TouchableOpacity
+          onPress={() => navigate('CreateGroup', {
+            title: 'Create Group'
+          })}
+        >
+          <View style={styles.buttonContainer}>
+            <Text style={styles.buttonText}>CREATE GROUP</Text>
+          </View>
+        </TouchableOpacity>
         <ListView
           style={styles.listView}
           dataSource={this.state.groups}

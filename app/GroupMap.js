@@ -127,18 +127,20 @@ export default class GroupMap extends Component {
     const { data } = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
-        <Button
-          color='black'
+        <TouchableOpacity
           onPress={() => !this.state.addAndDelete ? this.changeToEditGroup() : this.updateGroupMembers() }
-          title={ !this.state.addAndDelete ? 'Add/Delete Friends' : 'Confirm'}
-        />
-          <View style={styles.switchContainer}>
-            <Switch
-              onValueChange={this.switchChange}
-              value={this.state.showLabel}
-            />
-            <Text style={styles.switchText}>{this.state.showLabel ? 'Show Only Label' : 'Show GPS'}</Text>
+        >
+          <View style={styles.buttonContainer}>
+            <Text style={styles.buttonText}>{ !this.state.addAndDelete ? 'ADD/DELETE FRIENDS' : 'CONFIRM'}</Text>
           </View>
+        </TouchableOpacity>
+        <View style={styles.switchContainer}>
+          <Switch
+            onValueChange={this.switchChange}
+            value={this.state.showLabel}
+          />
+          <Text style={styles.switchText}>{this.state.showLabel ? 'Show Only Label' : 'Show GPS'}</Text>
+        </View>
         {this.state.addAndDelete ? <EditGroupMap members={this.state.members} name={data.name} toAdd={this.addMember} toDelete={this.removeMember} /> : this.renderNoChangeList()}
       </View>
     );

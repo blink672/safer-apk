@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CheckBox from 'react-native-checkbox';
-import { View, Text, StyleSheet, TextInput, ListView, Picker, Button } from 'react-native';
+import { View, Text, StyleSheet, TextInput, ListView, Picker, Button, TouchableOpacity } from 'react-native';
 import AuthAxios from './AuthAxios.js';
 import styles from './styles.js';
 
@@ -73,15 +73,21 @@ export default class CreateGroup extends Component {
     title: 'Create Group'
   });
 
+        // <Button 
+        //   color='black'
+        //   title="Create Group"
+        // />
   render() {
     const params = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
-        <Button 
-          color='black'
-          title="Create Group"
+        <TouchableOpacity
           onPress={this.submitGroup}
-        />
+        >
+          <View style={styles.buttonContainer}>
+            <Text style={styles.buttonText}>CREATE GROUP</Text>
+          </View>
+        </TouchableOpacity>
         <View style={styles.createGroupContainer}>
           <Text style={styles.createGroupText}>Create Group:</Text>
           <TextInput

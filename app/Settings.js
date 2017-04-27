@@ -98,10 +98,13 @@ export default class Settings extends Component {
         <Switch
           onValueChange={this.switchChange}
           value={this.state.incognito} />
-        <View style= {{flex: 1}}>
-          <Button onPress={() => {this._signOut()}} title='Log Out' color='black' />
-        </View>
-
+        <TouchableOpacity
+          onPress={() => this._signOut()}
+        >
+          <View style={styles.buttonContainer}>
+            <Text style={styles.buttonText}>LOG OUT</Text>
+          </View>
+        </TouchableOpacity>
         {this.state.error &&
           (<Text>There was an error updating your privacy settings. Please try again later.</Text>)}
           

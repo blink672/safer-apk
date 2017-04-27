@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Button, Picker, ListView } from 'react-native';
+import { View, Text, StyleSheet, Button, Picker, ListView, TouchableOpacity } from 'react-native';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import AuthAxios from './AuthAxios.js';
 import styles from './styles.js';
@@ -84,11 +84,13 @@ export default class AddFence extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Button
-            color='black'
-            title='Set this fence'
-            onPress={() => this.makeFence(this.state.coordinates)}
-        />
+        <TouchableOpacity
+          onPress={() => this.makeFence(this.state.coordinates)}
+        >
+          <View style={styles.buttonContainer}>
+            <Text style={styles.buttonText}>SET THIS FENCE</Text>
+          </View>
+        </TouchableOpacity>
         <Picker 
           selectedValue={this.state.label}
           onValueChange={this.onValueChange.bind(this)}>

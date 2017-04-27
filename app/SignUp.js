@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Button, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
 import AuthAxios from './AuthAxios.js';
 import styles from './styles.js';
@@ -69,6 +69,10 @@ export default class SignUp extends Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.signUpContainer}>
+        <Image 
+          style={{width: 250, height: 250, alignSelf: 'center'}}
+          source={require('./Image/safer.png')}
+        />
         <Text style={styles.splashScreenText}> SAFER </Text>
           {!this.state.dbUser.created && (
             <View style={styles.googleContainer}>

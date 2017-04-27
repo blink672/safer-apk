@@ -87,6 +87,7 @@ export default class SplashScreen extends Component {
     return (
       <View style={styles.splashScreenContainer}>
         <Image 
+          style={{width: 250, height: 250}}
           source={require('./Image/safer.png')}
         />
         <Text style={styles.splashScreenText}>SAFER</Text> 

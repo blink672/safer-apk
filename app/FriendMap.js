@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, Switch, Button } from 'react-native';
+import { View, Text, StyleSheet, Image, Switch, Button, TouchableOpacity, TouchableHighlight } from 'react-native';
 import styles from './styles.js';
 import MapView from 'react-native-maps';
 import AuthAxios from './AuthAxios.js';
@@ -74,14 +74,39 @@ export default class FriendMap extends Component {
     if(data.showSetting === 'request') { return this.renderRequest(data); }
   }
 
+  whichButtonToRender() {
+    const { data } = this.props.navigation.state.params;
+
+    if( data.showSetting === 'GPS' || data.showSetting === 'label' ) {
+      return (
+        <TouchableOpacity
+          onPress={() => this.subscribeTo(data)}
+        >
+          <View style={styles.buttonContainer}>
+            <Text style={styles.buttonText}>LET ME KNOW WHEN THEY GET HOME</Text>
+          </View>
+        </TouchableOpacity>
+      )
+    }
+
+    if( data.showSetting === 'pending' ) {
+      return (
+        <TouchableOpacity
+          onPress={() => this.addFriend(data)}
+        >
+          <View style={styles.buttonContainer}>
+            <Text style={styles.buttonText}>CONFIRM FRIEND REQUEST</Text>
+          </View>
+        </TouchableOpacity>
+      )
+    }
+  }
+
   render() {
     const { data } = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
-        { (data.showSetting === 'GPS' || data.showSetting === 'label') &&
-          <Button color='black' title='Let me know when they get home' onPress={() => {this.subscribeTo(data)}} /> }
-        { (data.showSetting === 'pending') &&
-          <Button color='black' title='Confirm friend request' onPress={() => {this.addFriend(data)}} /> }
+        {this.whichButtonToRender()}
         <View style={styles.switchContainer}>
           <Switch
               onValueChange={this.switchChange}
@@ -117,6 +142,7 @@ export default class FriendMap extends Component {
     if( data.currentLabel === 'Office' ) { path = require('./Image/office.png') };
     if( data.currentLabel === 'Bar' ) { path = require('./Image/bar.png') };
     if( data.currentLabel === 'Gym' ) { path = require('./Image/gym.png') };
+    if( data.currentLabel === 'Elsewhere' ) { path = require('./Image/elsewhere.png') };
     return (
       <View style={styles.friendMapContainer}>
         <Text style={styles.friendMapText}>{data.first} checked in at:</Text> 

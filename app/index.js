@@ -11,7 +11,7 @@ import SplashScreen from './SplashScreen.js';
 import SignUp from './SignUp.js';
 
 import React from 'react';
-import { Button, TouchableOpacity, Image } from 'react-native';
+import { View, Button, TouchableOpacity, Image, Text } from 'react-native';
 import { StackNavigator, TabNavigator, DrawerNavigator } from 'react-navigation';
 
 const HomePageTabs = TabNavigator({
@@ -44,8 +44,18 @@ const renderBurgerButton = (navigation) => {
   );
 };
 
+const renderHeader = () => {
+  return (
+
+      <Image
+        source={require('./Image/safer.png')}
+        style={{height: 125, width: 125}}
+      />
+  );
+};
+
 HomePageTabs.navigationOptions = ({navigation}) => ({
-  title: 'SAFER',
+  title: renderHeader(),
   headerLeft: renderBurgerButton(navigation)
 });
 
@@ -67,7 +77,7 @@ Stack.navigationOptions = {
 };
 
 const MenuDrawer = DrawerNavigator({
-  Stack: { screen: Stack },
+  Home: { screen: Stack },
   AddFriend: { screen: AddFriendList },  
   AddFence: { screen: AddFence },
   Settings: { screen: Settings },

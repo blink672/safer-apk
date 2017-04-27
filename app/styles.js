@@ -50,8 +50,8 @@ module.exports = StyleSheet.create({
   friendMapContainer: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
-    // marginTop: 10,
+    justifyContent: 'flex-start',
+    marginTop: 10,
   },
   nameContainer: {
     flex: 1,
@@ -71,6 +71,19 @@ module.exports = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#F5FCFF',
   },
+  buttonContainer: {
+    backgroundColor: 'black',
+    borderStyle: 'solid',
+    borderWidth: 5,
+    borderRadius: 3,
+    margin: 10
+  },
+  buttonText: {
+    fontSize: 15,
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
   name: {
     fontSize: 23,
     textAlign: 'left',
@@ -89,9 +102,10 @@ module.exports = StyleSheet.create({
   },
   switchText: {
     color: 'black',
-    fontSize: 15,
+    fontSize: 20,
   },
   signUpText: {
+    alignItems: 'stretch',
     fontSize: 25,
     color: 'black',
     textAlign: 'center',
@@ -108,10 +122,11 @@ module.exports = StyleSheet.create({
     color: 'black',
   },
   splashScreenText: {
-    fontSize: 32,
+    fontSize: 50,
     color: 'black',
     fontWeight: 'bold',
     textAlign: 'center',
+    margin: 10,
   },
   phoneNumber: {
     textAlign: 'center',

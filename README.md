@@ -59,7 +59,7 @@ Follow the installation instructions [here](https://facebook.github.io/react-nat
 Folow instructions [here](https://facebook.github.io/react-native/docs/running-on-device.html) to run the app on your device.
 
 Follow only steps 1 - 2 [here](https://github.com/devfd/react-native-google-signin/blob/master/android-guide.md) to setup google-signin.
-After step 2, copy and paste the "client_id" under "oauth_client" with the "client_type" of 3 "googleAuthWebClientId" to endpoint.js
+After step 2, in your "google-services.json" file ,copy and paste the "client_id" under "oauth_client" with the "client_type" of 3 "googleAuthWebClientId" to endpoint.js
 
 ### Installing Dependencies
 

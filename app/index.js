@@ -46,7 +46,6 @@ const renderBurgerButton = (navigation) => {
 
 const renderHeader = () => {
   return (
-
       <Image
         source={require('./Image/safer.png')}
         style={{height: 125, width: 125}}
@@ -55,7 +54,7 @@ const renderHeader = () => {
 };
 
 HomePageTabs.navigationOptions = ({navigation}) => ({
-  title: renderHeader(),
+  title: 'SAFER',
   headerLeft: renderBurgerButton(navigation)
 });
 

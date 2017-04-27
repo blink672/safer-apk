@@ -74,7 +74,7 @@ export default class Settings extends Component {
       this.setState({user: null});
     })
     .done(() => {
-      this.props.navigation.navigate('SignUp');
+      this.props.navigation.navigate('SplashScreen');
     });
   }
 

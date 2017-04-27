@@ -9,7 +9,7 @@ export default class SignUp extends Component {
     super(props);
     this.state = {
       user: '',
-      dbUser: {},
+      dbUser: {created: false},
       phoneNumber: '',
     };
   };
@@ -36,7 +36,6 @@ export default class SignUp extends Component {
     const { navigate } = this.props.navigation;
     GoogleSignin.signIn()
     .then((user) => {
-      console.log('user in sign in : ', user);
       this.setState({user: user});
       return this.saveLocation();
     })
@@ -72,50 +71,32 @@ export default class SignUp extends Component {
     return (
       <View style={styles.signUpContainer}>
         <Text style={styles.splashScreenText}> SAFER </Text>
-        <Text style={styles.signUpText}>
-          Please enter your phone number
-        </Text>
-        <TextInput
-          style={styles.signUpText}
-          onChangeText={(text) => this.setState( {phoneNumber: text} )}
-          maxLength = {10}
-          value={this.state.text}
-          underlineColorAndroid={'black'}
-        />
-
-        {(this.state.phoneNumber.length === 10) && (
-          <View style={styles.googleContainer}>
-            <GoogleSigninButton
-              style={{width: 312, height: 48, alignItems: 'center'}}
-              color={GoogleSigninButton.Color.Dark}
-              size={GoogleSigninButton.Size.Wide}
-              onPress={() => { this._signIn(); }}
-            />
-            <Button title='Next' onPress={() => (this.savePhoneNumber()) }/>
-          </View> 
+          {!this.state.dbUser.created && (
+            <View style={styles.googleContainer}>
+              <GoogleSigninButton
+                style={{width: 312, height: 48, alignItems: 'center'}}
+                color={GoogleSigninButton.Color.Dark}
+                size={GoogleSigninButton.Size.Wide}
+                onPress={() => { this._signIn(); }}
+              />
+            </View> 
+          )}
+        {this.state.dbUser.created && (
+          <View>
+            <Text style={styles.signUpText}>
+              Please enter your phone number
+            </Text>
+            <TextInput
+              style={styles.signUpText}
+              onChangeText={(text) => this.setState( {phoneNumber: text} )}
+              maxLength = {10}
+              value={this.state.text}
+              underlineColorAndroid={'black'}/>
+          </View>
         )}
+        {(this.state.phoneNumber.length === 10) && (
+          <Button title='Next' onPress={() => (this.savePhoneNumber()) }/>)}
       </View>
     )
   }
 };
-// =======
-//       <View>
-//         <View style={styles.container}>
-//           <Text>Your phone number: {this.state.phoneNumber}</Text>
-//           <GoogleSigninButton
-//             style={{width: 312, height: 48}}
-//             color={GoogleSigninButton.Color.Dark}
-//             size={GoogleSigninButton.Size.Wide}
-//             onPress={() => { this._signIn() }}
-//           />
-//         </View>
-//         { this.state.dbUser.created && (
-//           <View>
-//             <Text style={{fontSize: 25}}>
-//               Please enter your phone number
-//             </Text>
-//             <TextInput
-//               style={{fontSize: 25}}
-//               onChangeText={(text) => this.setState( {phoneNumber: text} )}
-//               value={this.state.text}
-// >>>>>>> Conditionally render phone number input if a new user signs in

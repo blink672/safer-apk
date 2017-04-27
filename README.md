@@ -34,7 +34,9 @@ Allows users to see at a glance and give them the peace of mind that their loved
 
 ## Usage
 
-Follow instructions [here](https://facebook.github.io/react-native/docs/getting-started.html) 
+Follow the installation instructions [here](https://facebook.github.io/react-native/docs/getting-started.html) to setup React-Native. Be sure to select the proper MobileOS and DevOS.
+
+Folow instructions [here](https://facebook.github.io/react-native/docs/running-on-device.html) to run the app on your device.
 
 ## Development
 
@@ -45,9 +47,6 @@ From within the root directory:
 ```sh
 npm install
 ```
-Follow the installation instructions [here](https://facebook.github.io/react-native/docs/getting-started.html) to setup React-Native. Be sure to select the proper MobileOS and DevOS.
-
-Folow instructions [here](https://facebook.github.io/react-native/docs/running-on-device.html) to run the app on your device.
 
 ### Roadmap
 

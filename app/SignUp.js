@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { View, Text, Button, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
 import AuthAxios from './AuthAxios.js';
 import styles from './styles.js';
@@ -98,7 +98,13 @@ export default class SignUp extends Component {
           </View>
         )}
         {(this.state.phoneNumber.length === 10) && (
-          <Button title='Next' onPress={() => (this.savePhoneNumber()) }/>)}
+          <TouchableOpacity
+            onPress={() => this.savePhoneNumber()}
+          >
+            <View style={styles.buttonContainer}>
+              <Text style={styles.buttonText}>NEXT</Text>
+            </View>
+          </TouchableOpacity>)}
       </View>
     )
   }

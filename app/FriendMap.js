@@ -67,7 +67,7 @@ export default class FriendMap extends Component {
 
   whichPageToRender() {
     const { data } = this.props.navigation.state.params;
-    if(data.showSetting === 'GPS' && data.currentLabel === 'Elsewhere') {return this.renderElsewhere(data)}
+    // if(data.showSetting === 'GPS' && data.currentLabel === 'Elsewhere') {return this.renderElsewhere(data)}
     if(data.showSetting === 'GPS') { return this.renderGPS(data); }
     if(data.showSetting === 'label') { return this.renderLabel(data); }
     if(data.showSetting === 'pending') { return this.renderPending(data); }
@@ -160,8 +160,7 @@ export default class FriendMap extends Component {
     return (
       <View style={styles.friendMapContainer}>
         <Text style={styles.friendMapText}>Checked In At:</Text>
-        {this.renderMapView(data)}
-        <Text style={styles.friendMapText}>{data.currentLabel} 12 min Ago.</Text>
+        {data.currentLabel === 'Elsewhere' ? this.renderElsewhere(data) : this.renderMapView(data)}
       </View>
     );
   }
@@ -180,6 +179,7 @@ export default class FriendMap extends Component {
         >
           <MapView.Marker 
             title={data.currentLabel}
+            description='12 min ago'
             coordinate={{
              latitude: data.lat,
              longitude: data.long

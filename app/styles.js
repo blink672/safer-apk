@@ -51,7 +51,7 @@ module.exports = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-start',
-    marginTop: 10,
+    // marginTop: 1,
   },
   nameContainer: {
     flex: 1,
@@ -79,7 +79,7 @@ module.exports = StyleSheet.create({
     margin: 10
   },
   buttonText: {
-    fontSize: 15,
+    fontSize: 18,
     color: 'white',
     fontWeight: 'bold',
     textAlign: 'center',

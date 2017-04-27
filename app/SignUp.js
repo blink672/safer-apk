@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Button, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
 import AuthAxios from './AuthAxios.js';
 import styles from './styles.js';
@@ -9,6 +9,7 @@ export default class SignUp extends Component {
     super(props);
     this.state = {
       user: '',
+      dbUser: {},
       phoneNumber: '',
     };
   };
@@ -24,44 +25,48 @@ export default class SignUp extends Component {
       long: position.coords.longitude
     };
 
-    AuthAxios({
+    return AuthAxios({
       url: `/api/user/location`,
       method: 'put',
       data: location
     })
-    .then(response => console.log('Location updated'))
-    .catch(error => console.log('Location not updated in SignUp: ', error));
   }
 
   _signIn() {
+    const { navigate } = this.props.navigation;
     GoogleSignin.signIn()
     .then((user) => {
+      console.log('user in sign in : ', user);
       this.setState({user: user});
+      return this.saveLocation();
     })
-    .then(() => {
-      return AuthAxios({
-        url: '/api/user/',
-        method: 'put',
-        data: {phoneNumber: this.state.phoneNumber}
-      })
-    })
-    .catch((err) => {
-      console.log('Sign in error: ', err);
-    })
-    .then(() => {
-      this.saveLocation();
-    })
-    .catch((err) => {
-      console.log('Error saving location to db: ', err);
-    })
-    .done(() => {
-      if (this.state.user) {
-        this.props.navigation.navigate('AddFence', {SignUp: true});
+    .then(({data}) => {
+      console.log('updated user after google sign in save location: ', data);
+      this.setState({dbUser: data}, () => console.log('state after dbuser: ', this.state));
+      if (!data.created) {
+        navigate('HomePageTabs');
       }
+    })
+    .catch((err) => {
+      console.log('Error: ', err);
     });
   }
 
+  savePhoneNumber() {
+    const { navigate } = this.props.navigation;
+    AuthAxios({
+      url: '/api/user/',
+      method: 'put',
+      data: {phoneNumber: this.state.phoneNumber}
+    })
+    .then((result) => {
+      navigate('AddFence', {SignUp: true});
+    })
+    .catch((err) => {
+      console.log('There was an error saving phone number: ', err);
+    })
 
+  }
   render() {
     const { navigate } = this.props.navigation;
     return (
@@ -86,9 +91,31 @@ export default class SignUp extends Component {
               size={GoogleSigninButton.Size.Wide}
               onPress={() => { this._signIn(); }}
             />
-          </View>
+            <Button title='Next' onPress={() => (this.savePhoneNumber()) }/>
+          </View> 
         )}
       </View>
     )
   }
 };
+// =======
+//       <View>
+//         <View style={styles.container}>
+//           <Text>Your phone number: {this.state.phoneNumber}</Text>
+//           <GoogleSigninButton
+//             style={{width: 312, height: 48}}
+//             color={GoogleSigninButton.Color.Dark}
+//             size={GoogleSigninButton.Size.Wide}
+//             onPress={() => { this._signIn() }}
+//           />
+//         </View>
+//         { this.state.dbUser.created && (
+//           <View>
+//             <Text style={{fontSize: 25}}>
+//               Please enter your phone number
+//             </Text>
+//             <TextInput
+//               style={{fontSize: 25}}
+//               onChangeText={(text) => this.setState( {phoneNumber: text} )}
+//               value={this.state.text}
+// >>>>>>> Conditionally render phone number input if a new user signs in

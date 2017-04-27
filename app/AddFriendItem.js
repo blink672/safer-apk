@@ -34,7 +34,7 @@ export default class AddFriendList extends Component {
     return !this.state.buttonPressed && (
       <View style={styles.centerContainer}>
         <Button
-          style={styles.button}
+          color='black'
           onPress={() => this.addFriend(friend)}
           title={friend.hasApp ? "Add Friend" : "Invite Friend"}
         />

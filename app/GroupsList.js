@@ -38,6 +38,7 @@ export default class GroupsList extends Component {
     return (
       <View style={styles.container}>
         <Button
+          color='black'
           onPress={() => navigate('CreateGroup',{
             title: "Create Group"
           })

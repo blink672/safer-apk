@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import { ListView, View, Text, StyleSheet, TouchableOpacity, Button } from 'react-native';
 import AuthAxios from './AuthAxios.js';
 import styles from './styles.js';
+import AddGroupMember from './AddGroupMember.js';
+import DeleteGroupMember from './DeleteGroupMember.js';
 
-export default class GroupMap extends Component {
+export default class EditGroupMap extends Component {
   constructor(props) {
     super(props);
     this.state =  {
       nonMembers: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2
       }),
-      membersToAdd: [],
-      membersToDelete: []
     };
   }
 
@@ -38,44 +38,14 @@ export default class GroupMap extends Component {
       <View>
         <ListView
           dataSource={this.props.members}
-          renderRow={rowData => this.renderMembersToBeChanged(rowData)}
+          renderRow={rowData => <DeleteGroupMember data={rowData} toDelete={this.props.toDelete} />}
           style={styles.listView}
         />
         <ListView
           dataSource={this.state.nonMembers}
-          renderRow={rowData => this.renderNonMembers(rowData)}
+          renderRow={rowData => <AddGroupMember data={rowData} toAdd={this.props.toAdd} />}
           style={styles.listView}
         />
-      </View>
-    )
-  }
-
-  renderMembersToBeChanged(data) {
-    return (
-      <View style={styles.centerContainer}>
-        <Button
-          onPress={() => this.props.toDelete(data)}
-          title='Delete'
-          style={styles.button}
-        />
-        <View style={styles.nameContainer}>
-          <Text style={styles.name}>{`${data.first} ${data.last}`}</Text>
-        </View>
-      </View>
-    )
-  }
- 
-  renderNonMembers(data) {
-    return (
-      <View style={styles.centerContainer}>
-        <Button
-          onPress={() => this.props.toAdd(data)}
-          title='Add'
-          style={styles.button}
-        />
-        <View style={styles.nameContainer}>
-          <Text style={styles.name}>{`${data.first} ${data.last}`}</Text>
-        </View>
       </View>
     )
   }

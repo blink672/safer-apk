@@ -7,7 +7,6 @@ import Settings from './Settings.js';
 import AddFriendList from './AddFriendList.js';
 import CreateGroup from './CreateGroup.js';
 import GroupMap from './GroupMap.js';
-import LogOut from './LogOut.js';
 import SplashScreen from './SplashScreen.js';
 import SignUp from './SignUp.js';
 
@@ -19,6 +18,17 @@ const HomePageTabs = TabNavigator({
   Home: { screen: HomeScreen },
   GroupsList: { screen: GroupsList },
   AllFriendsList: { screen: AllFriendsList },
+}, {
+  tabBarOptions: {
+    inactiveBackgroundColor: '#e91e63',
+    style: {
+      backgroundColor: 'black',
+    },
+    indicatorStyle: {
+      backgroundColor: 'blue',
+    },
+    pressColor: '#cfe9fd',
+  },
 });
 
 const renderBurgerButton = (navigation) => {
@@ -26,12 +36,10 @@ const renderBurgerButton = (navigation) => {
     <TouchableOpacity
       onPress={() => navigation.navigate('DrawerOpen')}
     >
-
-        <Image
-          style={{height: 30, width: 30, marginLeft: 10}}
-          source={ require('./Image/BurgerButton.png') }
-        />
-
+      <Image
+        style={{height: 30, width: 30, marginLeft: 10}}
+        source={ require('./Image/BurgerButton.png') }
+      />
     </TouchableOpacity>
   );
 };

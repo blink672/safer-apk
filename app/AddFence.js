@@ -85,6 +85,7 @@ export default class AddFence extends Component {
     return (
       <View style={styles.container}>
         <Button
+            color='black'
             title='Set this fence'
             onPress={() => this.makeFence(this.state.coordinates)}
         />

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import { googleAuthWebClientId } from './endpoint.js';
 import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
 import AuthAxios from './AuthAxios.js';
@@ -86,6 +86,9 @@ export default class SplashScreen extends Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.splashScreenContainer}>
+        <Image 
+          source={require('./Image/safer.png')}
+        />
         <Text style={styles.splashScreenText}>SAFER</Text> 
       </View>
     );

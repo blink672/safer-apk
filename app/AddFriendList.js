@@ -23,16 +23,8 @@ export default class AddFriendList extends Component {
 
   static navigationOptions = ({navigation}) => ({
     title: 'Add Friend',
-    headerRight: navigation.state.params && navigation.state.params.SignUp && this.signUpButton(),
+    headerRight: navigation.state.params && navigation.state.params.SignUp && <View style={{marginRight: 10}} ><Button color='black' onPress={() => navigation.navigate('CreateGroup', {SignUp: true})} title='Next' /></View>
   });
-
-  signUpButton () {
-    return (
-      <View>
-        <Button onPress={() => navigation.navigate('CreateGroup', {SignUp: true})} title='Next' />
-      </View>
-    )
-  }
 
   checkPermissionAndGet() {
     Contacts.checkPermission( (err, permission) => {

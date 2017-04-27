@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ListView, View, Text, StyleSheet, TouchableOpacity, Button, Switch } from 'react-native';
 import AuthAxios from './AuthAxios.js';
-import AddDeleteGroupMembers from './AddDeleteGroupMembers.js';
+import EditGroupMap from './EditGroupMap.js';
 import styles from './styles.js';
 
 export default class GroupMap extends Component {
@@ -81,7 +81,7 @@ export default class GroupMap extends Component {
     if(index === -1) {
       membersToAdd.push(friendData);
     } else {
-      userArr.splice(index, 1);
+      membersToAdd.splice(index, 1);
     }
     this.setState({
       membersToAdd: membersToAdd
@@ -128,6 +128,7 @@ export default class GroupMap extends Component {
     return (
       <View style={styles.container}>
         <Button
+          color='black'
           onPress={() => !this.state.addAndDelete ? this.changeToEditGroup() : this.updateGroupMembers() }
           title={ !this.state.addAndDelete ? 'Add/Delete Friends' : 'Confirm'}
         />
@@ -138,7 +139,7 @@ export default class GroupMap extends Component {
             />
             <Text style={styles.switchText}>{this.state.showLabel ? 'Show Only Label' : 'Show GPS'}</Text>
           </View>
-        {this.state.addAndDelete ? <AddDeleteGroupMembers members={this.state.members} name={data.name} toAdd={this.addMember} toDelete={this.removeMember} /> : this.renderNoChangeList()}
+        {this.state.addAndDelete ? <EditGroupMap members={this.state.members} name={data.name} toAdd={this.addMember} toDelete={this.removeMember} /> : this.renderNoChangeList()}
       </View>
     );
   }

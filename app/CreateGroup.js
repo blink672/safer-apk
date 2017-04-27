@@ -78,6 +78,7 @@ export default class CreateGroup extends Component {
     return (
       <View style={styles.container}>
         <Button 
+          color='black'
           title="Create Group"
           onPress={this.submitGroup}
         />
@@ -88,6 +89,7 @@ export default class CreateGroup extends Component {
             onChangeText={(text) => this.setState( {groupName: text} )}
             placeholder='Insert Group Name'
             value={this.state.text}
+            underlineColorAndroid={'black'}
           />
           <Text style={styles.createGroupText}>Privacy Setting:</Text>
           <Picker

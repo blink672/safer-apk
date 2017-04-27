@@ -99,7 +99,7 @@ export default class Settings extends Component {
           onValueChange={this.switchChange}
           value={this.state.incognito} />
         <View style= {{flex: 1}}>
-          <Button onPress={() => {this._signOut()}} title='Log Out' />
+          <Button onPress={() => {this._signOut()}} title='Log Out' color='black' />
         </View>
 
         {this.state.error &&

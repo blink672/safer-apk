@@ -79,9 +79,9 @@ export default class FriendMap extends Component {
     return (
       <View style={styles.container}>
         { (data.showSetting === 'GPS' || data.showSetting === 'label') &&
-          <Button title='Let me know when they get home' onPress={() => {this.subscribeTo(data)}} /> }
+          <Button color='black' title='Let me know when they get home' onPress={() => {this.subscribeTo(data)}} /> }
         { (data.showSetting === 'pending') &&
-          <Button title='Confirm friend request' onPress={() => {this.addFriend(data)}} /> }
+          <Button color='black' title='Confirm friend request' onPress={() => {this.addFriend(data)}} /> }
         <View style={styles.switchContainer}>
           <Switch
               onValueChange={this.switchChange}

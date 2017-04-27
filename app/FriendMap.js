@@ -106,13 +106,15 @@ export default class FriendMap extends Component {
     return (
       <View style={styles.container}>
         {this.whichButtonToRender()}
+
+        {data.showSetting === 'pending' || data.showSetting === 'request' ? null : (
         <View style={styles.switchContainer}>
           <Switch
               onValueChange={this.switchChange}
               value={this.state.showLabel}
             />
           <Text style={styles.switchText}>{this.state.showLabel ? 'Show Only Label' : 'Show GPS'}</Text>
-        </View>
+        </View> )}
         {this.whichPageToRender()}
       </View>
     )

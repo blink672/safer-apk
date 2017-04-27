@@ -40,8 +40,7 @@ export default class SignUp extends Component {
       return this.saveLocation();
     })
     .then(({data}) => {
-      console.log('updated user after google sign in save location: ', data);
-      this.setState({dbUser: data}, () => console.log('state after dbuser: ', this.state));
+      this.setState({dbUser: data});
       if (!data.created) {
         navigate('HomePageTabs');
       }

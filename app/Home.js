@@ -46,8 +46,8 @@ export default class HomeScreen extends Component {
 
   renderMembers(memberData) {
     const { navigate } = this.props.navigation;
-    var privacy = memberData.showSetting;
-    var label = memberData.currentLabel;
+    let privacy = memberData.showSetting;
+    let label = memberData.currentLabel;
     if (privacy === 'request' || privacy === 'pending') {
       label = privacy.charAt(0).toUpperCase() + privacy.slice(1);
     }

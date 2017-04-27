@@ -46,13 +46,19 @@ export default class HomeScreen extends Component {
 
   renderMembers(memberData) {
     const { navigate } = this.props.navigation;
+    var privacy = memberData.showSetting;
+    var label = memberData.currentLabel;
+    if (privacy === 'request' || privacy === 'pending') {
+      label = privacy.charAt(0).toUpperCase() + privacy.slice(1);
+    }
+
     return (
       <TouchableOpacity
         onPress={() => navigate('FriendMap', {data: memberData}) }
       >
         <View style={styles.nameContainer}>
           <Text style={styles.name}>{memberData.first} {memberData.last}</Text>
-          <Text style={styles.label}>{memberData.currentLabel ? memberData.currentLabel : 'Pending'}</Text>
+          <Text style={styles.label}>{label}</Text>
         </View>
       </TouchableOpacity>
     );

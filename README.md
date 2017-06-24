@@ -1,9 +1,11 @@
-![alt text](http://i.imgur.com/oGTBJ7J.png) ![alt text](http://i.imgur.com/RYJ9Aso.png) ![alt text](http://i.imgur.com/hHpkWHh.png)
+![Alt text](/app/Image/safer.png)
 
 
 # Safer
 
 Allows users to see at a glance and give them the peace of mind that their loved ones are safe using labeled geolocation fencing.
+
+![alt text](http://i.imgur.com/RYJ9Aso.png) ![alt text](http://i.imgur.com/hHpkWHh.png)
 
 ## Team
 

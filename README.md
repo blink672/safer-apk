@@ -1,4 +1,4 @@
-![alt text](http://imgur.com/oGTBJ7J)
+![alt text](http://i.imgur.com/oGTBJ7J.png)
 
 # Safer
 

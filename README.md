@@ -1,8 +1,11 @@
+![Alt text](/app/Image/safer.png)
+
+
 # Safer
 
-> React Native &amp; client side files for the Safer project
->> Safer - A peace of mind
->> Safer allows users to see at a glance that their loved ones are safe using labeled geolocation fencing.
+Allows users to see at a glance and give them the peace of mind that their loved ones are safe using labeled geolocation fencing.
+
+![alt text](http://i.imgur.com/RYJ9Aso.png) ![alt text](http://i.imgur.com/hHpkWHh.png)
 
 ## Team
 
@@ -11,26 +14,57 @@
   - Raphael Feliciano
   - Tiffany Lin
 
-## Table of Contents
+## Tech Stack
 
-1. [Usage](#Usage)
+- React-Native
+- MySQL
+- NodeJS/ExpressJS
+- Firebase
+
+## Features
+
+- creating a geofence
+- google sign in
+- google autocomplete
+- creating custom groups
+- friend notifications/firebase notificatons/native notifications
+- add friends via contact list
+
+# Table of Contents
+
 1. [Requirements](#requirements)
 1. [Development](#development)
+    1. [Setup](#setup)
     1. [Installing Dependencies](#installing-dependencies)
-    1. [Tasks](#tasks)
-1. [Roadmap](#roadmap)
+    1. [Roadamp](#roadmap)
 1. [Contributing](#contributing)
-
-## Usage
-
-> Some usage instructions
+1. [Troubleshooting](#troubleshooting)
+1. [Credits](#credits)
 
 ## Requirements
+
+Globally install these dependencies
 
 - [node > 7.6.0](https://nodejs.org)
 - [react-native-cli](https://www.npmjs.com/package/react-native-cli)
 
 ## Development
+
+
+### Setup
+
+To use app, clone down the apk repo.
+If working on own dev copy of the safer-server, clone the repo [here](https://github.com/blink672/safer-server) and follow the setup instructions for the server.
+
+If working on local dev server, follow directions at [endpoint.example.js](app/endpoint.example.js) to setup your endpoint.
+If you want to connect to production server, set endpoint to https://safer-prod.herokuapp.com/.
+
+Follow the installation instructions [here](https://facebook.github.io/react-native/docs/getting-started.html) to setup React-Native. Be sure to select the proper MobileOS and DevOS.
+
+Folow instructions [here](https://facebook.github.io/react-native/docs/running-on-device.html) to run the app on your device.
+
+Follow only steps 1 - 2 [here](https://github.com/devfd/react-native-google-signin/blob/master/android-guide.md) to setup google-signin.
+After step 2, in your "google-services.json" file ,copy and paste the "client_id" under "oauth_client" with the "client_type" of 3 "googleAuthWebClientId" to endpoint.js
 
 ### Installing Dependencies
 
@@ -39,7 +73,6 @@ From within the root directory:
 ```sh
 npm install
 ```
-Follow the installation instructions [here](https://facebook.github.io/react-native/docs/getting-started.html).
 
 ### Roadmap
 
@@ -52,7 +85,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 
 ## Troubleshooting
 
-- If you get something similar to this error, specifically with 'default' not found:
+### If you get something similar to this error, specifically with 'default' not found:
 ```sh
 A problem occurred configuring project ':app'.
 > Could not resolve all dependencies for configuration ':app:_debugApk'.
@@ -64,7 +97,7 @@ project(':react-native-fcm').projectDir = new File(rootProject.projectDir, '../n
 ```
 follow the path listed as the last argument to new File and make sure it's installed for every project in settings.gradle.
 
-- If you get an error about naming collisions, similar to this:
+### If you get an error about naming collisions, similar to this:
 ```sh
 Failed to build DependencyGraph: @providesModule naming collision:
   Duplicate module name: react-native-vector-icons
@@ -88,11 +121,25 @@ Then run React Native's packager with the --reset-cache option:
 npm start --reset-cache
 ```
 
-- If you're not using an emulator, make sure wifi is on and you're connected to the same network.
 
-- Try deleting node_modules and reinstalling:
+### Try deleting node_modules and reinstalling:
 ```sh
 rm -rf node_modules && npm install
 ```
+### If you're not using an emulator, make sure wifi is on and you're connected to the same network.
 
-- Turn it off and back on again. Turn off your emulator, unplug your phone, close your terminals, and if that doesn't work, restart your computer.
+### Turn it off and back on again. Turn off your emulator, unplug your phone, close your terminals, and if that doesn't work, restart your computer.
+
+## Credits
+
+Icons made by 
+- [Freepick](http://www.freepik.com) from [Flaticon](http://www.flaticon.com) is licensed by [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/).
+- [Bogdan Rosu](http://www.flaticon.com/authors/bogdan-rosu) from [Flaticon](http://www.flaticon.com) is licensed by [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/).
+- [Alfredo Hernandez](http://www.flaticon.com/authors/alfredo-hernandez) from [Flaticon](http://www.flaticon.com) is licensed by [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/).
+
+
+
+
+
+
+
